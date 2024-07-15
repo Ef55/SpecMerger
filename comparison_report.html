@@ -1,0 +1,1244 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Comparison Report</title>
+            <style>
+                body { font-family: Arial, sans-serif; line-height: 1.6; }
+                .section { margin-bottom: 20px; }
+                .case { margin-left: 20px; }
+                .error { color: red; }
+                .success { color: green; }
+            </style>
+        </head>
+        <body>
+            <h1>Comparison Report</h1>
+            
+            <h2>Correct Matches</h2>
+            <div class='success'><p><h3>22.2.2 Pattern Semantics:</h3></p></div><div class='success'><p><h3>22.2.2.5 Runtime Semantics: CompileQuantifier:</h3></p></div><div class='success'><p><h3>22.2.2.9.1 CharacterRange ( A, B ):</h3></p></div><div class='success'><p><h3>22.2.2.9.2 WordCharacters ( rer ):</h3></p></div><div class='success'><p><h3>22.2.8 Properties of RegExp Instances:</h3></p></div><div class='success'><p><h3>22.2.8.1 lastIndex:</h3></p></div><div class='success'><p><h3>22.2.9 RegExp String Iterator Objects:</h3></p></div><div class='success'><p><h3>22.2.7.7 GetMatchIndexPair ( S, match ):</h3></p></div><div class='success'><p><h3>22.2.7.6 GetMatchString ( S, match ):</h3></p></div><div class='success'><p><h3>22.2.1.2 Static Semantics: CountLeftCapturingParensWithin ( node ):</h3></p></div>
+            
+            <h2>Sections Not Found</h2>
+            <div class='error'><p><h3>IN COQ:</h3> </p></div><br><div class='error'><p><h3>IN ECMAScript:</h3> 22.2 RegExp (Regular Expression) Objects : <a href='https://262.ecma-international.org/14.0/#sec-regexp-regular-expression-objects'>https://262.ecma-international.org/14.0/#sec-regexp-regular-expression-objects</a><br><br>22.2.1.9 Static Semantics: RegExpIdentifierCodePoints : <a href='https://262.ecma-international.org/14.0/#sec-regexpidentifiercodepoints'>https://262.ecma-international.org/14.0/#sec-regexpidentifiercodepoints</a><br><br>22.2.1.10 Static Semantics: RegExpIdentifierCodePoint : <a href='https://262.ecma-international.org/14.0/#sec-regexpidentifiercodepoint'>https://262.ecma-international.org/14.0/#sec-regexpidentifiercodepoint</a><br><br>22.2.2.7.3 Canonicalize ( rer, ch ) : <a href='https://262.ecma-international.org/14.0/#sec-runtime-semantics-canonicalize-ch'>https://262.ecma-international.org/14.0/#sec-runtime-semantics-canonicalize-ch</a><br><br>22.2.2.9.3 UnicodeMatchProperty ( p ) : <a href='https://262.ecma-international.org/14.0/#sec-runtime-semantics-unicodematchproperty-p'>https://262.ecma-international.org/14.0/#sec-runtime-semantics-unicodematchproperty-p</a><br><br>22.2.2.9.4 UnicodeMatchPropertyValue ( p, v ) : <a href='https://262.ecma-international.org/14.0/#sec-runtime-semantics-unicodematchpropertyvalue-p-v'>https://262.ecma-international.org/14.0/#sec-runtime-semantics-unicodematchpropertyvalue-p-v</a><br><br>22.2.3 Abstract Operations for RegExp Creation : <a href='https://262.ecma-international.org/14.0/#sec-abstract-operations-for-regexp-creation'>https://262.ecma-international.org/14.0/#sec-abstract-operations-for-regexp-creation</a><br><br>22.2.3.1 RegExpCreate ( P, F ) : <a href='https://262.ecma-international.org/14.0/#sec-regexpcreate'>https://262.ecma-international.org/14.0/#sec-regexpcreate</a><br><br>22.2.3.2 RegExpAlloc ( newTarget ) : <a href='https://262.ecma-international.org/14.0/#sec-regexpalloc'>https://262.ecma-international.org/14.0/#sec-regexpalloc</a><br><br>22.2.3.4 Static Semantics: ParsePattern ( patternText, u ) : <a href='https://262.ecma-international.org/14.0/#sec-parsepattern'>https://262.ecma-international.org/14.0/#sec-parsepattern</a><br><br>22.2.4 The RegExp Constructor : <a href='https://262.ecma-international.org/14.0/#sec-regexp-constructor'>https://262.ecma-international.org/14.0/#sec-regexp-constructor</a><br><br>22.2.4.1 RegExp ( pattern, flags ) : <a href='https://262.ecma-international.org/14.0/#sec-regexp-pattern-flags'>https://262.ecma-international.org/14.0/#sec-regexp-pattern-flags</a><br><br>22.2.5 Properties of the RegExp Constructor : <a href='https://262.ecma-international.org/14.0/#sec-properties-of-the-regexp-constructor'>https://262.ecma-international.org/14.0/#sec-properties-of-the-regexp-constructor</a><br><br>22.2.5.1 RegExp.prototype : <a href='https://262.ecma-international.org/14.0/#sec-regexp.prototype'>https://262.ecma-international.org/14.0/#sec-regexp.prototype</a><br><br>22.2.5.2 get RegExp [ @@species ] : <a href='https://262.ecma-international.org/14.0/#sec-get-regexp-@@species'>https://262.ecma-international.org/14.0/#sec-get-regexp-@@species</a><br><br>22.2.6 Properties of the RegExp Prototype Object : <a href='https://262.ecma-international.org/14.0/#sec-properties-of-the-regexp-prototype-object'>https://262.ecma-international.org/14.0/#sec-properties-of-the-regexp-prototype-object</a><br><br>22.2.6.1 RegExp.prototype.constructor : <a href='https://262.ecma-international.org/14.0/#sec-regexp.prototype.constructor'>https://262.ecma-international.org/14.0/#sec-regexp.prototype.constructor</a><br><br>22.2.6.2 RegExp.prototype.exec ( string ) : <a href='https://262.ecma-international.org/14.0/#sec-regexp.prototype.exec'>https://262.ecma-international.org/14.0/#sec-regexp.prototype.exec</a><br><br>22.2.6.3 get RegExp.prototype.dotAll : <a href='https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.dotAll'>https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.dotAll</a><br><br>22.2.6.4 get RegExp.prototype.flags : <a href='https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.flags'>https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.flags</a><br><br>22.2.6.4.1 RegExpHasFlag ( R, codeUnit ) : <a href='https://262.ecma-international.org/14.0/#sec-regexphasflag'>https://262.ecma-international.org/14.0/#sec-regexphasflag</a><br><br>22.2.6.5 get RegExp.prototype.global : <a href='https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.global'>https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.global</a><br><br>22.2.6.6 get RegExp.prototype.hasIndices : <a href='https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.hasIndices'>https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.hasIndices</a><br><br>22.2.6.7 get RegExp.prototype.ignoreCase : <a href='https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.ignorecase'>https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.ignorecase</a><br><br>22.2.6.10 get RegExp.prototype.multiline : <a href='https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.multiline'>https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.multiline</a><br><br>22.2.6.11 RegExp.prototype [ @@replace ] ( string, replaceValue ) : <a href='https://262.ecma-international.org/14.0/#sec-regexp.prototype-@@replace'>https://262.ecma-international.org/14.0/#sec-regexp.prototype-@@replace</a><br><br>22.2.6.13 get RegExp.prototype.source : <a href='https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.source'>https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.source</a><br><br>22.2.6.13.1 EscapeRegExpPattern ( P, F ) : <a href='https://262.ecma-international.org/14.0/#sec-escaperegexppattern'>https://262.ecma-international.org/14.0/#sec-escaperegexppattern</a><br><br>22.2.6.14 RegExp.prototype [ @@split ] ( string, limit ) : <a href='https://262.ecma-international.org/14.0/#sec-regexp.prototype-@@split'>https://262.ecma-international.org/14.0/#sec-regexp.prototype-@@split</a><br><br>22.2.6.15 get RegExp.prototype.sticky : <a href='https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.sticky'>https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.sticky</a><br><br>22.2.6.17 RegExp.prototype.toString ( ) : <a href='https://262.ecma-international.org/14.0/#sec-regexp.prototype.tostring'>https://262.ecma-international.org/14.0/#sec-regexp.prototype.tostring</a><br><br>22.2.6.18 get RegExp.prototype.unicode : <a href='https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.unicode'>https://262.ecma-international.org/14.0/#sec-get-regexp.prototype.unicode</a><br><br>22.2.7 Abstract Operations for RegExp Matching : <a href='https://262.ecma-international.org/14.0/#sec-abstract-operations-for-regexp-matching'>https://262.ecma-international.org/14.0/#sec-abstract-operations-for-regexp-matching</a><br><br>22.2.9.2 The %RegExpStringIteratorPrototype% Object : <a href='https://262.ecma-international.org/14.0/#sec-%regexpstringiteratorprototype%-object'>https://262.ecma-international.org/14.0/#sec-%regexpstringiteratorprototype%-object</a><br><br>22.2.9.2.1 %RegExpStringIteratorPrototype%.next ( ) : <a href='https://262.ecma-international.org/14.0/#sec-%regexpstringiteratorprototype%.next'>https://262.ecma-international.org/14.0/#sec-%regexpstringiteratorprototype%.next</a><br><br>22.2.9.2.2 %RegExpStringIteratorPrototype% [ @@toStringTag ] : <a href='https://262.ecma-international.org/14.0/#sec-%regexpstringiteratorprototype%-@@tostringtag'>https://262.ecma-international.org/14.0/#sec-%regexpstringiteratorprototype%-@@tostringtag</a></p></div>
+
+            <h2>Sections with Different Titles</h2>
+            Empty
+
+            <h2>Sections with Different Descriptions</h2>
+            <div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.2.1.1 RegExp Records, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/RegExpRecord.v'><b>RegExpRecord.v</b>: 2 - 19</a></h3><p>A RegExp Record is a Record value used to store information about a RegExp that is needed during compilation and possibly during matching. It has the following fields: [[IgnoreCase]] [[Multiline]] [[DotAll]] [[Unicode]] [[CapturingGroupsCount]] </p></div></p><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.1.1 RegExp Records, <a href='https://262.ecma-international.org/14.0/#sec-regexp-records'>https://262.ecma-international.org/14.0/#sec-regexp-records</a></h3><p>A RegExp Record is a Record value used to store information about a RegExp that is needed during compilation and possibly during matching. It has the following fields: </p></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.2.1 Notation, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Parameters.v'><b>Parameters.v</b>: 44 - 44</a>, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Notation.v'><b>Notation.v</b>: 3 - 73</a></h3><p>The descriptions below use the following internal data structures: A CaptureRange is an ordered pair (startIndex, endIndex) that represents the range of characters included in a capture, where startIndex is an integer representing the start index (inclusive) of the range within Input, and endIndex is an integer representing the end index (exclusive) of the range within Input. For any CaptureRange, these indices must satisfy the invariant that startIndex ≤ endIndex. A MatchState is an ordered triple (input, endIndex, captures) where input is a List of characters representing the String being matched, endIndex is an integer, and captures is a List of values, one for each left-capturing parenthesis in the pattern. States are used to represent partial match states in the regular expression matching algorithms. The endIndex is one plus the index of the last input character matched so far by the pattern, while captures holds the results of capturing parentheses. The nth element of captures is either a CaptureRange representing the range of characters captured by the nth set of capturing parentheses, or undefined if the nth set of capturing parentheses hasn't been reached yet. Due to backtracking, many States may be in use at any time during the matching process. A MatchResult is either a MatchState or the special token failure that indicates that the match failed. A MatcherContinuation is an Abstract Closure that takes one MatchState argument and returns a MatchResult result. The MatcherContinuation attempts to match the remaining portion (specified by the closure's captured values) of the pattern against Input, starting at the intermediate state given by its MatchState argument. If the match succeeds, the MatcherContinuation returns the final MatchState that it reached; if the match fails, the MatcherContinuation returns failure. A Matcher is an Abstract Closure that takes two arguments—a MatchState and a MatcherContinuation—and returns a MatchResult result. A Matcher attempts to match a middle subpattern (specified by the closure's captured values) of the pattern against the MatchState's input, starting at the intermediate state given by its MatchState argument. The MatcherContinuation argument should be a closure that matches the rest of the pattern. After matching the subpattern of a pattern to obtain a new MatchState, the Matcher then calls MatcherContinuation on that new MatchState to test if the rest of the pattern can match as well. If it can, the Matcher returns the MatchState returned by MatcherContinuation; if not, the Matcher may try different choices at its choice points, repeatedly calling MatcherContinuation until it either succeeds or all possibilities have been exhausted. 
+[...] A CharSet is a mathematical set of characters. In the context of a Unicode pattern, “all characters” means the CharSet containing all code point values; otherwise “all characters” means the CharSet containing all code unit values. [...] </p></div></p><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.1 Notation, <a href='https://262.ecma-international.org/14.0/#sec-pattern-notation'>https://262.ecma-international.org/14.0/#sec-pattern-notation</a></h3><p>The descriptions below use the following internal data structures:  A CharSet is a mathematical set of characters. In the context of a Unicode pattern, “all characters” means the CharSet containing all code point values; otherwise “all characters” means the CharSet containing all code unit values.
+ A CaptureRange is an ordered pair (startIndex, endIndex) that represents the range of characters included in a capture, where startIndex is an integer representing the start index (inclusive) of the range within Input, and endIndex is an integer representing the end index (exclusive) of the range within Input. For any CaptureRange, these indices must satisfy the invariant that startIndex ≤ endIndex.
+ A MatchState is an ordered triple (input, endIndex, captures) where input is a List of characters representing the String being matched, endIndex is an integer, and captures is a List of values, one for each left-capturing parenthesis in the pattern. States are used to represent partial match states in the regular expression matching algorithms. The endIndex is one plus the index of the last input character matched so far by the pattern, while captures holds the results of capturing parentheses. The nth element of captures is either a CaptureRange representing the range of characters captured by the nth set of capturing parentheses, or undefined if the nth set of capturing parentheses hasn't been reached yet. Due to backtracking, many States may be in use at any time during the matching process.
+ A MatchResult is either a MatchState or the special token failure that indicates that the match failed.
+ A MatcherContinuation is an Abstract Closure that takes one MatchState argument and returns a MatchResult result. The MatcherContinuation attempts to match the remaining portion (specified by the closure's captured values) of the pattern against Input, starting at the intermediate state given by its MatchState argument. If the match succeeds, the MatcherContinuation returns the final MatchState that it reached; if the match fails, the MatcherContinuation returns failure.
+ A Matcher is an Abstract Closure that takes two arguments—a MatchState and a MatcherContinuation—and returns a MatchResult result. A Matcher attempts to match a middle subpattern (specified by the closure's captured values) of the pattern against the MatchState's input, starting at the intermediate state given by its MatchState argument. The MatcherContinuation argument should be a closure that matches the rest of the pattern. After matching the subpattern of a pattern to obtain a new MatchState, the Matcher then calls MatcherContinuation on that new MatchState to test if the rest of the pattern can match as well. If it can, the Matcher returns the MatchState returned by MatcherContinuation; if not, the Matcher may try different choices at its choice points, repeatedly calling MatcherContinuation until it either succeeds or all possibilities have been exhausted.
+</p></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.1 Patterns, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Patterns.v'><b>Patterns.v</b>: 3 - 206</a></h3><p>The RegExp constructor applies the following grammar to the input pattern String. An error occurs if the grammar cannot interpret the String as an expansion of Pattern </p></div></p><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1 Patterns, <a href='https://262.ecma-international.org/14.0/#sec-patterns'>https://262.ecma-international.org/14.0/#sec-patterns</a></h3><p>The RegExp constructor applies the following grammar to the input pattern String. An error occurs if the grammar cannot interpret the String as an expansion of Pattern. </p></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.7.5 Match Records, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Frontend.v'><b>Frontend.v</b>: 129 - 139</a></h3><p>A Match Record is a Record value used to encapsulate the start and end indices of a regular expression match or capture. Match Records have the fields listed in Table 67. [[StartIndex]] 	a non-negative integer [[EndIndex]] 	an integer ≥ [[StartIndex]] </p></div></p><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.7.5 Match Records, <a href='https://262.ecma-international.org/14.0/#sec-match-records'>https://262.ecma-international.org/14.0/#sec-match-records</a></h3><p>A Match Record is a Record value used to encapsulate the start and end indices of a regular expression match or capture. Match Records have the fields listed in Table 67. </p></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.1.5 Static Semantics: IsCharacterClass, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 152 - 176</a></h3><p>The syntax-directed operation IsCharacterClass takes no arguments and returns a Boolean. Note It is defined piecewise over the following productions: </p></div></p><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.5 Static Semantics: IsCharacterClass, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-is-character-class'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-is-character-class</a></h3><p>The syntax-directed operation IsCharacterClass takes no arguments and returns a Boolean. It is defined piecewise over the following productions: </p></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.1.4 Static Semantics: CapturingGroupNumber, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 180 - 180</a></h3><p>The syntax-directed operation CapturingGroupNumber takes no arguments and returns a positive integer. Note It is defined piecewise over the following productions: </p></div></p><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.4 Static Semantics: CapturingGroupNumber, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-capturing-group-number'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-capturing-group-number</a></h3><p>The syntax-directed operation CapturingGroupNumber takes no arguments and returns a positive integer. It is defined piecewise over the following productions: </p></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.1.3 Static Semantics: CountLeftCapturingParensBefore ( node ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 224 - 224</a></h3><p>The abstract operation CountLeftCapturingParensBefore takes argument node (a Parse Node) and returns a non-negative integer. It returns the number of left-capturing parentheses within the enclosing pattern that occur to the left of node. Note It performs the following steps when called: </p></div></p><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.3 Static Semantics: CountLeftCapturingParensBefore ( node ), <a href='https://262.ecma-international.org/14.0/#sec-countleftcapturingparensbefore'>https://262.ecma-international.org/14.0/#sec-countleftcapturingparensbefore</a></h3><p>The abstract operation CountLeftCapturingParensBefore takes argument node (a Parse Node) and returns a non-negative integer. It returns the number of left-capturing parentheses within the enclosing pattern that occur to the left of node. It performs the following steps when called: </p></div></p></div>
+
+            <h2>Cases Not Found At All</h2>
+            <div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.2.4 Runtime Semantics: CompileAssertion, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 582 - 779</a></h3><p>The syntax-directed operation CompileAssertion takes argument rer (a RegExp Record) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>Term ::  Atom</p><pre>1. Return CompileAtom of Atom with arguments rer and direction.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.2.7 Runtime Semantics: CompileAtom, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 780 - 920</a></h3><p>The syntax-directed operation CompileAtom takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>Term ::  Atom Quantifier</p><pre>1. Let m be CompileAtom of Atom with arguments rer and direction.
+2. Let q be CompileQuantifier of Quantifier.
+3. Assert: q.[[Min]] ≤ q.[[Max]].
+4. Let parenIndex be CountLeftCapturingParensBefore(Term).
+5. Let parenCount be CountLeftCapturingParensWithin(Atom).
+6. Return a new Matcher with parameters (x, c) that captures m, q, parenIndex, and parenCount and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Return RepeatMatcher(m, q.[[Min]], q.[[Max]], q.[[Greedy]], x, c, parenIndex, parenCount).
+</pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.1.8 Static Semantics: CapturingGroupName, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 12 - 21</a></h3><p>The syntax-directed operation CapturingGroupName takes no arguments and returns a String. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>RegExpIdentifierName ::  RegExpIdentifierStart</p><pre>1. Let idTextUnescaped be RegExpIdentifierCodePoints of RegExpIdentifierName.
+2. Return CodePointsToString(idTextUnescaped).
+</pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.1.6 Static Semantics: CharacterValue, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 51 - 136</a></h3><p>The syntax-directed operation CharacterValue takes no arguments and returns a non-negative integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>HexLeadSurrogate ::  Hex4Digits</p><pre></pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.1.6 Static Semantics: CharacterValue, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 51 - 136</a></h3><p>The syntax-directed operation CharacterValue takes no arguments and returns a non-negative integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>HexTrailSurrogate ::  Hex4Digits</p><pre></pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.1 Static Semantics: Early Errors, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors</a></h3><p></p></div></p><p><h3>Case not found:</h3> <div class='case'><p>RegExpIdentifierStart ::  UnicodeLeadSurrogate UnicodeTrailSurrogate</p><pre>* It is a Syntax Error if RegExpIdentifierCodePoint of RegExpIdentifierStart is not matched by the UnicodeIDStart lexical grammar production.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.1 Static Semantics: Early Errors, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors</a></h3><p></p></div></p><p><h3>Case not found:</h3> <div class='case'><p>NonemptyClassRangesNoDash ::  ClassAtomNoDash - ClassAtom ClassRanges</p><pre>* It is a Syntax Error if IsCharacterClass of ClassAtomNoDash is true or IsCharacterClass of ClassAtom is true.
+* It is a Syntax Error if IsCharacterClass of ClassAtomNoDash is false, IsCharacterClass of ClassAtom is false, and the CharacterValue of ClassAtomNoDash is strictly greater than the CharacterValue of ClassAtom.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.1 Static Semantics: Early Errors, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors</a></h3><p></p></div></p><p><h3>Case not found:</h3> <div class='case'><p>RegExpIdentifierPart ::  \ RegExpUnicodeEscapeSequence</p><pre>* It is a Syntax Error if the CharacterValue of RegExpUnicodeEscapeSequence is not the numeric value of some code point matched by the IdentifierPartChar lexical grammar production.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.1 Static Semantics: Early Errors, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors</a></h3><p></p></div></p><p><h3>Case not found:</h3> <div class='case'><p>RegExpIdentifierPart ::  UnicodeLeadSurrogate UnicodeTrailSurrogate</p><pre>* It is a Syntax Error if RegExpIdentifierCodePoint of RegExpIdentifierPart is not matched by the UnicodeIDContinue lexical grammar production.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.1 Static Semantics: Early Errors, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors</a></h3><p></p></div></p><p><h3>Case not found:</h3> <div class='case'><p>RegExpIdentifierStart ::  \ RegExpUnicodeEscapeSequence</p><pre>* It is a Syntax Error if the CharacterValue of RegExpUnicodeEscapeSequence is not the numeric value of some code point matched by the IdentifierStartChar lexical grammar production.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.1 Static Semantics: Early Errors, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors</a></h3><p></p></div></p><p><h3>Case not found:</h3> <div class='case'><p>UnicodePropertyValueExpression ::  UnicodePropertyName = UnicodePropertyValue</p><pre>* It is a Syntax Error if the source text matched by UnicodePropertyName is not a Unicode property name or property alias listed in the “Property name and aliases” column of Table 65.
+* It is a Syntax Error if the source text matched by UnicodePropertyValue is not a property value or property value alias for the Unicode property or property alias given by the source text matched by UnicodePropertyName listed in PropertyValueAliases.txt.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.1 Static Semantics: Early Errors, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-early-errors</a></h3><p></p></div></p><p><h3>Case not found:</h3> <div class='case'><p>UnicodePropertyValueExpression ::  LoneUnicodePropertyNameOrValue</p><pre>* It is a Syntax Error if the source text matched by LoneUnicodePropertyNameOrValue is not a Unicode property value or property value alias for the General_Category (gc) property listed in PropertyValueAliases.txt, nor a binary property or binary property alias listed in the “Property name and aliases” column of Table 66.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.4 Static Semantics: CapturingGroupNumber, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-capturing-group-number'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-capturing-group-number</a></h3><p>The syntax-directed operation CapturingGroupNumber takes no arguments and returns a positive integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>DecimalEscape ::  NonZeroDigit</p><pre>1. Return the MV of NonZeroDigit.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.4 Static Semantics: CapturingGroupNumber, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-capturing-group-number'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-capturing-group-number</a></h3><p>The syntax-directed operation CapturingGroupNumber takes no arguments and returns a positive integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>DecimalEscape ::  NonZeroDigit DecimalDigits</p><pre>1. Let n be the number of code points in DecimalDigits.
+2. Return (the MV of NonZeroDigit × 10n plus the MV of DecimalDigits).
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.6 Static Semantics: CharacterValue, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-character-value'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-character-value</a></h3><p>The syntax-directed operation CharacterValue takes no arguments and returns a non-negative integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>ClassAtom ::  -</p><pre>1. Return the numeric value of U+002D (HYPHEN-MINUS).
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.8 Static Semantics: CapturingGroupName, <a href='https://262.ecma-international.org/14.0/#sec-static-semantics-capturinggroupname'>https://262.ecma-international.org/14.0/#sec-static-semantics-capturinggroupname</a></h3><p>The syntax-directed operation CapturingGroupName takes no arguments and returns a String. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>GroupName ::  < RegExpIdentifierName ></p><pre>1. Let idTextUnescaped be RegExpIdentifierCodePoints of RegExpIdentifierName.
+2. Return CodePointsToString(idTextUnescaped).
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='https://262.ecma-international.org/14.0/#sec-compiletocharset'>https://262.ecma-international.org/14.0/#sec-compiletocharset</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>UnicodePropertyValueExpression ::  UnicodePropertyName = UnicodePropertyValue</p><pre>1. Let ps be the source text matched by UnicodePropertyName.
+2. Let p be UnicodeMatchProperty(ps).
+3. Assert: p is a Unicode property name or property alias listed in the “Property name and aliases” column of Table 65.
+4. Let vs be the source text matched by UnicodePropertyValue.
+5. Let v be UnicodeMatchPropertyValue(p, vs).
+6. Return the CharSet containing all Unicode code points whose character database definition includes the property p with value v.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='https://262.ecma-international.org/14.0/#sec-compiletocharset'>https://262.ecma-international.org/14.0/#sec-compiletocharset</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>NonemptyClassRanges ::  ClassAtom NonemptyClassRangesNoDash</p><pre>1. Let A be CompileToCharSet of ClassAtom with argument rer.
+2. Let B be CompileToCharSet of NonemptyClassRangesNoDash with argument rer.
+3. Return the union of CharSets A and B.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='https://262.ecma-international.org/14.0/#sec-compiletocharset'>https://262.ecma-international.org/14.0/#sec-compiletocharset</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>NonemptyClassRangesNoDash ::  ClassAtomNoDash NonemptyClassRangesNoDash</p><pre>1. Let A be CompileToCharSet of ClassAtomNoDash with argument rer.
+2. Let B be CompileToCharSet of NonemptyClassRangesNoDash with argument rer.
+3. Return the union of CharSets A and B.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='https://262.ecma-international.org/14.0/#sec-compiletocharset'>https://262.ecma-international.org/14.0/#sec-compiletocharset</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>UnicodePropertyValueExpression ::  LoneUnicodePropertyNameOrValue</p><pre>1. Let s be the source text matched by LoneUnicodePropertyNameOrValue.
+2.IfUnicodeMatchPropertyValue(General_Category,s) is a Unicode property value or property value alias for the General_Category (gc) property listed inPropertyValueAliases.txt, then
+a. Return the CharSet containing all Unicode code points whose character database definition includes the property “General_Category” with value s.
+3. Let p be UnicodeMatchProperty(s).
+4. Assert: p is a binary Unicode property or binary property alias listed in the “Property name and aliases” column of Table 66.
+5. Return the CharSet containing all Unicode code points whose character database definition includes the property p with value “True”.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='https://262.ecma-international.org/14.0/#sec-compiletocharset'>https://262.ecma-international.org/14.0/#sec-compiletocharset</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>NonemptyClassRanges ::  ClassAtom - ClassAtom ClassRanges</p><pre>1. Let A be CompileToCharSet of the first ClassAtom with argument rer.
+2. Let B be CompileToCharSet of the second ClassAtom with argument rer.
+3. Let C be CompileToCharSet of ClassRanges with argument rer.
+4. Let D be CharacterRange(A, B).
+5. Return the union of D and C.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='https://262.ecma-international.org/14.0/#sec-compiletocharset'>https://262.ecma-international.org/14.0/#sec-compiletocharset</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>ClassAtom ::  -</p><pre>1. Return the CharSet containing the single character - U+002D (HYPHEN-MINUS).
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='https://262.ecma-international.org/14.0/#sec-compiletocharset'>https://262.ecma-international.org/14.0/#sec-compiletocharset</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case not found:</h3> <div class='case'><p>NonemptyClassRangesNoDash ::  ClassAtomNoDash - ClassAtom ClassRanges</p><pre>1. Let A be CompileToCharSet of ClassAtomNoDash with argument rer.
+2. Let B be CompileToCharSet of ClassAtom with argument rer.
+3. Let C be CompileToCharSet of ClassRanges with argument rer.
+4. Let D be CharacterRange(A, B).
+5. Return the union of D and C.
+</pre></div></p></div>
+
+            <h2>Cases with Right Side Not Found</h2>
+            <div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 265 - 380</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>ClassRanges ::  ClassAtom - ClassAtom ClassRanges</p><pre>1. Let A be CompileToCharSet of the first ClassAtom with argument rer.
+2. Let B be CompileToCharSet of the second ClassAtom with argument rer.
+3. Let Character be CompileToCharSet of ClassRanges with argument rer.
+4. Let D be CharacterRange(A, B).
+5. Return the union of D and Character.
+</pre></div></p><p>Left cases found: <div class='case'><p>ClassRanges ::  [empty]</p><pre>1. Return the empty CharSet.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 265 - 380</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>ClassEscape :: </p><pre>b
+-
+CharacterEscape
+1. Let cv be the CharacterValue of this ClassEscape.
+2. Let c be the character whose character value is cv.
+3. Return the CharSet containing the single character c.
+</pre></div></p><p>Left cases found: <div class='case'><p>ClassEscape :: 
+b 
+- 
+CharacterEscape</p><pre>1. Let cv be the CharacterValue of this ClassEscape.
+2. Let c be the character whose character value is cv.
+3. Return the CharSet containing the single character c.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 265 - 380</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>ClassAtomNoDash ::  SourceCharacter</p><pre>Return the CharSet containing the character matched by SourceCharacter.
+</pre></div></p><p>Left cases found: <div class='case'><p>ClassAtomNoDash ::  SourceCharacter   but not one of \ or ] or -</p><pre>1. Return the CharSet containing the character matched by SourceCharacter.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 265 - 380</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>ClassRanges ::  ClassAtom ClassRanges</p><pre>1. Let A be CompileToCharSet of ClassAtom with argument rer.
+2. Let B be CompileToCharSet of NonemptyClassRangesNoDash with argument rer.
+3. Return the union of CharSets A and B.
+</pre></div></p><p>Left cases found: <div class='case'><p>ClassRanges ::  [empty]</p><pre>1. Return the empty CharSet.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.2.7 Runtime Semantics: CompileAtom, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 780 - 920</a></h3><p>The syntax-directed operation CompileAtom takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>Atom ::  ( GroupSpecifier_opt Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and direction.
+2. Let parenIndex be CountLeftCapturingParensBefore(Atom).
+3. Return a new Matcher with parameters (x, c) that captures direction, m, and parenIndex and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let d be a new MatcherContinuation with parameters (y) that captures x, c, direction, and parenIndex and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Let cap be a copy of y's captures List.
+iii. Let Input be x's input.
+iv. Let xe be x's endIndex.
+v. Let ye be y's endIndex.
+vi. If direction is forward, then
+1. Assert: xe ≤ ye.
+2. Let r be the CaptureRange (xe, ye).
+vii. Else,
+1. Assert: direction is backward.
+2. Assert: ye ≤ xe.
+3. Let r be the CaptureRange (ye, xe).
+viii. Set cap[parenIndex + 1] to r.
+ix. Let z be the MatchState (Input, ye, cap).
+x. Return c(z).
+d. Return m(x, d).
+</pre></div></p><p>Left cases found: <div class='case'><p>Atom ::  ( GroupSpecifieropt Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and direction.
+2. Let parenIndex be CountLeftCapturingParensBefore(Atom).
+3.Return a newMatcherwith parameters (x,c) that capturesdirection,m, andparenIndexand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c.Letdbe a newMatcherContinuationwith parameters (y) that capturesx,c,direction, andparenIndexand performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Let cap be a copy of y's captures List.
+iii. Let Input be x's input.
+iv. Let xe be x's endIndex.
+v. Let ye be y's endIndex.
+vi.Ifdirectionisforward, then
+1. Assert: xe ≤ ye.
+2. Let r be the CaptureRange (xe, ye).
+vii.Else,
+1. Assert: direction is backward.
+2. Assert: ye ≤ xe.
+3. Let r be the CaptureRange (ye, xe).
+viii. Set cap[parenIndex + 1] to r.
+ix. Let z be the MatchState (Input, ye, cap).
+x. Return c(z).
+d. Return m(x, d).
+</pre></div>
+<div class='case'><p>Atom ::  CharacterClass</p><pre>1. Let cc be CompileCharacterClass of CharacterClass with argument rer.
+2. Return CharacterSetMatcher(rer, cc.[[CharSet]], cc.[[Invert]], direction).
+</pre></div>
+<div class='case'><p>Atom ::  .</p><pre>1. Let A be the CharSet of all characters.
+2.Ifrer.[[DotAll]] is nottrue, then
+a. Remove from A all characters corresponding to a code point on the right-hand side of the LineTerminator production.
+3. Return CharacterSetMatcher(rer, A, false, direction).
+</pre></div>
+<div class='case'><p>Atom ::  (?: Disjunction )</p><pre>1. Return CompileSubpattern of Disjunction with arguments rer and direction.
+</pre></div>
+<div class='case'><p>Atom ::  PatternCharacter</p><pre>1. Let ch be the character matched by PatternCharacter.
+2. Let A be a one-element CharSet containing the character ch.
+3. Return CharacterSetMatcher(rer, A, false, direction).
+</pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.1.6 Static Semantics: CharacterValue, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 51 - 136</a></h3><p>The syntax-directed operation CharacterValue takes no arguments and returns a non-negative integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>HexNonSurrogate ::  Hex4Digits</p><pre>Return the MV of Hex4Digits.
+</pre></div></p><p>Left cases found: <div class='case'><p>HexNonSurrogate ::  Hex4Digits Hex4Digits Hex4Digits</p><pre>1. Return the MV of Hex4Digits.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.1.6 Static Semantics: CharacterValue, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 51 - 136</a></h3><p>The syntax-directed operation CharacterValue takes no arguments and returns a non-negative integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>ClassAtomNoDash ::  SourceCharacter</p><pre>1. Let ch be the code point matched by SourceCharacter.
+2. Return the numeric value of ch.
+</pre></div></p><p>Left cases found: <div class='case'><p>ClassAtomNoDash ::  SourceCharacter   but not one of \ or ] or -</p><pre>1. Let ch be the code point matched by SourceCharacter.
+2. Return the numeric value of ch.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN COQ:</h3> <div class='section'><h3>22.2.1.6 Static Semantics: CharacterValue, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 51 - 136</a></h3><p>The syntax-directed operation CharacterValue takes no arguments and returns a non-negative integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>CharacterEscape ::  0</p><pre>1. Return the numeric value of U+0000 (NULL).
+</pre></div></p><p>Left cases found: <div class='case'><p>CharacterEscape ::  ControlEscape</p><pre>1. Return the numeric value according to Table 63.
+</pre></div>
+<div class='case'><p>CharacterEscape ::  c AsciiLetter</p><pre>1. Let ch be the code point matched by AsciiLetter.
+2. Let i be the numeric value of ch.
+3. Return the remainder of dividing i by 32.
+</pre></div>
+<div class='case'><p>CharacterEscape ::  0 [lookahead ∉ DecimalDigit]</p><pre>1. Return the numeric value of U+0000 (NULL).
+</pre></div>
+<div class='case'><p>CharacterEscape ::  HexEscapeSequence</p><pre>1. Return the MV of HexEscapeSequence.
+</pre></div>
+<div class='case'><p>CharacterEscape ::  IdentityEscape</p><pre>1. Let ch be the code point matched by IdentityEscape.
+2. Return the numeric value of ch.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1 Patterns, <a href='https://262.ecma-international.org/14.0/#sec-patterns'>https://262.ecma-international.org/14.0/#sec-patterns</a></h3><p>The RegExp constructor applies the following grammar to the input pattern String. An error occurs if the grammar cannot interpret the String as an expansion of Pattern. </p></div></p><p><h3>Case:</h3> <div class='case'><p>ClassEscape[UnicodeMode] :: 
+Hex4Digits but only if the MV of Hex4Digits is in the inclusive interval from 0xD800 to 0xDBFF
+Hex4Digits but only if the MV of Hex4Digits is in the inclusive interval from 0xDC00 to 0xDFFF
+Hex4Digits but only if the MV of Hex4Digits is not in the inclusive interval from 0xD800 to 0xDFFF
+[+UnicodeMode] SyntaxCharacter 
+[+UnicodeMode] / 
+[~UnicodeMode] SourceCharacter   but not UnicodeIDContinue
+NonZeroDigit DecimalDigits[~Sep]opt [lookahead ∉ DecimalDigit]
+d 
+D 
+s 
+S 
+w 
+W 
+[+UnicodeMode] p{ UnicodePropertyValueExpression } 
+[+UnicodeMode] P{ UnicodePropertyValueExpression }
+UnicodePropertyName = UnicodePropertyValue 
+LoneUnicodePropertyNameOrValue
+UnicodePropertyNameCharacters
+UnicodePropertyNameCharacter UnicodePropertyNameCharactersopt
+UnicodePropertyValueCharacters
+UnicodePropertyValueCharacters
+UnicodePropertyValueCharacter UnicodePropertyValueCharactersopt
+UnicodePropertyNameCharacter 
+DecimalDigit
+AsciiLetter 
+_
+[ [lookahead ≠ ^] ClassRanges[?UnicodeMode] ] 
+[^ ClassRanges[?UnicodeMode] ]
+[empty] 
+NonemptyClassRanges[?UnicodeMode]
+ClassAtom[?UnicodeMode] 
+ClassAtom[?UnicodeMode] NonemptyClassRangesNoDash[?UnicodeMode] 
+ClassAtom[?UnicodeMode] - ClassAtom[?UnicodeMode] ClassRanges[?UnicodeMode]
+ClassAtom[?UnicodeMode] 
+ClassAtomNoDash[?UnicodeMode] NonemptyClassRangesNoDash[?UnicodeMode] 
+ClassAtomNoDash[?UnicodeMode] - ClassAtom[?UnicodeMode] ClassRanges[?UnicodeMode]
+- 
+ClassAtomNoDash[?UnicodeMode]
+SourceCharacter   but not one of \ or ] or - 
+\ ClassEscape[?UnicodeMode]
+b 
+[+UnicodeMode] - 
+CharacterClassEscape[?UnicodeMode] 
+CharacterEscape[?UnicodeMode]</p><pre></pre></div></p><p>Left cases found: <div class='case'><p>ClassEscape[UnicodeMode] :: </p><pre>b
+[+UnicodeMode] -
+CharacterClassEscape[?UnicodeMode]
+CharacterEscape[?UnicodeMode]
+AtomEscape[UnicodeMode, N] ::
+DecimalEscape
+CharacterClassEscape[?UnicodeMode]
+CharacterEscape[?UnicodeMode]
+[+N] k GroupName[?UnicodeMode]
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.5 Static Semantics: IsCharacterClass, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-is-character-class'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-is-character-class</a></h3><p>The syntax-directed operation IsCharacterClass takes no arguments and returns a Boolean. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>ClassEscape :: 
+-
+SourceCharacter   but not one of \ or ] or -
+b 
+- 
+CharacterEscape</p><pre>1. Return false.
+</pre></div></p><p>Left cases found: <div class='case'><p>ClassEscape :: </p><pre>-
+SourceCharacter but not one of \ or ] or -
+b
+-
+CharacterEscape
+1. Return false.
+</pre></div>
+<div class='case'><p>ClassEscape ::  CharacterClassEscape</p><pre>1. Return true.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.6 Static Semantics: CharacterValue, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-character-value'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-character-value</a></h3><p>The syntax-directed operation CharacterValue takes no arguments and returns a non-negative integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>ClassAtomNoDash ::  SourceCharacter   but not one of \ or ] or -</p><pre>1. Let ch be the code point matched by SourceCharacter.
+2. Return the numeric value of ch.
+</pre></div></p><p>Left cases found: <div class='case'><p>ClassAtomNoDash ::  SourceCharacter</p><pre>1. Let ch be the code point matched by SourceCharacter.
+2. Return the numeric value of ch.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.6 Static Semantics: CharacterValue, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-character-value'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-character-value</a></h3><p>The syntax-directed operation CharacterValue takes no arguments and returns a non-negative integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>CharacterEscape ::  0 [lookahead ∉ DecimalDigit]</p><pre>1. Return the numeric value of U+0000 (NULL).
+</pre></div></p><p>Left cases found: <div class='case'><p>CharacterEscape ::  ControlEscape</p><pre>1. Return the numeric value according to Table 63.
+</pre></div>
+<div class='case'><p>CharacterEscape ::  IdentityEscape</p><pre>1. Let ch be the code point matched by IdentityEscape.
+2. Return the numeric value of ch.
+</pre></div>
+<div class='case'><p>CharacterEscape ::  c AsciiLetter</p><pre>1. Let ch be the code point matched by AsciiLetter.
+2. Let i be the numeric value of ch.
+3. Return the remainder of dividing i by 32.
+</pre></div>
+<div class='case'><p>CharacterEscape ::  HexEscapeSequence</p><pre>1. Return the MV of HexEscapeSequence.
+</pre></div>
+<div class='case'><p>CharacterEscape ::  0</p><pre>1. Return the numeric value of U+0000 (NULL).
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.1.6 Static Semantics: CharacterValue, <a href='https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-character-value'>https://262.ecma-international.org/14.0/#sec-patterns-static-semantics-character-value</a></h3><p>The syntax-directed operation CharacterValue takes no arguments and returns a non-negative integer. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>HexNonSurrogate ::  Hex4Digits Hex4Digits Hex4Digits</p><pre>1. Return the MV of Hex4Digits.
+</pre></div></p><p>Left cases found: <div class='case'><p>HexNonSurrogate ::  Hex4Digits</p><pre>Return the MV of Hex4Digits.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.3 Runtime Semantics: CompileSubpattern, <a href='https://262.ecma-international.org/14.0/#sec-compilesubpattern'>https://262.ecma-international.org/14.0/#sec-compilesubpattern</a></h3><p>The syntax-directed operation CompileSubpattern takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>Term ::  Atom</p><pre>1. Return CompileAtom of Atom with arguments rer and direction.
+</pre></div></p><p>Left cases found: <div class='case'><p>Term ::  Assertion</p><pre>1. Return CompileAssertion of Assertion with argument rer.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.3 Runtime Semantics: CompileSubpattern, <a href='https://262.ecma-international.org/14.0/#sec-compilesubpattern'>https://262.ecma-international.org/14.0/#sec-compilesubpattern</a></h3><p>The syntax-directed operation CompileSubpattern takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>Term ::  Atom Quantifier</p><pre>1. Let m be CompileAtom of Atom with arguments rer and direction.
+2. Let q be CompileQuantifier of Quantifier.
+3. Assert: q.[[Min]] ≤ q.[[Max]].
+4. Let parenIndex be CountLeftCapturingParensBefore(Term).
+5. Let parenCount be CountLeftCapturingParensWithin(Atom).
+6.Return a newMatcherwith parameters (x,c) that capturesm,q,parenIndex, andparenCountand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Return RepeatMatcher(m, q.[[Min]], q.[[Max]], q.[[Greedy]], x, c, parenIndex, parenCount).
+</pre></div></p><p>Left cases found: <div class='case'><p>Term ::  Assertion</p><pre>1. Return CompileAssertion of Assertion with argument rer.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.7 Runtime Semantics: CompileAtom, <a href='https://262.ecma-international.org/14.0/#sec-compileatom'>https://262.ecma-international.org/14.0/#sec-compileatom</a></h3><p>The syntax-directed operation CompileAtom takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>Atom ::  ( GroupSpecifieropt Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and direction.
+2. Let parenIndex be CountLeftCapturingParensBefore(Atom).
+3.Return a newMatcherwith parameters (x,c) that capturesdirection,m, andparenIndexand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c.Letdbe a newMatcherContinuationwith parameters (y) that capturesx,c,direction, andparenIndexand performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Let cap be a copy of y's captures List.
+iii. Let Input be x's input.
+iv. Let xe be x's endIndex.
+v. Let ye be y's endIndex.
+vi.Ifdirectionisforward, then
+1. Assert: xe ≤ ye.
+2. Let r be the CaptureRange (xe, ye).
+vii.Else,
+1. Assert: direction is backward.
+2. Assert: ye ≤ xe.
+3. Let r be the CaptureRange (ye, xe).
+viii. Set cap[parenIndex + 1] to r.
+ix. Let z be the MatchState (Input, ye, cap).
+x. Return c(z).
+d. Return m(x, d).
+</pre></div></p><p>Left cases found: <div class='case'><p>Atom ::  ( GroupSpecifier_opt Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and direction.
+2. Let parenIndex be CountLeftCapturingParensBefore(Atom).
+3. Return a new Matcher with parameters (x, c) that captures direction, m, and parenIndex and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let d be a new MatcherContinuation with parameters (y) that captures x, c, direction, and parenIndex and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Let cap be a copy of y's captures List.
+iii. Let Input be x's input.
+iv. Let xe be x's endIndex.
+v. Let ye be y's endIndex.
+vi. If direction is forward, then
+1. Assert: xe ≤ ye.
+2. Let r be the CaptureRange (xe, ye).
+vii. Else,
+1. Assert: direction is backward.
+2. Assert: ye ≤ xe.
+3. Let r be the CaptureRange (ye, xe).
+viii. Set cap[parenIndex + 1] to r.
+ix. Let z be the MatchState (Input, ye, cap).
+x. Return c(z).
+d. Return m(x, d).
+</pre></div>
+<div class='case'><p>Atom ::  CharacterClass</p><pre>1. Let cc be CompileCharacterClass of CharacterClass with argument rer.
+2. Return CharacterSetMatcher(rer, cc.[[CharSet]], cc.[[Invert]], direction).
+</pre></div>
+<div class='case'><p>Atom ::  PatternCharacter</p><pre>1. Let ch be the character matched by PatternCharacter.
+2. Let A be a one-element CharSet containing the character ch.
+3. Return CharacterSetMatcher(rer, A, false, direction).
+</pre></div>
+<div class='case'><p>Atom ::  .</p><pre>1. Let A be the CharSet of all characters.
+2. If rer.[[DotAll]] is not true, then
+a. Remove from A all characters corresponding to a code point on the right-hand side of the LineTerminator production.
+3. Return CharacterSetMatcher(rer, A, false, direction).
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.7 Runtime Semantics: CompileAtom, <a href='https://262.ecma-international.org/14.0/#sec-compileatom'>https://262.ecma-international.org/14.0/#sec-compileatom</a></h3><p>The syntax-directed operation CompileAtom takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>Atom ::  (?: Disjunction )</p><pre>1. Return CompileSubpattern of Disjunction with arguments rer and direction.
+</pre></div></p><p>Left cases found: <div class='case'><p>Atom ::  ( GroupSpecifier_opt Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and direction.
+2. Let parenIndex be CountLeftCapturingParensBefore(Atom).
+3. Return a new Matcher with parameters (x, c) that captures direction, m, and parenIndex and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let d be a new MatcherContinuation with parameters (y) that captures x, c, direction, and parenIndex and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Let cap be a copy of y's captures List.
+iii. Let Input be x's input.
+iv. Let xe be x's endIndex.
+v. Let ye be y's endIndex.
+vi. If direction is forward, then
+1. Assert: xe ≤ ye.
+2. Let r be the CaptureRange (xe, ye).
+vii. Else,
+1. Assert: direction is backward.
+2. Assert: ye ≤ xe.
+3. Let r be the CaptureRange (ye, xe).
+viii. Set cap[parenIndex + 1] to r.
+ix. Let z be the MatchState (Input, ye, cap).
+x. Return c(z).
+d. Return m(x, d).
+</pre></div>
+<div class='case'><p>Atom ::  CharacterClass</p><pre>1. Let cc be CompileCharacterClass of CharacterClass with argument rer.
+2. Return CharacterSetMatcher(rer, cc.[[CharSet]], cc.[[Invert]], direction).
+</pre></div>
+<div class='case'><p>Atom ::  PatternCharacter</p><pre>1. Let ch be the character matched by PatternCharacter.
+2. Let A be a one-element CharSet containing the character ch.
+3. Return CharacterSetMatcher(rer, A, false, direction).
+</pre></div>
+<div class='case'><p>Atom ::  .</p><pre>1. Let A be the CharSet of all characters.
+2. If rer.[[DotAll]] is not true, then
+a. Remove from A all characters corresponding to a code point on the right-hand side of the LineTerminator production.
+3. Return CharacterSetMatcher(rer, A, false, direction).
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.8 Runtime Semantics: CompileCharacterClass, <a href='https://262.ecma-international.org/14.0/#sec-compilecharacterclass'>https://262.ecma-international.org/14.0/#sec-compilecharacterclass</a></h3><p>The syntax-directed operation CompileCharacterClass takes argument rer (a RegExp Record) and returns a Record with fields [[CharSet]] (a CharSet) and [[Invert]] (a Boolean). It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>CharacterClass ::  [^ ClassRanges ]</p><pre>1. Let A be CompileToCharSet of ClassRanges with argument rer.
+2. Return the Record { [[CharSet]]: A, [[Invert]]: true }.
+</pre></div></p><p>Left cases found: <div class='case'><p>CharacterClass ::  [ ClassRanges ]</p><pre>1. Let A be CompileToCharSet of ClassRanges with argument rer.
+2. Return the Record { [[CharSet]]: A, [[Invert]]: false }.
+1. Let A be CompileToCharSet of ClassRanges with argument rer.
+2. Return the Record { [[CharSet]]: A, [[Invert]]: true }.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='https://262.ecma-international.org/14.0/#sec-compiletocharset'>https://262.ecma-international.org/14.0/#sec-compiletocharset</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>ClassAtomNoDash ::  SourceCharacter   but not one of \ or ] or -</p><pre>1. Return the CharSet containing the character matched by SourceCharacter.
+</pre></div></p><p>Left cases found: <div class='case'><p>ClassAtomNoDash ::  SourceCharacter</p><pre>Return the CharSet containing the character matched by SourceCharacter.
+</pre></div></p></div><br><br><div class='error'><p><h3>IN ECMAScript:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='https://262.ecma-international.org/14.0/#sec-compiletocharset'>https://262.ecma-international.org/14.0/#sec-compiletocharset</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>Case:</h3> <div class='case'><p>ClassEscape :: 
+b 
+- 
+CharacterEscape</p><pre>1. Let cv be the CharacterValue of this ClassEscape.
+2. Let c be the character whose character value is cv.
+3. Return the CharSet containing the single character c.
+</pre></div></p><p>Left cases found: <div class='case'><p>ClassEscape :: </p><pre>b
+-
+CharacterEscape
+1. Let cv be the CharacterValue of this ClassEscape.
+2. Let c be the character whose character value is cv.
+3. Return the CharSet containing the single character c.
+</pre></div></p></div>
+
+            <h2>Cases Found Multiple Times</h2>
+            Empty
+
+            <h2>Cases with Different Code</h2>
+            <div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.6 Runtime Semantics: CompileQuantifierPrefix, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 35 - 81</a></h3><p>The syntax-directed operation CompileQuantifierPrefix takes no arguments and returns a Record with fields [[Min]] (a non-negative integer) and [[Max]] (a non-negative integer or +∞). It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>QuantifierPrefix ::  +</p><pre>1. Return the Record { [[Min]]: 1, [[Max]]: +∞ }
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>QuantifierPrefix ::  +</p><pre>1. Return the Record { [[Min]]: 1, [[Max]]: +∞ }.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.6 Runtime Semantics: CompileQuantifierPrefix, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 35 - 81</a></h3><p>The syntax-directed operation CompileQuantifierPrefix takes no arguments and returns a Record with fields [[Min]] (a non-negative integer) and [[Max]] (a non-negative integer or +∞). It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>QuantifierPrefix ::  { DecimalDigits , }</p><pre>1. Let i be the MV of DecimalDigits.
+2. Return the Record { [[Min]]: i, [[Max]]: +∞ }
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>QuantifierPrefix ::  { DecimalDigits ,}</p><pre>1. Let i be the MV of DecimalDigits.
+2. Return the Record { [[Min]]: i, [[Max]]: +∞ }.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.6 Runtime Semantics: CompileQuantifierPrefix, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 35 - 81</a></h3><p>The syntax-directed operation CompileQuantifierPrefix takes no arguments and returns a Record with fields [[Min]] (a non-negative integer) and [[Max]] (a non-negative integer or +∞). It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>QuantifierPrefix ::  { DecimalDigits }</p><pre>1. Let i be the MV of DecimalDigits (see 12.9.3).
+2. Return the Record { [[Min]]: i, [[Max]]: i }
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>QuantifierPrefix ::  { DecimalDigits }</p><pre>1. Let i be the MV of DecimalDigits (see 12.9.3).
+2. Return the Record { [[Min]]: i, [[Max]]: i }.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.7.1 CharacterSetMatcher ( rer, A, invert, direction ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 115 - 162</a></h3><p>The abstract operation CharacterSetMatcher takes arguments rer (a RegExp Record), A (a CharSet), invert (a Boolean), and direction (forward or backward) and returns a Matcher. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. Return a new Matcher with parameters (x, c) that captures rer, A, invert, and direction and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let e be x's endIndex.
+e. If direction is forward, let f be e + 1.
+f. Else, let f be e - 1.
+g. Let InputLength be the number of elements in Input.
+h. If f < 0 or f > InputLength, return failure.
+i. Let index be min(e, f).
+j. Let ch be the character Input[index].
+k. Let cc be Canonicalize(rer, ch).
+l. If there exists a member a of A such that Canonicalize(rer, a) is cc, let found be true. Otherwise, let found be false.
+m. If invert is false and found is false, return failure.
+n. If invert is true and found is true, return failure.
+o. Let cap be x's captures List.
+p. Let y be the MatchState (Input, f, cap).
+q. Return c(y).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1.Return a newMatcherwith parameters (x,c) that capturesrer,A,invert, anddirectionand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let e be x's endIndex.
+e. If direction is forward, let f be e + 1.
+f. Else, let f be e - 1.
+g. Let InputLength be the number of elements in Input.
+h. If f < 0 or f > InputLength, return failure.
+i. Let index be min(e, f).
+j. Let ch be the character Input[index].
+k. Let cc be Canonicalize(rer, ch).
+l. If there exists a member a of A such that Canonicalize(rer, a) is cc, let found be true. Otherwise, let found be false.
+m. If invert is false and found is false, return failure.
+n. If invert is true and found is true, return failure.
+o. Let cap be x's captures List.
+p. Let y be the MatchState (Input, f, cap).
+q. Return c(y).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.7.2 BackreferenceMatcher ( rer, n, direction ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 165 - 220</a></h3><p>The abstract operation BackreferenceMatcher takes arguments rer (a RegExp Record), n (a positive integer), and direction (forward or backward) and returns a Matcher. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. Assert: n ≥ 1.
+2. Return a new Matcher with parameters (x, c) that captures rer, n, and direction and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let cap be x's captures List.
+e. Let r be cap[ n ].
+f. If r is undefined, return c(x).
+g. Let e be x's endIndex.
+h. Let rs be r's startIndex.
+i. Let re be r's endIndex.
+j. Let len be re - rs.
+k. If direction = forward, let f be e + len.
+l. Else, let f be e - len.
+m. Let InputLength be the number of elements in Input.
+n. If f < 0 or f > InputLength, return failure.
+o. Let g be min(e, f).
+p. If there exists an integer i in the interval from 0 (inclusive) to len (exclusive) such that Canonicalize(rer, Input[rs + i]) is not Canonicalize(rer, Input[g + i]), return failure.
+q. Let y be the MatchState (Input, f, cap).
+r. Return c(y).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Assert: n ≥ 1.
+2.Return a newMatcherwith parameters (x,c) that capturesrer,n, anddirectionand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let cap be x's captures List.
+e. Let r be cap[n].
+f. If r is undefined, return c(x).
+g. Let e be x's endIndex.
+h. Let rs be r's startIndex.
+i. Let re be r's endIndex.
+j. Let len be re - rs.
+k. If direction is forward, let f be e + len.
+l. Else, let f be e - len.
+m. Let InputLength be the number of elements in Input.
+n. If f < 0 or f > InputLength, return failure.
+o. Let g be min(e, f).
+p. If there exists an integer i in the interval from 0 (inclusive) to len (exclusive) such that Canonicalize(rer, Input[rs + i]) is not Canonicalize(rer, Input[g + i]), return failure.
+q. Let y be the MatchState (Input, f, cap).
+r. Return c(y).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 265 - 380</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>CharacterClassEscape ::  S</p><pre>1. Return the CharSet containing all characters not in the CharSet returned by CharacterClassEscape :: s .
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>CharacterClassEscape ::  S</p><pre>1. Return the CharSet containing all characters not in the CharSet returned by CharacterClassEscape :: s.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 265 - 380</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>CharacterClassEscape ::  P{ UnicodePropertyValueExpression }</p><pre></pre></div></p><p>IN ECMAScript: <div class='case'><p>CharacterClassEscape ::  P{ UnicodePropertyValueExpression }</p><pre>1. Return the CharSet containing all Unicode code points not included in CompileToCharSet of UnicodePropertyValueExpression with argument rer.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 265 - 380</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>CharacterClassEscape ::  W</p><pre>1. Return the CharSet containing all characters not in the CharSet returned by CharacterClassEscape :: p .
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>CharacterClassEscape ::  W</p><pre>1. Return the CharSet containing all characters not in the CharSet returned by CharacterClassEscape :: w.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.9 Runtime Semantics: CompileToCharSet, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 265 - 380</a></h3><p>The syntax-directed operation CompileToCharSet takes argument rer (a RegExp Record) and returns a CharSet. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>CharacterClassEscape ::  D</p><pre>1. Return the CharSet containing all characters not in the CharSet returned by CharacterClassEscape :: d .
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>CharacterClassEscape ::  D</p><pre>1. Return the CharSet containing all characters not in the CharSet returned by CharacterClassEscape :: d.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.8 Runtime Semantics: CompileCharacterClass, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 384 - 409</a></h3><p>The syntax-directed operation CompileCharacterClass takes argument rer (a RegExp Record) and returns a Record with fields [[CharSet]] (a CharSet) and [[Invert]] (a Boolean). It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>CharacterClass ::  [ ClassRanges ]</p><pre>1. Let A be CompileToCharSet of ClassRanges with argument rer.
+2. Return the Record { [[CharSet]]: A, [[Invert]]: false }.
+1. Let A be CompileToCharSet of ClassRanges with argument rer.
+2. Return the Record { [[CharSet]]: A, [[Invert]]: true }.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>CharacterClass ::  [ ClassRanges ]</p><pre>1. Let A be CompileToCharSet of ClassRanges with argument rer.
+2. Return the Record { [[CharSet]]: A, [[Invert]]: false }.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.4.1 IsWordChar ( rer, Input, e ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 413 - 433</a></h3><p>The abstract operation IsWordChar takes arguments rer (a RegExp Record), Input (a List of characters), and e (an integer) and returns a Boolean. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. Let InputLength be the number of elements in Input.
+2. If e = -1 or e = InputLength, return false.
+3. Let c be the character Input[ e ].
+4. If WordCharacters(rer) contains c, return true.
+5. Return false.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Let InputLength be the number of elements in Input.
+2. If e = -1 or e = InputLength, return false.
+3. Let c be the character Input[e].
+4. If WordCharacters(rer) contains c, return true.
+5. Return false.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.3.1 RepeatMatcher ( m, min, max, greedy, x, c, parenIndex, parenCount ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 436 - 499</a></h3><p>The abstract operation RepeatMatcher takes arguments m (a Matcher), min (a non-negative integer), max (a non-negative integer or +∞), greedy (a Boolean), x (a MatchState), c (a MatcherContinuation), parenIndex (a non-negative integer), and parenCount (a non-negative integer) and returns a MatchResult. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. If max = 0, return c(x).
+2. Let d be a new MatcherContinuation with parameters (y) that captures m, min, max, greedy, x, c, parenIndex, and parenCount and performs the following steps when called:
+a. Assert: y is a MatchState.
+b. If min = 0 and y's endIndex = x's endIndex, return failure.
+c. If min = 0, let min2 be 0; otherwise let min2 be min - 1.
+d. If max = +∞, let max2 be +∞; otherwise let max2 be max - 1.
+e. Return RepeatMatcher(m, min2, max2, greedy, y, c, parenIndex, parenCount).
+3. Let cap be a copy of x's captures List.
+4. For each integer k in the inclusive interval from parenIndex + 1 to parenIndex + parenCount, set cap[k] to undefined.
+5. Let Input be x's input.
+6. Let e be x's endIndex.
+7. Let xr be the MatchState (Input, e, cap).
+8. If min ≠ 0, return m(xr, d).
+9. If greedy is false, then
+a. Let z be c(x).
+b. If z is not failure, return z.
+10. Let z be m(xr, d).
+11. If z is not failure, return z.
+12. Return c(x).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. If max = 0, return c(x).
+2.Letdbe a newMatcherContinuationwith parameters (y) that capturesm,min,max,greedy,x,c,parenIndex, andparenCountand performs the following steps when called:
+a. Assert: y is a MatchState.
+b. If min = 0 and y's endIndex = x's endIndex, return failure.
+c. If min = 0, let min2 be 0; otherwise let min2 be min - 1.
+d. If max = +∞, let max2 be +∞; otherwise let max2 be max - 1.
+e. Return RepeatMatcher(m, min2, max2, greedy, y, c, parenIndex, parenCount).
+3. Let cap be a copy of x's captures List.
+4. For each integer k in the inclusive interval from parenIndex + 1 to parenIndex + parenCount, set cap[k] to undefined.
+5. Let Input be x's input.
+6. Let e be x's endIndex.
+7. Let xr be the MatchState (Input, e, cap).
+8. If min ≠ 0, return m(xr, d).
+9.Ifgreedyisfalse, then
+a. Let z be c(x).
+b. If z is not failure, return z.
+c. Return m(xr, d).
+10. Let z be m(xr, d).
+11. If z is not failure, return z.
+12. Return c(x).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.3 Runtime Semantics: CompileSubpattern, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 508 - 581</a></h3><p>The syntax-directed operation CompileSubpattern takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Alternative ::  [empty]</p><pre>1. Return a new Matcher with parameters (x, c) that captures nothing and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Return c(x).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Alternative ::  [empty]</p><pre>1.Return a newMatcherwith parameters (x,c) that captures nothing and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Return c(x).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.3 Runtime Semantics: CompileSubpattern, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 508 - 581</a></h3><p>The syntax-directed operation CompileSubpattern takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Alternative ::  Alternative Term</p><pre>1. Let m1 be CompileSubpattern of Alternative with arguments rer and direction.
+2. Let m2 be CompileSubpattern of Term with arguments rer and direction.
+3. If direction is forward, then
+a. Return a new Matcher with parameters (x, c) that captures m1 and m2 and performs the following steps when called:
+i. Assert: x is a MatchState.
+ii. Assert: c is a MatcherContinuation.
+iii. Let d be a new MatcherContinuation with parameters (y) that captures c and m2 and performs the following steps when called:
+1. Assert: y is a MatchState.
+2. Return m2(y, c).
+iv. Return m1(x, d).
+4. Else,
+a. Assert: direction is backward.
+b. Return a new Matcher with parameters (x, c) that captures m1 and m2 and performs the following steps when called:
+i. Assert: x is a MatchState.
+ii. Assert: x is a MatchState.
+iii. Let d be a new MatcherContinuation with parameters (y) that captures c and m1 and performs the following steps when called:
+1. Assert: y is a MatchState.
+2. Return m1(y, c).
+iv. Return m2(x, d).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Alternative ::  Alternative Term</p><pre>1. Let m1 be CompileSubpattern of Alternative with arguments rer and direction.
+2. Let m2 be CompileSubpattern of Term with arguments rer and direction.
+3.Ifdirectionisforward, then
+a.Return a newMatcherwith parameters (x,c) that capturesm1andm2and performs the following steps when called:
+i. Assert: x is a MatchState.
+ii. Assert: c is a MatcherContinuation.
+iii.Letdbe a newMatcherContinuationwith parameters (y) that capturescandm2and performs the following steps when called:
+1. Assert: y is a MatchState.
+2. Return m2(y, c).
+iv. Return m1(x, d).
+4.Else,
+a. Assert: direction is backward.
+b.Return a newMatcherwith parameters (x,c) that capturesm1andm2and performs the following steps when called:
+i. Assert: x is a MatchState.
+ii. Assert: c is a MatcherContinuation.
+iii.Letdbe a newMatcherContinuationwith parameters (y) that capturescandm1and performs the following steps when called:
+1. Assert: y is a MatchState.
+2. Return m1(y, c).
+iv. Return m2(x, d).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.3 Runtime Semantics: CompileSubpattern, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 508 - 581</a></h3><p>The syntax-directed operation CompileSubpattern takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Disjunction ::  Alternative | Disjunction</p><pre>1. Let m1 be CompileSubpattern of Alternative with arguments rer and direction.
+2. Let m2 be CompileSubpattern of Disjunction with arguments rer and direction.
+3. Return a new Matcher with parameters (x, c) that captures m1 and m2 and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let r be m1(x, c).
+d. If r is not failure, return r.
+e. Return m2(x, c).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Disjunction ::  Alternative | Disjunction</p><pre>1. Let m1 be CompileSubpattern of Alternative with arguments rer and direction.
+2. Let m2 be CompileSubpattern of Disjunction with arguments rer and direction.
+3.Return a newMatcherwith parameters (x,c) that capturesm1andm2and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let r be m1(x, c).
+d. If r is not failure, return r.
+e. Return m2(x, c).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.4 Runtime Semantics: CompileAssertion, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 582 - 779</a></h3><p>The syntax-directed operation CompileAssertion takes argument rer (a RegExp Record) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Assertion ::  $</p><pre>1. Return a new Matcher with parameters (x, c) that captures rer and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let e be x's endIndex.
+e. Let InputLength be the number of elements in Input.
+f. If e = InputLength, or if rer.[[Multiline]] is true and the character Input[e] is matched by LineTerminator, then
+i. Return c(x).
+g. Return failure.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Assertion ::  $</p><pre>1.Return a newMatcherwith parameters (x,c) that capturesrerand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let e be x's endIndex.
+e. Let InputLength be the number of elements in Input.
+f.Ife=InputLength, or ifrer.[[Multiline]] istrueand the characterInput[e] is matched byLineTerminator, then
+i. Return c(x).
+g. Return failure.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.4 Runtime Semantics: CompileAssertion, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 582 - 779</a></h3><p>The syntax-directed operation CompileAssertion takes argument rer (a RegExp Record) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Assertion ::  (?<! Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and backward.
+2. Return a new Matcher with parameters (x, c) that captures m and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let d be a new MatcherContinuation with parameters (y) that captures nothing and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Return y.
+d. Let r be m(x, d).
+e. If r is not failure, return failure.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Assertion ::  (?<! Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and backward.
+2.Return a newMatcherwith parameters (x,c) that capturesmand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c.Letdbe a newMatcherContinuationwith parameters (y) that captures nothing and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Return y.
+d. Let r be m(x, d).
+e. If r is not failure, return failure.
+f. Return c(x).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.4 Runtime Semantics: CompileAssertion, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 582 - 779</a></h3><p>The syntax-directed operation CompileAssertion takes argument rer (a RegExp Record) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Assertion ::  \b</p><pre>1. Return a new Matcher with parameters (x, c) that captures rer and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let e be x's endIndex.
+e. Let a be IsWordChar(rer, Input, e - 1).
+f. Let b be IsWordChar(rer, Input, e).
+g. If a is true and b is false, or if a is false and b is true, return c(x).
+h. Return failure.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Assertion ::  \b</p><pre>1.Return a newMatcherwith parameters (x,c) that capturesrerand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let e be x's endIndex.
+e. Let a be IsWordChar(rer, Input, e - 1).
+f. Let b be IsWordChar(rer, Input, e).
+g. If a is true and b is false, or if a is false and b is true, return c(x).
+h. Return failure.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.4 Runtime Semantics: CompileAssertion, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 582 - 779</a></h3><p>The syntax-directed operation CompileAssertion takes argument rer (a RegExp Record) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Assertion ::  (?! Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and forward.
+2. Return a new Matcher with parameters (x, c) that captures m and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let d be a new MatcherContinuation with parameters (y) that captures nothing and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Return y.
+d. Let r be m(x, d).
+e. If r is not failure, return failure.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Assertion ::  (?! Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and forward.
+2.Return a newMatcherwith parameters (x,c) that capturesmand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c.Letdbe a newMatcherContinuationwith parameters (y) that captures nothing and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Return y.
+d. Let r be m(x, d).
+e. If r is not failure, return failure.
+f. Return c(x).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.4 Runtime Semantics: CompileAssertion, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 582 - 779</a></h3><p>The syntax-directed operation CompileAssertion takes argument rer (a RegExp Record) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Assertion ::  ^</p><pre>1. Return a new Matcher with parameters (x, c) that captures rer and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let e be x's endIndex.
+e. If e = 0, or if rer.[[Multiline]] is true and the character Input[e - 1] is matched by LineTerminator, then
+i. Return c(x).
+f. Return failure.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Assertion ::  ^</p><pre>1.Return a newMatcherwith parameters (x,c) that capturesrerand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let e be x's endIndex.
+e.Ife= 0, or ifrer.[[Multiline]] istrueand the characterInput[e- 1] is matched byLineTerminator, then
+i. Return c(x).
+f. Return failure.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.4 Runtime Semantics: CompileAssertion, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 582 - 779</a></h3><p>The syntax-directed operation CompileAssertion takes argument rer (a RegExp Record) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Assertion ::  (?= Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and forward.
+2. Return a new Matcher with parameters (x, c) that captures m and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let d be a new MatcherContinuation with parameters (y) that captures nothing and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Return y.
+d. Let r be m(x, d).
+e. If r is failure, return failure.
+f. Let y be r's MatchState.
+g. Let cap be y's captures List.
+h. Let cap be y's captures List.
+i. Let cap be y's captures List.
+j. Let z be the MatchState (Input, xe, cap).
+k. Let z be the MatchState (Input, xe, cap).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Assertion ::  (?= Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and forward.
+2.Return a newMatcherwith parameters (x,c) that capturesmand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c.Letdbe a newMatcherContinuationwith parameters (y) that captures nothing and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Return y.
+d. Let r be m(x, d).
+e. If r is failure, return failure.
+f. Let y be r's MatchState.
+g. Let cap be y's captures List.
+h. Let Input be x's input.
+i. Let xe be x's endIndex.
+j. Let z be the MatchState (Input, xe, cap).
+k. Return c(z).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.4 Runtime Semantics: CompileAssertion, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 582 - 779</a></h3><p>The syntax-directed operation CompileAssertion takes argument rer (a RegExp Record) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Assertion ::  \B</p><pre>1. Return a new Matcher with parameters (x, c) that captures rer and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let e be x's endIndex.
+e. Let a be IsWordChar(rer, Input, e - 1).
+f. Let b be IsWordChar(rer, Input, e).
+g. If a is true and b is true, or if a is false and b is false, return c(x).
+h. Return failure.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Assertion ::  \B</p><pre>1.Return a newMatcherwith parameters (x,c) that capturesrerand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let Input be x's input.
+d. Let e be x's endIndex.
+e. Let a be IsWordChar(rer, Input, e - 1).
+f. Let b be IsWordChar(rer, Input, e).
+g. If a is true and b is true, or if a is false and b is false, return c(x).
+h. Return failure.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.4 Runtime Semantics: CompileAssertion, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 582 - 779</a></h3><p>The syntax-directed operation CompileAssertion takes argument rer (a RegExp Record) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Assertion ::  (?<= Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and backward.
+2. Return a new Matcher with parameters (x, c) that captures m and performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c. Let d be a new MatcherContinuation with parameters (y) that captures nothing and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Return y.
+d. Let r be m(x, d).
+e. If r is failure, return failure.
+f. Let y be r's MatchState.
+g. Let cap be y's captures List.
+h. Let cap be y's captures List.
+i. Let cap be y's captures List.
+j. Let z be the MatchState (Input, xe, cap).
+k. Let z be the MatchState (Input, xe, cap).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Assertion ::  (?<= Disjunction )</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and backward.
+2.Return a newMatcherwith parameters (x,c) that capturesmand performs the following steps when called:
+a. Assert: x is a MatchState.
+b. Assert: c is a MatcherContinuation.
+c.Letdbe a newMatcherContinuationwith parameters (y) that captures nothing and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Return y.
+d. Let r be m(x, d).
+e. If r is failure, return failure.
+f. Let y be r's MatchState.
+g. Let cap be y's captures List.
+h. Let Input be x's input.
+i. Let xe be x's endIndex.
+j. Let z be the MatchState (Input, xe, cap).
+k. Return c(z).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.7 Runtime Semantics: CompileAtom, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 780 - 920</a></h3><p>The syntax-directed operation CompileAtom takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>AtomEscape ::  DecimalEscape</p><pre>1. Let n be the CapturingGroupNumber of DecimalEscape.
+2. Assert: n ≤ rer.[[CapturingGroupsCount]].
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>AtomEscape ::  DecimalEscape</p><pre>1. Let n be the CapturingGroupNumber of DecimalEscape.
+2. Assert: n ≤ rer.[[CapturingGroupsCount]].
+3. Return BackreferenceMatcher(rer, n, direction).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.7 Runtime Semantics: CompileAtom, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 780 - 920</a></h3><p>The syntax-directed operation CompileAtom takes arguments rer (a RegExp Record) and direction (forward or backward) and returns a Matcher. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Atom ::  .</p><pre>1. Let A be the CharSet of all characters.
+2. If rer.[[DotAll]] is not true, then
+a. Remove from A all characters corresponding to a code point on the right-hand side of the LineTerminator production.
+3. Return CharacterSetMatcher(rer, A, false, direction).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Atom ::  .</p><pre>1. Let A be the CharSet of all characters.
+2.Ifrer.[[DotAll]] is nottrue, then
+a. Remove from A all characters corresponding to a code point on the right-hand side of the LineTerminator production.
+3. Return CharacterSetMatcher(rer, A, false, direction).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.2.2 Runtime Semantics: CompilePattern, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Semantics.v'><b>Semantics.v</b>: 924 - 951</a></h3><p>The syntax-directed operation CompilePattern takes argument rer (a RegExp Record) and returns an Abstract Closure that takes a List of characters and a non-negative integer and returns a MatchResult. It is defined piecewise over the following productions: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Pattern ::  Disjunction</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and forward.
+2. Return a new Abstract Closure with parameters (Input, index) that captures rer and m and performs the following steps when called:
+a. Assert: Input is a List of characters.
+b. Assert: 0 ≤ index ≤ the number of elements in Input.
+c. Let c be a new MatcherContinuation with parameters (y) that captures nothing and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Return y.
+d. Let cap be a List of rer.[[CapturingGroupsCount]] undefined values, indexed 1 through rer.[[CapturingGroupsCount]].
+e. Let x be the MatchState (Input, index, cap).
+f. Return m(x, c).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Pattern ::  Disjunction</p><pre>1. Let m be CompileSubpattern of Disjunction with arguments rer and forward.
+2.Return a newAbstract Closurewith parameters (Input,index) that capturesrerandmand performs the following steps when called:
+a. Assert: Input is a List of characters.
+b. Assert: 0 ≤ index ≤ the number of elements in Input.
+c.Letcbe a newMatcherContinuationwith parameters (y) that captures nothing and performs the following steps when called:
+i. Assert: y is a MatchState.
+ii. Return y.
+d. Let cap be a List of rer.[[CapturingGroupsCount]] undefined values, indexed 1 through rer.[[CapturingGroupsCount]].
+e. Let x be the MatchState (Input, index, cap).
+f. Return m(x, c).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.7.3 AdvanceStringIndex ( S, index, unicode ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/API.v'><b>API.v</b>: 237 - 255</a></h3><p>The abstract operation AdvanceStringIndex takes arguments S (a String), index (a non-negative integer), and unicode (a Boolean) and returns an integer. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. Assert: index ≤ 2^53 - 1.
+If unicode is false, return index + 1.
+3. Let length be the length of S.
+4. If index + 1 ≥ length, return index + 1.
+5. Let cp be CodePointAt(S, index).
+6. Return index + cp.[[CodeUnitCount]].
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Assert: index ≤ 253 - 1.
+2. If unicode is false, return index + 1.
+3. Let length be the length of S.
+4. If index + 1 ≥ length, return index + 1.
+5. Let cp be CodePointAt(S, index).
+6. Return index + cp.[[CodeUnitCount]].
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.7.4 GetStringIndex ( S, codePointIndex ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/API.v'><b>API.v</b>: 258 - 292</a></h3><p>The abstract operation GetStringIndex takes arguments S (a String) and codePointIndex (a non-negative integer) and returns a non-negative integer. It interprets S as a sequence of UTF-16 encoded code points, as described in 6.1.4, and returns the code unit index corresponding to code point index codePointIndex when such an index exists. Otherwise, it returns the length of S. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. If S is the empty String, return 0.
+2. Let len be the length of S.
+3. Let codeUnitCount be 0.
+4. Let codePointCount be 0.
+5. Repeat, while codeUnitCount < len,
+a. If codePointCount = codePointIndex, return codeUnitCount.
+b. Let cp be CodePointAt(S, codeUnitCount).
+c. Set codeUnitCount to codeUnitCount + cp.[[CodeUnitCount]].
+d. Set codePointCount to codePointCount + 1.
+6. Return len.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. If S is the empty String, return 0.
+2. Let len be the length of S.
+3. Let codeUnitCount be 0.
+4. Let codePointCount be 0.
+5.Repeat, whilecodeUnitCount<len,
+a. If codePointCount = codePointIndex, return codeUnitCount.
+b. Let cp be CodePointAt(S, codeUnitCount).
+c. Set codeUnitCount to codeUnitCount + cp.[[CodeUnitCount]].
+d. Set codePointCount to codePointCount + 1.
+6. Return len.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.3.3 RegExpInitialize ( obj, pattern, flags ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Frontend.v'><b>Frontend.v</b>: 76 - 124</a></h3><p>The abstract operation RegExpInitialize takes arguments obj (an Object), pattern (an ECMAScript language value), and flags (an ECMAScript language value) and returns either a normal completion containing an Object or a throw completion. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. If pattern is undefined, let P be the empty String.
+2. Else, let P be ? ToString(pattern).
+3. If flags is undefined, let F be the empty String.
+4. Else, let F be ? ToString(flags).
+5. If F contains any code unit other than "d", "g", "i", "m", "s", "u", or "y", or if F contains any code unit more than once, throw a SyntaxError exception.
+6. If F contains "i", let i be true; else let i be false.
+7. If F contains "m", let m be true; else let m be false.
+8. If F contains "s", let s be true; else let s be false.
+9. If F contains "u", let u be true; else let u be false.
+10. If u is true, then
+a. Let patternText be StringToCodePoints(P).
+11. Else,
+a. Let patternText be the result of interpreting each of P's 16-bit elements as a Unicode BMP code point. UTF-16 decoding is not applied to the elements.
+12. Let parseResult be ParsePattern(patternText, u).
+15. Set obj.[[OriginalSource]] to P.
+16. Set obj.[[OriginalFlags]] to F.
+17. Let capturingGroupsCount be CountLeftCapturingParensWithin(parseResult).
+18. Let rer be the RegExp Record { [[IgnoreCase]]: i, [[Multiline]]: m, [[DotAll]]: s, [[Unicode]]: u, [[UnicodeSets]]: v, [[CapturingGroupsCount]]: capturingGroupsCount }.
+19. Set obj.[[RegExpRecord]] to rer.
+20. Set obj.[[RegExpMatcher]] to CompilePattern of parseResult with argument rer.
+21. Perform ? Set(obj, "lastIndex", +0𝔽, true)
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. If pattern is undefined, let P be the empty String.
+2. Else, let P be ? ToString(pattern).
+3. If flags is undefined, let F be the empty String.
+4. Else, let F be ? ToString(flags).
+5. If F contains any code unit other than "d", "g", "i", "m", "s", "u", or "y", or if F contains any code unit more than once, throw a SyntaxError exception.
+6. If F contains "i", let i be true; else let i be false.
+7. If F contains "m", let m be true; else let m be false.
+8. If F contains "s", let s be true; else let s be false.
+9. If F contains "u", let u be true; else let u be false.
+10.Ifuistrue, then
+a. Let patternText be StringToCodePoints(P).
+11.Else,
+a. Let patternText be the result of interpreting each of P's 16-bit elements as a Unicode BMP code point. UTF-16 decoding is not applied to the elements.
+12. Let parseResult be ParsePattern(patternText, u).
+13. If parseResult is a non-empty List of SyntaxError objects, throw a SyntaxError exception.
+14. Assert: parseResult is a Pattern Parse Node.
+15. Set obj.[[OriginalSource]] to P.
+16. Set obj.[[OriginalFlags]] to F.
+17. Let capturingGroupsCount be CountLeftCapturingParensWithin(parseResult).
+18. Let rer be the RegExp Record { [[IgnoreCase]]: i, [[Multiline]]: m, [[DotAll]]: s, [[Unicode]]: u, [[CapturingGroupsCount]]: capturingGroupsCount }.
+19. Set obj.[[RegExpRecord]] to rer.
+20. Set obj.[[RegExpMatcher]] to CompilePattern of parseResult with argument rer.
+21. Perform ? Set(obj, "lastIndex", +0𝔽, true).
+22. Return obj.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.7.8 MakeMatchIndicesIndexPairArray ( S, indices, groupNames, hasGroups ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Frontend.v'><b>Frontend.v</b>: 200 - 267</a></h3><p>The abstract operation MakeMatchIndicesIndexPairArray takes arguments S (a String), indices (a List of either Match Records or undefined), groupNames (a List of either Strings or undefined), and hasGroups (a Boolean) and returns an Array. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>a. Let matchIndices be indices[i].
+b. If matchIndices is not undefined, then
+i. Let matchIndexPair be GetMatchIndexPair(S, matchIndices).
+c. Else,
+i. Let matchIndexPair be undefined
+d. Perform ! CreateDataPropertyOrThrow(A, ! ToString(𝔽(i)), matchIndexPair).
+a. Let matchIndices be indices[i].
+b. If matchIndices is not undefined, then
+i. Let matchIndexPair be GetMatchIndexPair(S, matchIndices).
+c. Else,
+i. Let matchIndexPair be undefined
+e. If i > 0 and groupNames[i - 1] is not undefined, then
+ii. Perform ! CreateDataPropertyOrThrow(groups, groupNames[i - 1], matchIndexPair).
+1. Let n be the number of elements in indices.
+2. Assert: n < 2^32 - 1.
+3. Assert: groupNames has n - 1 elements.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Let n be the number of elements in indices.
+2. Assert: n < 232 - 1.
+3. Assert: groupNames has n - 1 elements.
+4. NOTE: The groupNames List contains elements aligned with the indices List starting at indices[1].
+5. Let A be ! ArrayCreate(n).
+6.IfhasGroupsistrue, then
+a. Let groups be OrdinaryObjectCreate(null).
+7.Else,
+a. Let groups be undefined.
+8. Perform ! CreateDataPropertyOrThrow(A, "groups", groups).
+9.For eachintegerisuch that 0 ≤i<n, in ascending order, do
+a. Let matchIndices be indices[i].
+b.IfmatchIndicesis notundefined, then
+i. Let matchIndexPair be GetMatchIndexPair(S, matchIndices).
+c.Else,
+i. Let matchIndexPair be undefined.
+d. Perform ! CreateDataPropertyOrThrow(A, ! ToString(𝔽(i)), matchIndexPair).
+e.Ifi> 0 andgroupNames[i- 1] is notundefined, then
+i. Assert: groups is not undefined.
+ii. Perform ! CreateDataPropertyOrThrow(groups, groupNames[i - 1], matchIndexPair).
+10. Return A.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.7.2 RegExpBuiltinExec ( R, S ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Frontend.v'><b>Frontend.v</b>: 293 - 551</a></h3><p>The abstract operation RegExpBuiltinExec takes arguments R (an initialized RegExp instance) and S (a String) and returns either a normal completion containing either an Array exotic object or null, or a throw completion. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>c. Else,
+i. Let captureStart be captureI.[[StartIndex]].
+ii. Let captureEnd be captureI.[[EndIndex]].
+iii. If fullUnicode is true, then
+1. Set captureStart to GetStringIndex(S, captureStart).
+2. Set captureEnd to GetStringIndex(S, captureEnd).
+iv. Let capture be the Match Record { [[StartIndex]]: captureStart, [[EndIndex]]: captureEnd }.
+v. Let capturedValue be GetMatchString(S, capture).
+33. For each integer i such that 1 ≤ i ≤ n, in ascending order, do
+a. Let captureI be ith element of r's captures List.
+d. Perform ! CreateDataPropertyOrThrow(A, ! ToString(𝔽(i)), capturedValue).
+e. If the ith capture of R was defined with a GroupName, then
+i. Let s be the CapturingGroupName of that GroupName.
+ii. Perform ! CreateDataPropertyOrThrow(groups, s, capturedValue).
+iii. Append s to groupNames.
+f. Else,
+i. Append undefined to groupNames.
+c. Else,
+i. Let captureStart be captureI.[[StartIndex]].
+ii. Let captureEnd be captureI.[[EndIndex]].
+iii. If fullUnicode is true, then
+1. Set captureStart to GetStringIndex(S, captureStart).
+2. Set captureEnd to GetStringIndex(S, captureEnd).
+iv. Let capture be the Match Record { [[StartIndex]]: captureStart, [[EndIndex]]: captureEnd }.
+vi. Append capture to indices.
+33. For each integer i such that 1 ≤ i ≤ n, in ascending order, do
+a. Let captureI be ith element of r's captures List.
+1. Let length be the length of S.
+2. Let lastIndex be ℝ(? ToLength(? Get(R, "lastIndex"))).
+3. Let flags be R.[[OriginalFlags]].
+4. If flags contains "g", let global be true; else let global be false.
+5. If flags contains "y", let sticky be true; else let sticky be false.
+6. If flags contains "d", let hasIndices be true; else let hasIndices be false.
+7. If global is false and sticky is false, set lastIndex to 0.
+8. Let matcher be R.[[RegExpMatcher]].
+9. If flags contains "u", let fullUnicode be true; else let fullUnicode be false.
+10. Let matchSucceeded be false.
+11. If fullUnicode is true, let input be StringToCodePoints(S). Otherwise, let input be a List whose elements are the code units that are the elements of S.
+12. NOTE: Each element of input is considered to be a character.
+13. Repeat, while matchSucceeded is false,
+a. If lastIndex > length, then
+i. If global is true or sticky is true, then
+1. Perform ? Set(R, "lastIndex", +0𝔽, true).
+ii. Return null.
+b. Let inputIndex be the index into input of the character that was obtained from element lastIndex of S.
+c. Let r be matcher(input, inputIndex).
+d. If r is failure, then
+i. If sticky is true, then
+1. Perform ? Set(R, "lastIndex", +0𝔽, true).
+2. Return null.
+ii. Set lastIndex to AdvanceStringIndex(S, lastIndex, fullUnicode).
+e. Else
+i. Assert: r is a MatchState.
+ii. Set matchSucceeded to true.
+14. Let e be r.[[EndIndex]].
+15. If fullUnicode is true, set e to GetStringIndex(S, e).
+16. If global is true or sticky is true, then
+a. Perform ? Set(R, "lastIndex", 𝔽(e), true).
+17. Let n be the number of elements in r.[[Captures]].
+18. Assert: n = R.[[RegExpRecord]].[[CapturingGroupsCount]].
+19. Assert: n < 2^32 - 1.
+20. Let A be ! ArrayCreate(n + 1).
+22. Perform ! CreateDataPropertyOrThrow(A, "index", 𝔽(lastIndex)).
+23. Perform ! CreateDataPropertyOrThrow(A, "input", S).
+24. Let match be the Match Record { [[StartIndex]]: lastIndex, [[EndIndex]]: e }.
+28. Let matchedSubstr be GetMatchString(S, match).
+29. Perform ! CreateDataPropertyOrThrow(A, "0", matchedSubstr).
+21. Assert: The mathematical value of A's "length" property is n + 1.
+30. If R contains any GroupName, then
+31. Else,
+a. Let groups be undefined.
+27. Append match to indices.
+34. a. Let indicesArray be MakeMatchIndicesIndexPairArray(S, indices, groupNames, hasGroups).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Let length be the length of S.
+2. Let lastIndex be ℝ(? ToLength(? Get(R, "lastIndex"))).
+3. Let flags be R.[[OriginalFlags]].
+4. If flags contains "g", let global be true; else let global be false.
+5. If flags contains "y", let sticky be true; else let sticky be false.
+6. If flags contains "d", let hasIndices be true; else let hasIndices be false.
+7. If global is false and sticky is false, set lastIndex to 0.
+8. Let matcher be R.[[RegExpMatcher]].
+9. If flags contains "u", let fullUnicode be true; else let fullUnicode be false.
+10. Let matchSucceeded be false.
+11. If fullUnicode is true, let input be StringToCodePoints(S). Otherwise, let input be a List whose elements are the code units that are the elements of S.
+12. NOTE: Each element of input is considered to be a character.
+13.Repeat, whilematchSucceededisfalse,
+a.IflastIndex>length, then
+i.Ifglobalistrueorstickyistrue, then
+1. Perform ? Set(R, "lastIndex", +0𝔽, true).
+ii. Return null.
+b. Let inputIndex be the index into input of the character that was obtained from element lastIndex of S.
+c. Let r be matcher(input, inputIndex).
+d.Ifrisfailure, then
+i.Ifstickyistrue, then
+1. Perform ? Set(R, "lastIndex", +0𝔽, true).
+2. Return null.
+ii. Set lastIndex to AdvanceStringIndex(S, lastIndex, fullUnicode).
+e.Else,
+i. Assert: r is a MatchState.
+ii. Set matchSucceeded to true.
+14. Let e be r's endIndex value.
+15. If fullUnicode is true, set e to GetStringIndex(S, e).
+16.Ifglobalistrueorstickyistrue, then
+a. Perform ? Set(R, "lastIndex", 𝔽(e), true).
+17. Let n be the number of elements in r's captures List.
+18. Assert: n = R.[[RegExpRecord]].[[CapturingGroupsCount]].
+19. Assert: n < 232 - 1.
+20. Let A be ! ArrayCreate(n + 1).
+21. Assert: The mathematical value of A's "length" property is n + 1.
+22. Perform ! CreateDataPropertyOrThrow(A, "index", 𝔽(lastIndex)).
+23. Perform ! CreateDataPropertyOrThrow(A, "input", S).
+24. Let match be the Match Record { [[StartIndex]]: lastIndex, [[EndIndex]]: e }.
+25. Let indices be a new empty List.
+26. Let groupNames be a new empty List.
+27. Append match to indices.
+28. Let matchedSubstr be GetMatchString(S, match).
+29. Perform ! CreateDataPropertyOrThrow(A, "0", matchedSubstr).
+30.IfRcontains anyGroupName, then
+a. Let groups be OrdinaryObjectCreate(null).
+b. Let hasGroups be true.
+31.Else,
+a. Let groups be undefined.
+b. Let hasGroups be false.
+32. Perform ! CreateDataPropertyOrThrow(A, "groups", groups).
+33.For eachintegerisuch that 1 ≤i≤n, in ascending order, do
+a. Let captureI be ith element of r's captures List.
+b.IfcaptureIisundefined, then
+i. Let capturedValue be undefined.
+ii. Append undefined to indices.
+c.Else,
+i. Let captureStart be captureI's startIndex.
+ii. Let captureEnd be captureI's endIndex.
+iii.IffullUnicodeistrue, then
+1. Set captureStart to GetStringIndex(S, captureStart).
+2. Set captureEnd to GetStringIndex(S, captureEnd).
+iv. Let capture be the Match Record { [[StartIndex]]: captureStart, [[EndIndex]]: captureEnd }.
+v. Let capturedValue be GetMatchString(S, capture).
+vi. Append capture to indices.
+d. Perform ! CreateDataPropertyOrThrow(A, ! ToString(𝔽(i)), capturedValue).
+e.If theithcapture ofRwas defined with aGroupName, then
+i. Let s be the CapturingGroupName of that GroupName.
+ii. Perform ! CreateDataPropertyOrThrow(groups, s, capturedValue).
+iii. Append s to groupNames.
+f.Else,
+i. Append undefined to groupNames.
+34.IfhasIndicesistrue, then
+a. Let indicesArray be MakeMatchIndicesIndexPairArray(S, indices, groupNames, hasGroups).
+b. Perform ! CreateDataPropertyOrThrow(A, "indices", indicesArray).
+35. Return A.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.7.1 RegExpExec ( R, S ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Frontend.v'><b>Frontend.v</b>: 567 - 574</a></h3><p>The abstract operation RegExpExec takes arguments R (an Object) and S (a String) and returns either a normal completion containing either an Object or null, or a throw completion. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>4. Return ? RegExpBuiltinExec(R, S).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Let exec be ? Get(R, "exec").
+2.IfIsCallable(exec) istrue, then
+a. Let result be ? Call(exec, R, « S »).
+b. If result is not an Object and result is not null, throw a TypeError exception.
+c. Return result.
+3. Perform ? RequireInternalSlot(R, [[RegExpMatcher]]).
+4. Return ? RegExpBuiltinExec(R, S).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.6.8 RegExp.prototype [ @@match ] ( string ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Frontend.v'><b>Frontend.v</b>: 577 - 641</a></h3><p>This method performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. Let rx be the this value.
+2. If rx is not an Object, throw a TypeError exception.
+3. Let S be ? ToString(string).
+4. Let flags be ? ToString(? Get(rx, "flags")).
+5. If flags does not contain "g", then
+a. Return ? RegExpExec(rx, S).
+6. Else,
+a. If flags contains "u", let fullUnicode be true. Otherwise, let fullUnicode be false.
+b. Perform ? Set(rx, "lastIndex", +0𝔽, true).
+c. Let A be ! ArrayCreate(0).
+d. Let n be 0.
+e. Repeat,
+i. Let result be ? RegExpExec(rx, S).
+ii. If result is null, then
+1. If n = 0, return null.
+2. Return A.
+iii. Else,
+1. Let matchStr be ? ToString(? Get(result, "0")).
+2. Perform ! CreateDataPropertyOrThrow(A, ! ToString(𝔽(n)), matchStr).
+3. If matchStr is the empty String, then
+a. Let thisIndex be ℝ(? ToLength(? Get(rx, "lastIndex"))).
+b. Let nextIndex be AdvanceStringIndex(S, thisIndex, fullUnicode).
+c. Perform ? Set(rx, "lastIndex", 𝔽(nextIndex), true).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Let rx be the this value.
+2. If rx is not an Object, throw a TypeError exception.
+3. Let S be ? ToString(string).
+4. Let flags be ? ToString(? Get(rx, "flags")).
+5.Ifflagsdoes not contain"g", then
+a. Return ? RegExpExec(rx, S).
+6.Else,
+a. If flags contains "u", let fullUnicode be true. Otherwise, let fullUnicode be false.
+b. Perform ? Set(rx, "lastIndex", +0𝔽, true).
+c. Let A be ! ArrayCreate(0).
+d. Let n be 0.
+e.Repeat,
+i. Let result be ? RegExpExec(rx, S).
+ii.Ifresultisnull, then
+1. If n = 0, return null.
+2. Return A.
+iii.Else,
+1. Let matchStr be ? ToString(? Get(result, "0")).
+2. Perform ! CreateDataPropertyOrThrow(A, ! ToString(𝔽(n)), matchStr).
+3.IfmatchStris the empty String, then
+a. Let thisIndex be ℝ(? ToLength(? Get(rx, "lastIndex"))).
+b. Let nextIndex be AdvanceStringIndex(S, thisIndex, fullUnicode).
+c. Perform ? Set(rx, "lastIndex", 𝔽(nextIndex), true).
+4. Set n to n + 1.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.6.12 RegExp.prototype [ @@search ] ( string ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Frontend.v'><b>Frontend.v</b>: 654 - 693</a></h3><p>This method performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. Let rx be the this value.
+2. If rx is not an Object, throw a TypeError exception.
+3. Let S be ? ToString(string).
+4. Let previousLastIndex be ? Get(rx, "lastIndex").
+5. If SameValue(previousLastIndex, +0𝔽) is false, then
+6. Let result be ? RegExpExec(rx, S).
+7. Let currentLastIndex be ? Get(rx, "lastIndex").
+8. If SameValue(currentLastIndex, previousLastIndex) is false, then
+9. If result is null, return -1𝔽.
+10. Return ? Get(result, "index").
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Let rx be the this value.
+2. If rx is not an Object, throw a TypeError exception.
+3. Let S be ? ToString(string).
+4. Let previousLastIndex be ? Get(rx, "lastIndex").
+5.IfSameValue(previousLastIndex,+0𝔽) isfalse, then
+a. Perform ? Set(rx, "lastIndex", +0𝔽, true).
+6. Let result be ? RegExpExec(rx, S).
+7. Let currentLastIndex be ? Get(rx, "lastIndex").
+8.IfSameValue(currentLastIndex,previousLastIndex) isfalse, then
+a. Perform ? Set(rx, "lastIndex", previousLastIndex, true).
+9. If result is null, return -1𝔽.
+10. Return ? Get(result, "index").
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.6.16 RegExp.prototype.test ( S ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Frontend.v'><b>Frontend.v</b>: 698 - 711</a></h3><p>This method performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. Let R be the this value.
+2. If R is not an Object, throw a TypeError exception.
+3. Let string be ? ToString(S).
+4. Let match be ? RegExpExec(R, string).
+5. If match is not null, return true; else return false.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Let R be the this value.
+2. If R is not an Object, throw a TypeError exception.
+3. Let string be ? ToString(S).
+4. Let match be ? RegExpExec(R, string).
+5. If match is not null, return true; else return false.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.9.1 CreateRegExpStringIterator ( R, S, global, fullUnicode ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Frontend.v'><b>Frontend.v</b>: 717 - 757</a></h3><p>The abstract operation CreateRegExpStringIterator takes arguments R (an Object), S (a String), global (a Boolean), and fullUnicode (a Boolean) and returns a Generator. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. Let closure be a new Abstract Closure with no parameters that captures R, S, global, and fullUnicode and performs the following steps when called:
+i. Let match be ? RegExpExec(R, S).
+ii. If match is null, return undefined.
+iii. If global is false, then
+1. Perform ? GeneratorYield(CreateIterResultObject(match, false)).
+2. Return undefined.
+iv. Let matchStr be ? ToString(? Get(match, "0")).
+v. If matchStr is the empty String, then
+1. Let thisIndex be ℝ(? ToLength(? Get(R, "lastIndex"))).
+2. Let nextIndex be AdvanceStringIndex(S, thisIndex, fullUnicode).
+3. Perform ? Set(R, "lastIndex", 𝔽(nextIndex), true)
+vi. Perform ? GeneratorYield(CreateIterResultObject(match, false)).
+2. Return CreateIteratorFromClosure(closure, "%RegExpStringIteratorPrototype%", %RegExpStringIteratorPrototype%).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1.Letclosurebe a newAbstract Closurewith no parameters that capturesR,S,global, andfullUnicodeand performs the following steps when called:
+a.Repeat,
+i. Let match be ? RegExpExec(R, S).
+ii. If match is null, return undefined.
+iii.Ifglobalisfalse, then
+1. Perform ? GeneratorYield(CreateIterResultObject(match, false)).
+2. Return undefined.
+iv. Let matchStr be ? ToString(? Get(match, "0")).
+v.IfmatchStris the empty String, then
+1. Let thisIndex be ℝ(? ToLength(? Get(R, "lastIndex"))).
+2. Let nextIndex be AdvanceStringIndex(S, thisIndex, fullUnicode).
+3. Perform ? Set(R, "lastIndex", 𝔽(nextIndex), true).
+vi. Perform ? GeneratorYield(CreateIterResultObject(match, false)).
+2. Return CreateIteratorFromClosure(closure, "%RegExpStringIteratorPrototype%", %RegExpStringIteratorPrototype%).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.6.9 RegExp.prototype [ @@matchAll ] ( string ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/Frontend.v'><b>Frontend.v</b>: 773 - 799</a></h3><p>This method performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>5. Let flags be ? ToString(? Get(R, "flags")).
+9. If flags contains "g", let global be true.
+11. If flags contains "u", let fullUnicode be true.
+13. Return CreateRegExpStringIterator(matcher, S, global, fullUnicode).
+b. iii. If ? ToString(flags) does not contain "g", throw a TypeError exception.
+5. Return ? Invoke(rx, @@matchAll, « S »).
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Let R be the this value.
+2. If R is not an Object, throw a TypeError exception.
+3. Let S be ? ToString(string).
+4. Let C be ? SpeciesConstructor(R, %RegExp%).
+5. Let flags be ? ToString(? Get(R, "flags")).
+6. Let matcher be ? Construct(C, « R, flags »).
+7. Let lastIndex be ? ToLength(? Get(R, "lastIndex")).
+8. Perform ? Set(matcher, "lastIndex", lastIndex, true).
+9. If flags contains "g", let global be true.
+10. Else, let global be false.
+11. If flags contains "u", let fullUnicode be true.
+12. Else, let fullUnicode be false.
+13. Return CreateRegExpStringIterator(matcher, S, global, fullUnicode).
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.1.7 Static Semantics: GroupSpecifiersThatMatch ( thisGroupName ), <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 24 - 48</a></h3><p>The abstract operation GroupSpecifiersThatMatch takes argument thisGroupName (a GroupName Parse Node) and returns a List of GroupSpecifier Parse Nodes. It performs the following steps when called: </p></div></p><p><h3>IN COQ:</h3> <div class='case'><p> :: </p><pre>1. Let name be the CapturingGroupName of thisGroupName.
+2. Let pattern be the Pattern containing thisGroupName.
+3. Let result be a new empty List.
+4. For each GroupSpecifier gs that pattern contains, do
+a. If the CapturingGroupName of gs is name, then
+i. Append gs to result.
+5. Return result.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p> :: </p><pre>1. Let name be the CapturingGroupName of thisGroupName.
+2. Let pattern be the Pattern containing thisGroupName.
+3. Let result be a new empty List.
+4.For eachGroupSpecifiergsthatpatterncontains, do
+a.If theCapturingGroupNameofgsisname, then
+i. Append gs to result.
+5. Return result.
+</pre></div></p></div><br><br><div class='error'><p><h3>Section:</h3> <div class='section'><h3>22.2.1.1 Static Semantics: Early Errors, <a href='file:////home/martin/regex_coq/warblre/mechanization/spec/StaticSemantics.v'><b>StaticSemantics.v</b>: 252 - 321</a></h3><p></p></div></p><p><h3>IN COQ:</h3> <div class='case'><p>Pattern ::  Disjunction</p><pre>* It is a Syntax Error if CountLeftCapturingParensWithin(Pattern) ≥ 2^32 - 1.
+* It is a Syntax Error if Pattern contains two or more GroupSpecifiers for which CapturingGroupName of GroupSpecifier is the same.
+</pre></div></p><p>IN ECMAScript: <div class='case'><p>Pattern ::  Disjunction</p><pre>* It is a Syntax Error if CountLeftCapturingParensWithin(Pattern) ≥ 232 - 1.
+* It is a Syntax Error if Pattern contains two or more GroupSpecifiers for which CapturingGroupName of GroupSpecifier is the same.
+</pre></div></p></div>
+
+            
+        </body>
+        </html>
+        
