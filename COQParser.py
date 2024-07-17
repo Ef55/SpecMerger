@@ -4,7 +4,7 @@ from alectryon.literate import coq_partition, Comment, StringView
 import re
 import os
 
-from utils import Path, SubSection, Parser, Case, ParserState, Position
+from utils import Path, SubSection, Parser, Case, ParserState, Position, add_case
 
 
 @dataclass(frozen=True)
@@ -19,17 +19,22 @@ class CoqPosition(Position):
     file_positions: Dict[str, Tuple[int, int]]
 
     def html_str(self) -> str:
-        return ", ".join([f"<a href='file:///{file_name}'><b>{self.get_file_name_without_path(file_name)}</b>: {start} - {end}</a>" for file_name, (start, end)
-                          in self.file_positions.items()])
-    def get_file_name_without_path(self,path) -> str:
+        return ", ".join(
+            f"<a download href='file://{file_name}'><b>{self.get_file_name_without_path(file_name)}</b>: {start} - {end}</a>"
+            for file_name, (start, end)
+            in self.file_positions.items())
+
+    def get_file_name_without_path(self, path) -> str:
         return path.split("/")[-1]
+
 
 class COQParser(Parser):
     def __init__(self, files: List[Path], to_exclude: List[Path], title_regex: str = r"(22\.2(?:\.[0-9]{0,2}){1,3})",
                  spec_regex: str = r"^\(\*(\* )?>?>(.|\n)*?<<\*\)$",
                  case_regex: str = r"([a-zA-Z0-9\[\]]+) ::((?:.|\n)*)",
-                 algo_regex: str = r"([0-9a-z]|i{2,})\. .*",
+                 algo_regex: str = r"(([0-9a-z]|i{2,})\.)|\* .*",
                  any_title_regex: str = r"^[ -]*?((?:[0-9]+\.)+[0-9]+)(?: .*?|)$"):
+        self.name = "COQ"
         self.files = files
         self.to_exclude = to_exclude
         self.title_regex = re.compile(title_regex)
@@ -89,7 +94,7 @@ class COQParser(Parser):
                             comments.append((line, CoqLine(filename, line_num)))
                 # avoid -1 at start, would have made no sense
                 if len(comments) > 0:
-                    comments.append(("", CoqLine(file, -1, True)))
+                    comments.append(("", CoqLine(filename, -1, True)))
         return comments
 
     # Completely arbitrary in our case
@@ -114,10 +119,17 @@ class COQParser(Parser):
                     new_files[filename] = old_files[0][filename]
                 case _:
                     raise Exception("This should never happen")
-
+        new_cases = {}
+        for case in section1.cases.keys() | section2.cases.keys():
+            if section1.cases.get(case) is not None and section2.cases.get(case) is not None:
+                new_cases[case] = section1.cases[case].union(section2.cases[case])
+            elif section1.cases.get(case) is not None:
+                new_cases[case] = section1.cases[case]
+            else:
+                new_cases[case] = section2.cases[case]
         return (SubSection(title,
                            description_first + "\n" + description_second,
-                           section1.cases.union(section2.cases),
+                           new_cases,
                            CoqPosition(new_files)))
 
     """
@@ -133,7 +145,6 @@ class COQParser(Parser):
             if type(comment) is int:
                 continue
             if res2 := self.any_title_regex.match(comment[0]):
-                print(res2.group(1), comment)
                 if current_block != "" and not section_to_be_thrown_away:
                     if title_indices.get(current_block) is not None:
                         # This means the section was split
@@ -171,9 +182,10 @@ class COQParser(Parser):
         title = ""
         description = ""
         parser_state = ParserState.READING_TITLE
-        cases = set()
+        in_case_title = False
+        cases: dict[str, set[Case]] = {}
         current_case = ""
-        current_case_title = ["", ""]
+        current_case_titles = []
         filenames = {}
         for parsed_comment, coq_line in comment_lines:
             # We are at the end of a comment
@@ -193,14 +205,22 @@ class COQParser(Parser):
                 filenames[filename] = (coq_line.line_number, coq_line.line_number)
             # Otherwise update last line
             else:
-                filenames[filename] = (filenames[filename][0], coq_line.line_number)
+                before_indices = filenames[filename]
+                added_index = coq_line.line_number
+                new_indices = (min(before_indices[0], added_index), max(before_indices[1], added_index))
+                filenames[filename] = new_indices
+
             if self.case_regex.match(parsed_comment):
                 parser_state = ParserState.READING_CASES
-                if current_case_title != ["", ""] or current_case != "":
-                    cases.add(Case(current_case_title[0], current_case_title[1], current_case))
+                if current_case != "":
+                    for case_title in current_case_titles:
+                        case = Case(case_title[0], case_title[1], current_case)
+                        add_case(cases, case)
+                    current_case_titles = []
                 match = self.case_regex.match(parsed_comment)
-                current_case_title = [match.group(1), match.group(2)]
+                current_case_titles.append([match.group(1), match.group(2)])
                 current_case = ""
+                in_case_title = True
 
             else:
                 match parser_state:
@@ -210,10 +230,10 @@ class COQParser(Parser):
                             # is only one case in the subsection and therefore we set its title to ""
                             parser_state = ParserState.READING_CASES
                             current_case = parsed_comment + "\n"
+                            if not current_case_titles:
+                                current_case_titles.append(["", ""])
                         else:
                             title += parsed_comment
-                            if "11.1.4" in title:
-                                a = 123
                             parser_state = ParserState.READING_DESCRIPTION
                     case ParserState.READING_DESCRIPTION:
                         if self.algo_regex.match(parsed_comment):
@@ -221,15 +241,27 @@ class COQParser(Parser):
                             # there is only one case in the subsection and therefore we set its title to ""
                             parser_state = ParserState.READING_CASES
                             current_case = parsed_comment + "\n"
+                            if not current_case_titles:
+                                current_case_titles.append(["", ""])
                         else:
                             description += parsed_comment + " "
                     case ParserState.READING_CASES:
-                        current_case += parsed_comment + "\n"
-
+                        if self.algo_regex.match(parsed_comment) or not in_case_title:
+                            if not current_case_titles:
+                                current_case_titles.append(["", ""])
+                            in_case_title = False
+                            current_case += parsed_comment + "\n"
+                        elif in_case_title:
+                            current_case_titles[-1][1] += "\n" + parsed_comment
         if current_case != "":
-            cases.add(Case(current_case_title[0], current_case_title[1], current_case))
+            for case_title in current_case_titles:
+                case = Case(case_title[0], case_title[1], current_case)
+                add_case(cases, case)
         return SubSection(title, description, cases, CoqPosition(filenames))
 
     def get_section_for_comparison(self, section) -> SubSection:
         assert section in self.sections_by_number.keys()
         return self.sections_by_number[section]
+
+    def get_all_section_numbers(self) -> set[str]:
+        return set(self.sections_by_number.keys())

@@ -25,15 +25,23 @@ class Case:
     def __str__(self):
         if self.left_title == "" and self.right_title == "":
             return self.code
-        return self.left_title + " ::" + self.right_title + "\n" + self.code
+        return self.title_str() + "\n" + self.code
+
+    def title_str(self):
+        return self.left_title + " ::" + self.right_title
 
 
 @dataclass(frozen=True)
 class SubSection:
     title: str
     description: str
-    cases: set[Case]
+    cases: dict[str, set[Case]]
     position: Position
+    def get_all_cases(self) -> set[Case]:
+        result = set()
+        for case_set in self.cases.values():
+            result.update(case_set)
+        return result
 
 
 class ParserState(enum.Enum):
@@ -43,6 +51,8 @@ class ParserState(enum.Enum):
 
 
 class Parser(ABC):
+    name: str
+
     def get_section(self, section) -> str:
         subsection = self.get_section_for_comparison(section)
         result = subsection.title + "\n" + subsection.description + "\n"
@@ -53,3 +63,14 @@ class Parser(ABC):
     @abstractmethod
     def get_section_for_comparison(self, section) -> SubSection:
         pass
+
+    @abstractmethod
+    def get_all_section_numbers(self) -> set[str]:
+        pass
+
+
+def add_case(cases: dict[str, set[Case]], case: Case):
+    if cases.get(case.title_str()) is None:
+        cases[case.title_str()] = {case}
+    else:
+        cases[case.title_str()].add(case)

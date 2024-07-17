@@ -3,9 +3,9 @@ from typing import Dict, List
 
 import bs4
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, PageElement
 
-from utils import Parser, SubSection, Case, ParserState, Position
+from utils import Parser, SubSection, Case, ParserState, Position, add_case
 
 
 @dataclass(frozen=True)
@@ -15,9 +15,11 @@ class URLPosition(Position):
     def html_str(self):
         return f"<a href='{self.url}'>{self.url}</a>"
 
+
 class ECMAParser(Parser):
 
     def __init__(self, url, sections=None):
+        self.name = "ECMA"
         if sections is None:
             sections = ["sec-regexp-regular-expression-objects"]
         self.url = url
@@ -37,12 +39,12 @@ class ECMAParser(Parser):
         first_subsection = section_html.find("emu-clause")
         if first_subsection is not None:
             paragraph = [x for x in first_subsection.previous_siblings if x.name not in self.avoid][::-1]
-            self.sections_by_number[title] = self.parse_subsection(paragraph,position)
+            self.sections_by_number[title] = self.parse_subsection(paragraph, position)
             for new_section in section_html.find_all("emu-clause", recursive=False):
                 self._parse_section(new_section)
         else:
             paragraph = [x for x in section_html.children if x.name not in self.avoid]
-            self.sections_by_number[title] = self.parse_subsection(paragraph,position)
+            self.sections_by_number[title] = self.parse_subsection(paragraph, position)
 
     def _preprocess(self, sections):
         for section in sections:
@@ -73,27 +75,46 @@ class ECMAParser(Parser):
         main_ol = list(emu_alg_section.children)[0]
         return self._parse_list(main_ol)
 
-    def _parse_emu_grammar(self, emu_grammar_section: BeautifulSoup) -> list[str]:
+    def _parse_emu_mods(self, mods: PageElement):
+        match list(mods.children)[0]:
+            case "emu-opt":
+                return "_" + mods.text
+            case _:
+                return mods.text
+
+    def _parse_emu_grammar(self, emu_grammar_section: BeautifulSoup) -> list[list[str]]:
         # an emu-grammar always contains one or multiple emu-production which themselves contain :
         # - an emu-nt
         # - an emu-geq
         # one or multiple emu-rhs which all contain one or more element
         emu_prods = emu_grammar_section.find_all("emu-production")
-        result = ["", ""]
+        result = []
         for prod in emu_prods:
-            result[0] = prod.find("emu-nt").text
+            tmp = ["", ""]
+            tmp[0] = prod.find("emu-nt").text
             separator = " " if prod.has_attr("collapsed") else "\n"
             right_hand_sides = prod.find_all("emu-rhs", recursive=False)
             for rhs in right_hand_sides:
                 # hack to avoid beautiful soup to add \n for no reason ?
-                if type(rhs) is not bs4.NavigableString:
-                    result[1] += separator
-                    for nt in rhs.children:
-                        to_add = nt.text.replace("\n", "") + " "
-                        result[1] += "" if to_add == " " else to_add
+                if type(rhs) is bs4.NavigableString:
+                    continue
+                tmp[1] += separator
+                to_add = ""
+                for nt in rhs.children:
+                    if type(nt) is bs4.NavigableString:
+                        continue
+                    for small_child in nt.children:
+                        if small_child.name == "emu-mods":
+                            to_add += "_" + self._parse_emu_mods(small_child)
+                        else:
+                            to_add += small_child.text
+                    to_add = to_add + " " if to_add != "" else ""
+                tmp[1] += to_add
+
             # remove last space
-            if result[1] != "":
-                result[1] = result[1][:-1]
+            if tmp[1] != "":
+                tmp[1] = tmp[1][:-1]
+            result.append(tmp)
         return result
 
     def _parse_p(self, p: BeautifulSoup):
@@ -103,7 +124,9 @@ class ECMAParser(Parser):
         for child in p.children:
             match child.name:
                 case "emu-grammar":
-                    res += " ::".join(self._parse_emu_grammar(child))
+                    res += " ::".join(f"{x[0]} ::{x[1]}" for x in self._parse_emu_grammar(child))
+                case "sup":
+                    res += "^" + child.text
                 case _:
                     res += child.text
         return res
@@ -111,9 +134,9 @@ class ECMAParser(Parser):
     def parse_subsection(self, subsection: List[BeautifulSoup], position: URLPosition) -> SubSection:
         title = ""
         description = ""
-        cases: set[Case] = set()
+        cases: dict[str, set[Case]] = {}
         current_case = ""
-        current_case_title = ["", ""]
+        current_case_titles = [["", ""]]
         parser_state = ParserState.READING_TITLE
         for children in subsection:
             match children.name:
@@ -137,26 +160,33 @@ class ECMAParser(Parser):
                 case "emu-alg":
                     parser_state = ParserState.READING_CASES
                     current_case += self._parse_emu_alg(children)
-                    cases.add(Case(current_case_title[0], current_case_title[1], current_case))
+                    for current_case_title in current_case_titles:
+                        case = Case(current_case_title[0], current_case_title[1], current_case)
+                        add_case(cases, case)
                     current_case = ""
-                    current_case_title = ["", ""]
+                    current_case_titles = [["", ""]]
                 case "emu-grammar":
                     parser_state = ParserState.READING_CASES
                     if current_case != "":
-                        cases.add(Case(current_case_title[0], current_case_title[1], current_case))
+                        for current_case_title in current_case_titles:
+                            case = Case(current_case_title[0], current_case_title[1], current_case)
+                            add_case(cases, case)
                         current_case = ""
-                    current_case_title = self._parse_emu_grammar(children)
+                    current_case_titles = self._parse_emu_grammar(children)
                 case "span" | "emu-table" | "emu-import" | "h2":
                     pass
                 case _:
                     print(f"ERROR: Unhandled tag in html section : {children.name}, {children.text}")
                     raise ValueError
-        if current_case_title != ["", ""]:
-            cases.add(Case(current_case_title[0], current_case_title[1], current_case))
-        return SubSection(title, description, cases,position)
+        if current_case_titles != [["", ""]]:
+            for current_case_title in current_case_titles:
+                case = Case(current_case_title[0], current_case_title[1], current_case)
+                add_case(cases, case)
+        return SubSection(title, description, cases, position)
 
     def get_section_for_comparison(self, section) -> SubSection:
         assert section in self.sections_by_number.keys()
         return self.sections_by_number[section]
 
-
+    def get_all_section_numbers(self) -> set[str]:
+        return set(self.sections_by_number.keys())
