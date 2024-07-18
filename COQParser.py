@@ -4,7 +4,7 @@ from alectryon.literate import coq_partition, Comment, StringView
 import re
 import os
 
-from utils import Path, SubSection, Parser, Case, ParserState, Position, add_case
+from utils import Path, SubSection, Parser, Case, ParserState, Position, add_case, ParsedPage
 
 
 @dataclass(frozen=True)
@@ -14,27 +14,34 @@ class CoqLine:
     is_end_comment: bool = False
 
 
+def get_file_name_without_path(path) -> str:
+    return path.split("/")[-1]
+
+
 @dataclass(frozen=True)
 class CoqPosition(Position):
     file_positions: Dict[str, Tuple[int, int]]
 
     def html_str(self) -> str:
         return ", ".join(
-            f"<a download href='file://{file_name}'><b>{self.get_file_name_without_path(file_name)}</b>: {start} - {end}</a>"
+            f"<a download href='file://{file_name}'><b>{get_file_name_without_path(file_name)}</b>: {start} - {end}</a>"
             for file_name, (start, end)
             in self.file_positions.items())
 
-    def get_file_name_without_path(self, path) -> str:
-        return path.split("/")[-1]
-
 
 class COQParser(Parser):
-    def __init__(self, files: List[Path], to_exclude: List[Path], title_regex: str = r"(22\.2(?:\.[0-9]{0,2}){1,3})",
+    def __init__(self, files: List[Path], to_exclude: List[Path], parser_name: str = "COQ",
+                 title_regex: str = r"(22\.2(?:\.[0-9]{0,2}){1,3})",
                  spec_regex: str = r"^\(\*(\* )?>?>(.|\n)*?<<\*\)$",
                  case_regex: str = r"([a-zA-Z0-9\[\]]+) ::((?:.|\n)*)",
-                 algo_regex: str = r"(([0-9a-z]|i{2,})\.)|\* .*",
+                 algo_regex: str = r"^(?:(?:(?:(?:[1-9][0-9]*)|[a-z]|[ivxlc]+)\.)|\*) .*$",
                  any_title_regex: str = r"^[ -]*?((?:[0-9]+\.)+[0-9]+)(?: .*?|)$"):
-        self.name = "COQ"
+        self.sections_by_number = None
+        self.comments = None
+        self.all_filenames = None
+        self.coq_code = None
+
+        self.name = parser_name
         self.files = files
         self.to_exclude = to_exclude
         self.title_regex = re.compile(title_regex)
@@ -43,12 +50,8 @@ class COQParser(Parser):
         self.case_regex = re.compile(case_regex)
         self.algo_regex = re.compile(algo_regex)
 
-        self.coq_code, self.all_filenames = self.get_coq_code()
-        self.comments = self.get_comment_lines()
-        self.sections_by_number = self.get_comment_titles()
-
     @staticmethod
-    def get_lines_num_from_paragraph(string_view: StringView) -> tuple[int, int]:
+    def __get_lines_num_from_paragraph(string_view: StringView) -> tuple[int, int]:
         original_string: str = string_view.s
         line_start = original_string.count("\n", 0, string_view.beg) + 1
         line_end = line_start + original_string.count("\n", string_view.beg, string_view.end)
@@ -57,10 +60,10 @@ class COQParser(Parser):
         return line_start, line_end
 
     @staticmethod
-    def get_line_num(string_view: StringView) -> int:
+    def __get_line_num(string_view: StringView) -> int:
         return string_view.s.count("\n", 0, string_view.beg)
 
-    def _add_file(self, filename: str, files_dic: dict, all_filenames: list):
+    def __add_file(self, filename: str, files_dic: dict, all_filenames: list):
         if any([filename.startswith(excluded.uri) for excluded in self.to_exclude]):
             return
         with open(filename, "r") as f:
@@ -68,19 +71,19 @@ class COQParser(Parser):
             files_dic[filename] = coq_file
         all_filenames.append(filename)
 
-    def get_coq_code(self) -> Tuple[Dict[str, str], List[str]]:
+    def __get_coq_code(self) -> Tuple[Dict[str, str], List[str]]:
         files_dic = {}
         all_filenames = []
         for file in self.files:
             if file.is_dir:
                 for root, dirs, files in os.walk(file.uri, topdown=False):
                     for name in files:
-                        self._add_file(os.path.abspath(os.path.join(root, name)), files_dic, all_filenames)
+                        self.__add_file(os.path.abspath(os.path.join(root, name)), files_dic, all_filenames)
             else:
-                self._add_file(file.uri, files_dic, all_filenames)
+                self.__add_file(file.uri, files_dic, all_filenames)
         return files_dic, all_filenames
 
-    def get_comment_lines(self) -> List[tuple[str, CoqLine]]:
+    def __get_comment_lines(self) -> List[tuple[str, CoqLine]]:
         comments = []
         for filename in self.all_filenames:
             file = self.coq_code[filename]
@@ -88,9 +91,9 @@ class COQParser(Parser):
             for field in partition:
                 if isinstance(field, Comment) and self.spec_regex.match(str(field.v)):
                     for line in str(field.v).splitlines():
-                        line = self._parse_comment(line)
+                        line = self.__parse_comment(line)
                         if line != "":
-                            line_num = self.get_line_num(field.v)
+                            line_num = self.__get_line_num(field.v)
                             comments.append((line, CoqLine(filename, line_num)))
                 # avoid -1 at start, would have made no sense
                 if len(comments) > 0:
@@ -98,7 +101,7 @@ class COQParser(Parser):
         return comments
 
     # Completely arbitrary in our case
-    def merge_comments(self, section1: SubSection, section2: SubSection):
+    def __merge_comments(self, section1: SubSection, section2: SubSection):
         print("[WARNING] Merge called for ", section1, section2)
         title = section1.title if len(section1.title) > len(section2.title) else section2.title
         description_first = section1.description if len(section1.description) > len(
@@ -136,32 +139,30 @@ class COQParser(Parser):
     Gets the indices of the comments that contain the titles of the sections (comments that match the title_regex)
     """
 
-    def get_comment_titles(self) -> Dict[str, SubSection]:
+    def __get_comment_titles(self) -> Dict[str, SubSection]:
         title_indices = {}
         current_block = ""
         last_block_end = 0
         section_to_be_thrown_away = False
         for comment_index, comment in enumerate(self.comments):
-            if type(comment) is int:
-                continue
             if res2 := self.any_title_regex.match(comment[0]):
                 if current_block != "" and not section_to_be_thrown_away:
                     if title_indices.get(current_block) is not None:
                         # This means the section was split
-                        title_indices[current_block] = self.merge_comments(
-                            self.parse_subsection((last_block_end, comment_index)), title_indices.get(current_block))
+                        title_indices[current_block] = self.__merge_comments(
+                            self.__parse_subsection((last_block_end, comment_index)), title_indices.get(current_block))
                     else:
-                        title_indices[current_block] = self.parse_subsection((last_block_end, comment_index))
+                        title_indices[current_block] = self.__parse_subsection((last_block_end, comment_index))
                     last_block_end = comment_index
                 elif current_block != "" and section_to_be_thrown_away:
                     last_block_end = comment_index
                 current_block = res2.group(1)
                 section_to_be_thrown_away = self.title_regex.search(str(comment)) is None
         if not section_to_be_thrown_away:
-            title_indices[current_block] = self.parse_subsection((last_block_end, len(self.comments)))
+            title_indices[current_block] = self.__parse_subsection((last_block_end, len(self.comments)))
         return title_indices
 
-    def _parse_title(self, title: str) -> str:
+    def __parse_title(self, title: str) -> str:
 
         lines = title.splitlines(keepends=False)
         title = lines[1].lstrip()
@@ -169,14 +170,14 @@ class COQParser(Parser):
             title += "\n" + line.lstrip()
         return title + "\n"
 
-    def _parse_comment(self, comment: str) -> str:
+    def __parse_comment(self, comment: str) -> str:
         return (comment.replace("\n", "").replace("(*>>", "").replace("<<*)", "")
                 .replace("(** >>", "").lstrip().rstrip())
 
     # Pour les commentaires de 22.2.2.1, on peut soit:
     # - mettre un "-" ou "*" au début pour montrer qu'il s'agit d'un point
     # - mettre un commentaire avant qui indique qu'il s'agit d'un enchaînement de points
-    def parse_subsection(self, comment_indices):
+    def __parse_subsection(self, comment_indices):
         comment_lines = self.comments[comment_indices[0]:comment_indices[1]]
 
         title = ""
@@ -259,9 +260,9 @@ class COQParser(Parser):
                 add_case(cases, case)
         return SubSection(title, description, cases, CoqPosition(filenames))
 
-    def get_section_for_comparison(self, section) -> SubSection:
-        assert section in self.sections_by_number.keys()
-        return self.sections_by_number[section]
-
-    def get_all_section_numbers(self) -> set[str]:
-        return set(self.sections_by_number.keys())
+    def get_parsed_page(self) -> ParsedPage:
+        if self.sections_by_number is None:
+            self.coq_code, self.all_filenames = self.__get_coq_code()
+            self.comments = self.__get_comment_lines()
+            self.sections_by_number = self.__get_comment_titles()
+        return ParsedPage(self.name, self.sections_by_number)

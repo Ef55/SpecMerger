@@ -1,6 +1,7 @@
 import enum
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
+from typing import Optional
 
 
 @dataclass(frozen=True)
@@ -37,6 +38,7 @@ class SubSection:
     description: str
     cases: dict[str, set[Case]]
     position: Position
+
     def get_all_cases(self) -> set[Case]:
         result = set()
         for case_set in self.cases.values():
@@ -50,22 +52,24 @@ class ParserState(enum.Enum):
     READING_CASES = 2
 
 
+@dataclass
+class ParsedPage:
+    name: str
+    sections: dict[str, SubSection]
+
+    def get_all_section_numbers(self):
+        return set(self.sections.keys())
+
+    def __getitem__(self, item) -> Optional[SubSection]:
+        assert isinstance(item, str), f"Expected string, got {type(item)}"
+        return self.sections.get(item)
+
+
 class Parser(ABC):
     name: str
 
-    def get_section(self, section) -> str:
-        subsection = self.get_section_for_comparison(section)
-        result = subsection.title + "\n" + subsection.description + "\n"
-        for case in subsection.cases:
-            result += str(case) + "\n"
-        return result
-
     @abstractmethod
-    def get_section_for_comparison(self, section) -> SubSection:
-        pass
-
-    @abstractmethod
-    def get_all_section_numbers(self) -> set[str]:
+    def get_parsed_page(self) -> ParsedPage:
         pass
 
 

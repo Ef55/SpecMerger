@@ -41,7 +41,7 @@ class Formatter:
             </style>
         </head>
         <body>
-            <h1>Comparison Report</h1>
+            <h1>Comparison Report {first_doc_name} vs {second_doc_name}</h1>
             
             <h2>Correct Matches</h2>
             {correct}
@@ -82,37 +82,37 @@ class Formatter:
             return section if section != "" else "Empty"
 
         not_found_html = format_if_empty("<br>".join(
-            f"<div class='error'><p><h3>{e(names[i])}:</h3> {'<br><br>'.join(f'{e(section.title)} : {section.position.html_str()}' for section in report.not_found[i])}"
+            f"<div class='error'><p><h3>IN {e(names[i])}:</h3> {'<br><br>'.join(f'{e(section.title)} : {section.position.html_str()}' for section in report.not_found[i])}"
             f"</p></div>"
             for i in range(2)))
 
         not_same_title_html = format_if_empty("<br>".join(
-            f"<div class='error'><p><h3>{e(report.first_doc_name)}:</h3> {format_section(original)}</p><p><h3>{e(report.second_doc_name)}:</h3>{format_section(other)}</p></div>"
+            f"<div class='error'><p><h3>IN {e(report.first_doc_name)}:</h3> {format_section(original)}</p><p><h3>{e(report.second_doc_name)}:</h3>{format_section(other)}</p></div>"
             for original, other in report.not_same_title
         ))
 
         not_same_description_html = format_if_empty("<br><br>".join(
-            f"<div class='error'><p><h3>{e(report.first_doc_name)}:</h3> {format_section(original)}</p><p><h3>{e(report.second_doc_name)}:</h3> {format_section(other)}</p></div>"
+            f"<div class='error'><p><h3>IN {e(report.first_doc_name)}:</h3> {format_section(original)}</p><p><h3>IN {e(report.second_doc_name)}:</h3> {format_section(other)}</p></div>"
             for original, other in report.not_same_description
         ))
 
         case_not_found_at_all_html = format_if_empty("<br><br>".join(
-            f"<div class='error'><p><h3>{e(names[doc])}:</h3> {format_section(original)}</p><p><h3>Case not found:</h3> {format_case(case)}</p></div>"
+            f"<div class='error'><p><h3>IN {e(names[doc])}:</h3> {format_section(original)}</p><p><h3>Case not found:</h3> {format_case(case)}</p></div>"
             for original, other, case, doc in report.case_not_found_at_all
         ))
 
         case_right_not_found_html = format_if_empty("<br><br>".join(
-            f"<div class='error'><p><h3>{e(names[doc])}:</h3> {format_section(original)}</p><p><h3>Case:</h3> {format_case(case)}</p><p>Left cases found: {chr(10).join(format_case(left) for left in lefts)}</p></div>"
+            f"<div class='error'><p><h3>IN {e(names[doc])}:</h3> {format_section(original)}</p><p><h3>Case:</h3> {format_case(case)}</p><p>Left cases found: {chr(10).join(format_case(left) for left in lefts)}</p></div>"
             for original, other, case, lefts, doc in report.case_right_not_found
         ))
 
         case_found_multiple_times_html = format_if_empty("<br><br>".join(
-            f"<div class='error'><p><h3>{e(names[doc])}:</h3> {format_section(original)}</p><p><h3>Case found multiple times:</h3> {format_case(case)}</p><p>Preciser cases: {', '.join(str(p) for p in preciser)}</p></div>"
+            f"<div class='error'><p><h3>IN {e(names[doc])}:</h3> {format_section(original)}</p><p><h3>Case found multiple times:</h3> {format_case(case)}</p><p>Preciser cases: {', '.join(str(p) for p in preciser)}</p></div>"
             for original, other, case, preciser, doc in report.case_found_multiple_times
         ))
 
         case_code_not_same_html = format_if_empty("<br><br>".join(
-            f"<div class='error'><p><h3>Section:</h3> {format_section(original)}</p><p><h3>{e(report.first_doc_name)}:</h3> {format_case(original_case)}</p><p><h3>{e(report.second_doc_name)}</h3>: {format_case(other_case)}</p></div>"
+            f"<div class='error'><p><h3>Section:</h3> {format_section(original)}</p><p><h3>IN {e(report.first_doc_name)}:</h3> {format_case(original_case)}</p><p><h3>IN {e(report.second_doc_name)}</h3>: {format_case(other_case)}</p></div>"
             "<b>line-diffs</b> : " + "<br>".join(
                 difflib.unified_diff(original_case.code.replace('\xa0','').replace(' ','').splitlines(), other_case.code.replace('\xa0','').replace(' ','').splitlines()))
 
@@ -132,7 +132,9 @@ class Formatter:
             case_right_not_found=case_right_not_found_html,
             case_found_multiple_times=case_found_multiple_times_html,
             case_code_not_same=case_code_not_same_html,
-            correct=correct_html
+            correct=correct_html,
+            first_doc_name=e(report.first_doc_name),
+            second_doc_name=e(report.second_doc_name)
         )
 
         file_path = os.path.abspath(os.path.join(report_path,"comparison.html"))
