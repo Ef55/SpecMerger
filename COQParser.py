@@ -28,6 +28,9 @@ class CoqPosition(Position):
             for file_name, (start, end)
             in self.file_positions.items())
 
+    def __hash__(self):
+        return hash(self.html_str())
+
 
 class COQParser(Parser):
     def __init__(self, files: List[Path], to_exclude: List[Path], parser_name: str = "COQ",
@@ -37,7 +40,7 @@ class COQParser(Parser):
                  algo_regex: str = r"^(?:(?:(?:(?:[1-9][0-9]*)|[a-z]|[ivxlc]+)\.)|\*) .*$",
                  any_title_regex: str = r"^[ -]*?((?:[0-9]+\.)+[0-9]+)(?: .*?|)$"):
         self.sections_by_number = None
-        self.comments = None
+        self.comments: list[tuple[str, CoqLine]] = None
         self.all_filenames = None
         self.coq_code = None
 
@@ -61,7 +64,7 @@ class COQParser(Parser):
 
     @staticmethod
     def __get_line_num(string_view: StringView) -> int:
-        return string_view.s.count("\n", 0, string_view.beg)
+        return string_view.s.count("\n", 0, string_view.beg) + 1
 
     def __add_file(self, filename: str, files_dic: dict, all_filenames: list):
         if any([filename.startswith(excluded.uri) for excluded in self.to_exclude]):
@@ -90,11 +93,11 @@ class COQParser(Parser):
             partition = coq_partition(file)
             for field in partition:
                 if isinstance(field, Comment) and self.spec_regex.match(str(field.v)):
-                    for line in str(field.v).splitlines():
+                    start_line_num = self.__get_line_num(field.v)
+                    for i, line in enumerate(str(field.v).splitlines()):
                         line = self.__parse_comment(line)
                         if line != "":
-                            line_num = self.__get_line_num(field.v)
-                            comments.append((line, CoqLine(filename, line_num)))
+                            comments.append((line, CoqLine(filename, start_line_num + i)))
                 # avoid -1 at start, would have made no sense
                 if len(comments) > 0:
                     comments.append(("", CoqLine(filename, -1, True)))
@@ -188,6 +191,7 @@ class COQParser(Parser):
         current_case = ""
         current_case_titles = []
         filenames = {}
+        case_line_indices = [-1, -1]
         for parsed_comment, coq_line in comment_lines:
             # We are at the end of a comment
             if coq_line.is_end_comment:
@@ -214,10 +218,13 @@ class COQParser(Parser):
             if self.case_regex.match(parsed_comment):
                 parser_state = ParserState.READING_CASES
                 if current_case != "":
+                    case_pos = CoqPosition({coq_line.file_name: tuple(case_line_indices)})
                     for case_title in current_case_titles:
-                        case = Case(case_title[0], case_title[1], current_case)
+                        case = Case(case_title[0], case_title[1], current_case, case_pos)
                         add_case(cases, case)
                     current_case_titles = []
+                case_line_indices[0] = coq_line.line_number
+                case_line_indices[1] = coq_line.line_number
                 match = self.case_regex.match(parsed_comment)
                 current_case_titles.append([match.group(1), match.group(2)])
                 current_case = ""
@@ -228,7 +235,9 @@ class COQParser(Parser):
                     case ParserState.READING_TITLE:
                         if self.algo_regex.match(parsed_comment):
                             # If there is a start of an algorithm, but we are still building title, it means that there
-                            # is only one case in the subsection and therefore we set its title to ""
+                            # is only one case in the subsection, and therefore we set its title to ""
+                            case_line_indices[0] = coq_line.line_number
+                            case_line_indices[1] = coq_line.line_number
                             parser_state = ParserState.READING_CASES
                             current_case = parsed_comment + "\n"
                             if not current_case_titles:
@@ -239,7 +248,9 @@ class COQParser(Parser):
                     case ParserState.READING_DESCRIPTION:
                         if self.algo_regex.match(parsed_comment):
                             # If there is a start of an algorithm, but we are still building description, it means that
-                            # there is only one case in the subsection and therefore we set its title to ""
+                            # there is only one case in the subsection, and therefore we set its title to ""
+                            case_line_indices[0] = coq_line.line_number
+                            case_line_indices[1] = coq_line.line_number
                             parser_state = ParserState.READING_CASES
                             current_case = parsed_comment + "\n"
                             if not current_case_titles:
@@ -247,6 +258,7 @@ class COQParser(Parser):
                         else:
                             description += parsed_comment + " "
                     case ParserState.READING_CASES:
+                        case_line_indices[1] = coq_line.line_number
                         if self.algo_regex.match(parsed_comment) or not in_case_title:
                             if not current_case_titles:
                                 current_case_titles.append(["", ""])
@@ -255,8 +267,9 @@ class COQParser(Parser):
                         elif in_case_title:
                             current_case_titles[-1][1] += "\n" + parsed_comment
         if current_case != "":
+            case_pos = CoqPosition({comment_lines[-1][1].file_name: tuple(case_line_indices)})
             for case_title in current_case_titles:
-                case = Case(case_title[0], case_title[1], current_case)
+                case = Case(case_title[0], case_title[1], current_case, case_pos)
                 add_case(cases, case)
         return SubSection(title, description, cases, CoqPosition(filenames))
 

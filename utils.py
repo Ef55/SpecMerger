@@ -2,7 +2,7 @@ import enum
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from typing import Optional
-
+from comparer_utils import Dictionnary, OrderedSeq, String, Bag, Content
 
 @dataclass(frozen=True)
 class Path:
@@ -22,6 +22,7 @@ class Case:
     left_title: str
     right_title: str
     code: str
+    position: Position
 
     def __str__(self):
         if self.left_title == "" and self.right_title == "":
@@ -78,3 +79,7 @@ def add_case(cases: dict[str, set[Case]], case: Case):
         cases[case.title_str()] = {case}
     else:
         cases[case.title_str()].add(case)
+
+class GenericParsedPage:
+    name: str
+    entries: Dictionnary

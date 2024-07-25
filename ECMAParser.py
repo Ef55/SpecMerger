@@ -18,7 +18,7 @@ class URLPosition(Position):
 
 class ECMAParser(Parser):
 
-    def __init__(self, url, parser_name="ECMA",sections=None):
+    def __init__(self, url, parser_name="ECMA", sections=None):
         self.name = parser_name
         if sections is None:
             sections = ["sec-regexp-regular-expression-objects"]
@@ -41,7 +41,7 @@ class ECMAParser(Parser):
             paragraph = [x for x in first_subsection.previous_siblings if x.name not in self.avoid][::-1]
             sections_by_number[title] = self.__parse_subsection(paragraph, position)
             for new_section in section_html.find_all("emu-clause", recursive=False):
-                self.__parse_section(new_section,sections_by_number)
+                self.__parse_section(new_section, sections_by_number)
         else:
             paragraph = [x for x in section_html.children if x.name not in self.avoid]
             sections_by_number[title] = self.__parse_subsection(paragraph, position)
@@ -140,6 +140,8 @@ class ECMAParser(Parser):
         current_case_titles = [["", ""]]
         parser_state = ParserState.READING_TITLE
         for children in subsection:
+            if title.startswith("22.2.1.2 "):
+                print("DEBUG")
             match children.name:
                 case "h1":
                     title += self.__strip_sides(children.text)
@@ -162,7 +164,7 @@ class ECMAParser(Parser):
                     parser_state = ParserState.READING_CASES
                     current_case += self.__parse_emu_alg(children)
                     for current_case_title in current_case_titles:
-                        case = Case(current_case_title[0], current_case_title[1], current_case)
+                        case = Case(current_case_title[0], current_case_title[1], current_case, position)
                         add_case(cases, case)
                     current_case = ""
                     current_case_titles = [["", ""]]
@@ -170,7 +172,7 @@ class ECMAParser(Parser):
                     parser_state = ParserState.READING_CASES
                     if current_case != "":
                         for current_case_title in current_case_titles:
-                            case = Case(current_case_title[0], current_case_title[1], current_case)
+                            case = Case(current_case_title[0], current_case_title[1], current_case, position)
                             add_case(cases, case)
                         current_case = ""
                     current_case_titles = self.__parse_emu_grammar(children)
@@ -181,7 +183,7 @@ class ECMAParser(Parser):
                     raise ValueError
         if current_case_titles != [["", ""]]:
             for current_case_title in current_case_titles:
-                case = Case(current_case_title[0], current_case_title[1], current_case)
+                case = Case(current_case_title[0], current_case_title[1], current_case, position)
                 add_case(cases, case)
         return SubSection(title, description, cases, position)
 

@@ -1,6 +1,5 @@
-from typing import List, Callable
+from typing import List
 from packaging.version import Version
-import difflib
 
 from Report import Report
 from utils import Case, SubSection, ParsedPage
@@ -27,7 +26,12 @@ def _same_titles(case_titles: list[tuple[Case, str]]) -> set[set[Case]]:
 
 
 class Comparer:
-    def __init__(self, first_parsed_page: ParsedPage, second_parsed_page: ParsedPage, sections_to_exclude: List[str]):
+    def __init__(self, first_parsed_page: ParsedPage, second_parsed_page: ParsedPage, sections_to_exclude: List[str],
+                 sort_section_titles=None):
+        if sort_section_titles is None:
+            self.sort_section_titles = lambda subsection: Version(subsection.title.split(" ")[0])
+        else:
+            self.sort_section_titles = sort_section_titles
         self.sections_to_exclude = sections_to_exclude
         self.formatter = Formatter()
         self.first_page = first_parsed_page
@@ -80,7 +84,6 @@ class Comparer:
             description2 = "".join([x for x in section_2.description if x not in chars_to_replace])
             if description1 != description2:
                 self.report.add_not_same_description(section_1, section_2)
-                continue
             all_cases_correct = True
             cases_keys_first = section_1.cases.keys()
             cases_keys_second = section_2.cases.keys()
@@ -104,8 +107,8 @@ class Comparer:
                     all_cases_correct = False
                 if not all_cases_correct:
                     continue
-                case_first = cases_first.pop()
-                case_second = cases_second.pop()
+                case_first = list(cases_first)[0]
+                case_second = list(cases_second)[0]
                 code1 = "".join([x for x in case_first.code if x not in chars_to_replace])
                 code2 = "".join([x for x in case_second.code if x not in chars_to_replace])
                 if code1 != code2:
@@ -118,4 +121,5 @@ class Comparer:
             self.__compare_cases(to_check_again_from_first, section_1, section_2, 1)
             # 1 was found but not 2
             self.__compare_cases(to_check_again_from_second, section_1, section_2, 0)
+        self.report.finalize(self.sort_section_titles)
         return self.report
