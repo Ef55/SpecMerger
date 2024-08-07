@@ -3,7 +3,6 @@ from packaging.version import Version
 
 from Report import Report
 from utils import Case, SubSection, ParsedPage
-from Formatter import Formatter
 
 
 def _same_titles(case_titles: list[tuple[Case, str]]) -> set[set[Case]]:
@@ -33,7 +32,6 @@ class Comparer:
         else:
             self.sort_section_titles = sort_section_titles
         self.sections_to_exclude = sections_to_exclude
-        self.formatter = Formatter()
         self.first_page = first_parsed_page
         self.second_page = second_parsed_page
         self.report = Report(first_parsed_page.name, second_parsed_page.name)

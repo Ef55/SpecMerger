@@ -11,7 +11,7 @@ class Path:
 
 
 @dataclass(frozen=True)
-class Position:
+class Position(ABC):
     @abstractmethod
     def html_str(self) -> str:
         pass
@@ -80,6 +80,16 @@ def add_case(cases: dict[str, set[Case]], case: Case):
     else:
         cases[case.title_str()].add(case)
 
+@dataclass
 class GenericParsedPage:
     name: str
     entries: Dictionnary
+
+
+class GenericParser(ABC):
+    name: str
+
+    @abstractmethod
+    def get_parsed_page(self) -> GenericParsedPage:
+        pass
+

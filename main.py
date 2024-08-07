@@ -4,7 +4,6 @@ from Formatter import Formatter
 from Comparer import Comparer
 from utils import Path
 
-
 def main():
     url = "https://262.ecma-international.org/14.0/"
     url2 = "https://262.ecma-international.org/15.0/"

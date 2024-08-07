@@ -1,0 +1,49 @@
+{
+  "22.2":
+  {
+    "title":  "22.2 Regex (typo in one of the keys)",
+    "description": "This is the regex description",
+    "cases": {
+      "Atom :: Disjunction": {"1":"1. Do a shenanigan","2":"2. This is weird ?","order": ["1","2"]},
+      "Disjunction :: Alternative" : [true, "1. this is an alternative","2. continue","3. end."]
+    }
+  },
+  "22.2.1":
+  {
+    "title": "22.2.1 Notation (description different)",
+    "description": "From greatest falls come greatest bruises."
+  },
+  "22.2.7.3":
+  {
+    "title": "22.2.7.3 Semantics (steps missing in list + set)",
+    "cases": {
+      "Atom :: Bomb": [true, "2. Now everything is ok.","3. return."],
+      "DJ :: Set": [false,"if y then b","if u then v","10100111001",
+        "if you give a fishing stick to a man, he will starve (not edible)"]
+    }
+  },
+  "22.2.5":
+  {
+    "title": "22.2.5 Static Semantics (problem with priorities and focus)",
+    "description": "Ahhh... statistics",
+    "algorithm" : {"1": "1. Do x.","2":"2. Do y.","3":"3. Do a.",
+      "order": ["1","2","3"]},
+    "subpart": {
+      "left": "present",
+      "center": "present",
+      "right": [true,"no","it","is","not","there"]
+    }
+  },
+  "22.123":
+  {
+    "title": "22.123 RTFM (priorities should work)",
+    "description": "Radio télévision FM",
+    "computer": [true,"1. CPU","3. GPU", "4. SSD"]
+  },
+  "22.1937006962":
+  {
+    "title": "22.1937006962 Stars",
+    "description": "22.1937006962",
+    "wildcards": ["description"]
+  }
+}
