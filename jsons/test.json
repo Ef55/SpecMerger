@@ -4,7 +4,7 @@
     "title":  "22.2 Regex (typo in one of the keys)",
     "description": "This is the regex description",
     "cases": {
-      "Atom :: Disjunction": {"1":"1. Do a shenanigan","2":"2. This is weird ?","order": ["1","2"]},
+      "Atoms :: Disjunction": {"1":"1. Do a shenanigan","2":"2. This is weird ?","order": ["1","2"]},
       "Disjunction :: Alternative" : [true, "1. this is an alternative","2. continue","3. end."]
     }
   },

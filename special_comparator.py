@@ -1,4 +1,6 @@
-from comparer_utils import Content, WildCard, GenericReportErrorType, AlignmentNotPossible
+from aligner_utils import Content, ReportErrorType
+from content_classes.misalignment import Misalignment
+from content_classes.wildcard import WildCard
 
 
 class SpecialComparator:
@@ -6,11 +8,11 @@ class SpecialComparator:
     def compare_special(elem1: Content, elem2: Content, aligner) -> Content:
         match (elem1, elem2):
             case (WildCard(), _) | (_, WildCard()):
-                return AlignmentNotPossible((elem1.position,elem2.position),elem1, elem2, GenericReportErrorType.MATCHED_WILDCARDS)
+                return Misalignment((elem1.position, elem2.position), elem1, elem2, ReportErrorType.MATCHED_WILDCARDS)
             case (t1, t2) if type(t1) is not type(t2):
                 print(type(t1),type(t2))
-                return AlignmentNotPossible((elem1.position,elem2.position),elem1, elem2, GenericReportErrorType.MISMATCHED_TYPES)
+                return Misalignment((elem1.position, elem2.position), elem1, elem2, ReportErrorType.MISMATCHED_TYPES)
             case _:
                 print(
                     f"[WARNING!!!!!] Function is same type but not registered in SpecialComparator???? \n{elem1}\n VS \n{elem2}")
-                return AlignmentNotPossible((elem1.position,elem2.position),elem1, elem2, GenericReportErrorType.UNKNOWN_ERROR)
+                return Misalignment((elem1.position, elem2.position), elem1, elem2, ReportErrorType.UNKNOWN_ERROR)

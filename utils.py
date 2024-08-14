@@ -1,8 +1,7 @@
 import enum
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
-from comparer_utils import Dictionnary, OrderedSeq, String, Bag, Content
-
+from content_classes.dictionary import Dictionary
 
 @dataclass(frozen=True)
 class Path:
@@ -10,11 +9,6 @@ class Path:
     is_dir: bool
 
 
-@dataclass(frozen=True)
-class Position(ABC):
-    @abstractmethod
-    def html_str(self) -> str:
-        pass
 
 
 class ParserState(enum.Enum):
@@ -26,15 +20,15 @@ class ParserState(enum.Enum):
 
 
 @dataclass
-class GenericParsedPage:
+class ParsedPage:
     name: str
-    entries: Dictionnary
+    entries: Dictionary
 
 
-class GenericParser(ABC):
+class Parser(ABC):
     name: str
 
     @abstractmethod
-    def get_parsed_page(self) -> GenericParsedPage:
+    def get_parsed_page(self) -> ParsedPage:
         pass
 

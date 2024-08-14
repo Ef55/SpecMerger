@@ -1,26 +1,34 @@
 import os
+import random
 import sys
 import webbrowser
 
-from GenericComparer import Aligner
-from GenericCoqParser import GenericCOQParser
-from HTMLRenderer import HTMLRenderer
-from JSONParser import JSONParser
-from comparer_utils import String, OrderedSeq, Content, Bag, Dictionnary
-from GenericECMAParser import GenericECMAParser
-from utils import GenericParsedPage, Path
+from aligner import Aligner
+from coq_parser import COQParser
+from html_renderer import HTMLRenderer
+from json_parser import JSONParser
+from ecma_parser import ECMAParser
+from utils import Path
 
 
 def main(open_in_browser:bool):
+    random.seed(12)
     parsed1 = JSONParser("jsons/test.json", "ONE").get_parsed_page()
     parsed2 = JSONParser("jsons/test2.json", "TWO").get_parsed_page()
+    alignment_result = Aligner().align(parsed1.entries,parsed2.entries)
+    rendered = HTMLRenderer(alignment_result).render()
+    with open("jsons.html","w") as f:
+        f.write(rendered)
+    webbrowser.open(f"file://{os.path.abspath('jsons.html')}", 2)
+    print(alignment_result.to_text(0))
+    exit(0)
     paths = [Path("../warblre/mechanization/spec/", True)]
     files_to_exclude = [Path("../warblre/mechanization/spec/Node.v", False)]
     url = "https://262.ecma-international.org/14.0/"
 
-    coq_parser = GenericCOQParser(paths, files_to_exclude)
+    coq_parser = COQParser(paths, files_to_exclude)
     coq_parsed_page = coq_parser.get_parsed_page()
-    ecma_parser_v14 = GenericECMAParser(url, parser_name="ECMAScript v14.0")
+    ecma_parser_v14 = ECMAParser(url, parser_name="ECMAScript v14.0")
     ecma_parsed_page_v14 = ecma_parser_v14.get_parsed_page()
 
     a = Aligner()

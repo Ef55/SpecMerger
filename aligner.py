@@ -1,7 +1,12 @@
-from comparer_utils import String, OrderedSeq, Content, Bag, Dictionnary, GenericReportErrorType, AlignmentNotPossible, \
-    AlignmentError, OrderedDictionnary
+from aligner_utils import Content, ReportErrorType
+from content_classes.alignment_issue import AlignmentIssue
+from content_classes.bag import Bag
+from content_classes.dictionary import Dictionary
+from content_classes.misalignment import Misalignment
+from content_classes.ordered_dictionary import OrderedDictionnary
+from content_classes.ordered_seq import OrderedSeq
+from content_classes.string import String
 from special_comparator import SpecialComparator
-from utils import GenericParsedPage, GenericParser
 from typing import Optional, Callable, TypeVar
 import nltk
 
@@ -33,7 +38,7 @@ class Aligner:
         self.populate_report_error_dict()
 
     def populate_report_error_dict(self):
-        self.report_error_dict[(Dictionnary, Dictionnary)] = self.align_dict
+        self.report_error_dict[(Dictionary, Dictionary)] = self.align_dict
         self.report_error_dict[OrderedSeq, OrderedSeq] = self.align_sequence
         self.report_error_dict[(OrderedDictionnary, OrderedDictionnary)] = self.align_ordered_dict
         self.report_error_dict[(Bag, Bag)] = self.align_set
@@ -69,37 +74,35 @@ class Aligner:
                 ordered_keys.append(key_left)
             else:
                 if key_left is not None and key_left in right.entries.keys() and key_left not in ordered_keys:
-                    current_dic[key_left] = AlignmentError((None, None), self.align(left.entries[key_left],
+                    current_dic[key_left] = AlignmentIssue((None, None), self.align(left.entries[key_left],
                                                                                     right.entries[key_left]),
-                                                           GenericReportErrorType.REORDERED_ENTRIES)
+                                                           ReportErrorType.REORDERED_ENTRIES)
                     ordered_keys.append(key_left)
                 elif key_left is not None and key_left not in ordered_keys:
-                    current_dic[key_left] = AlignmentNotPossible((None, None), left.entries[key_left], None,
-                                                                 GenericReportErrorType.MISSING_ENTRIES)
+                    current_dic[key_left] = Misalignment((None, None), left.entries[key_left], None,
+                                                         ReportErrorType.MISSING_ENTRIES)
                     ordered_keys.append(key_left)
                 if key_right is not None and key_right in left.entries.keys() and key_right not in ordered_keys:
-                    current_dic[key_right] = AlignmentError((None, None), self.align(left.entries[key_right],
+                    current_dic[key_right] = AlignmentIssue((None, None), self.align(left.entries[key_right],
                                                                                      right.entries[key_right]),
-                                                            GenericReportErrorType.REORDERED_ENTRIES)
+                                                            ReportErrorType.REORDERED_ENTRIES)
                     ordered_keys.append(key_right)
                 elif key_right is not None and key_right not in ordered_keys:
-                    current_dic[key_right] = AlignmentNotPossible((None, None), None, right.entries[key_right],
-                                                                  GenericReportErrorType.MISSING_ENTRIES)
+                    current_dic[key_right] = Misalignment((None, None), None, right.entries[key_right],
+                                                          ReportErrorType.MISSING_ENTRIES)
                     ordered_keys.append(key_right)
         return OrderedDictionnary((left.position, right.position), current_dic, ordered_keys)
 
     def align_dict(self, left: Content, right: Content) -> Content:
-        assert isinstance(left, Dictionnary) and isinstance(right, Dictionnary)
+        assert isinstance(left, Dictionary) and isinstance(right, Dictionary)
         current_dic = {}
-        left: Dictionnary
-        right: Dictionnary
+        left: Dictionary
+        right: Dictionary
         keys_left = list(left.entries.keys())
         keys_right = list(right.entries.keys())
         common_keys = list(filter(lambda x: x in keys_left, keys_right))
         for key in common_keys:
             current_dic[key] = self.align(left.entries[key], right.entries[key])
-        if "22.2.1" in common_keys:
-            print("DEBUG")
         remaining_left = list(filter(lambda x: x not in common_keys, keys_left))
         remaining_right = list(filter(lambda x: x not in common_keys, keys_right))
         remaining_keys = remaining_left + list(filter(lambda x: x not in remaining_left, remaining_right))
@@ -112,37 +115,37 @@ class Aligner:
                 keys = filter(lambda x: x not in used and x not in remaining_left, remaining_right)
                 match Aligner.find_closest_key(keys, key):
                     case None:
-                        current_dic[key] = AlignmentNotPossible((None, None), left.entries[key], None,
-                                                                GenericReportErrorType.MISSING_ENTRIES)
+                        current_dic[key] = Misalignment((None, None), left.entries[key], None,
+                                                        ReportErrorType.MISSING_ENTRIES)
                     case closest_key:
                         alignment_try = self.align(left.entries[key], right.entries[closest_key])
                         match alignment_try:
-                            case AlignmentNotPossible(_, _, _):
-                                current_dic[key] = AlignmentNotPossible((None, None),
-                                                                        left.entries[key], None,
-                                                                        GenericReportErrorType.MISSING_ENTRIES)
+                            case Misalignment(_, _, _):
+                                current_dic[key] = Misalignment((None, None),
+                                                                left.entries[key], None,
+                                                                ReportErrorType.MISSING_ENTRIES)
                             case _:
                                 used.add(closest_key)
-                                current_dic[key] = AlignmentError((None, None), alignment_try,
-                                                                  GenericReportErrorType.MISSPELLED_ENTRY)
+                                current_dic[key] = AlignmentIssue((None, None), alignment_try,
+                                                                  ReportErrorType.MISSPELLED_ENTRY)
 
             elif key in remaining_right:
                 keys = filter(lambda x: x not in used and x not in remaining_right,remaining_left)
                 match Aligner.find_closest_key(keys, key):
                     case None:
-                        current_dic[key] = AlignmentNotPossible((None, None), None, right.entries[key],
-                                                                GenericReportErrorType.MISSING_ENTRIES)
+                        current_dic[key] = Misalignment((None, None), None, right.entries[key],
+                                                        ReportErrorType.MISSING_ENTRIES)
                     case closest_key:
                         alignment_try = self.align(left.entries[closest_key], right.entries[key])
                         match alignment_try:
-                            case AlignmentNotPossible(_, _, _):
-                                current_dic[key] = AlignmentNotPossible((None, None), None, right.entries[key],
-                                                                        GenericReportErrorType.MISSING_ENTRIES)
+                            case Misalignment(_, _, _):
+                                current_dic[key] = Misalignment((None, None), None, right.entries[key],
+                                                                ReportErrorType.MISSING_ENTRIES)
                             case _:
                                 used.add(closest_key)
-                                current_dic[key] = AlignmentError((None, None), alignment_try,
-                                                                  GenericReportErrorType.MISSPELLED_ENTRY)
-        return Dictionnary((left.position, right.position), current_dic)
+                                current_dic[key] = AlignmentIssue((None, None), alignment_try,
+                                                                  ReportErrorType.MISSPELLED_ENTRY)
+        return Dictionary((left.position, right.position), current_dic)
 
     def align_sequence(self, left: Content, right: Content) -> Content:
         left: OrderedSeq
@@ -165,34 +168,34 @@ class Aligner:
             alignment_result = self.align(element, supposed_to_match) if smallest is left else (
                 self.align(supposed_to_match, element))
             i += 1
-            while isinstance(alignment_result, AlignmentNotPossible) and i < len(biggest.sequence):
+            while isinstance(alignment_result, Misalignment) and i < len(biggest.sequence):
                 if smallest is left:
-                    result.append(AlignmentNotPossible((None, None), None, biggest.sequence[i - 1],
-                                                       GenericReportErrorType.NOT_SAME_ELEM_IN_SEQ))
+                    result.append(Misalignment((None, None), None, biggest.sequence[i - 1],
+                                               ReportErrorType.NOT_SAME_ELEM_IN_SEQ))
                 else:
-                    result.append(AlignmentNotPossible((None, None), biggest.sequence[i - 1], None,
-                                                       GenericReportErrorType.NOT_SAME_ELEM_IN_SEQ))
+                    result.append(Misalignment((None, None), biggest.sequence[i - 1], None,
+                                               ReportErrorType.NOT_SAME_ELEM_IN_SEQ))
                 supposed_to_match = biggest.sequence[i]
                 alignment_result = self.align(element, supposed_to_match) if smallest is left else (
                     self.align(supposed_to_match, element))
                 i += 1
-            if isinstance(alignment_result, AlignmentNotPossible):
+            if isinstance(alignment_result, Misalignment):
                 if smallest is left:
-                    result.append(AlignmentNotPossible((None, None), None, biggest.sequence[i - 1],
-                                                       GenericReportErrorType.NOT_SAME_ELEM_IN_SEQ))
+                    result.append(Misalignment((None, None), None, biggest.sequence[i - 1],
+                                               ReportErrorType.NOT_SAME_ELEM_IN_SEQ))
                 else:
-                    result.append(AlignmentNotPossible((None, None), biggest.sequence[i - 1], None,
-                                                       GenericReportErrorType.NOT_SAME_ELEM_IN_SEQ))
+                    result.append(Misalignment((None, None), biggest.sequence[i - 1], None,
+                                               ReportErrorType.NOT_SAME_ELEM_IN_SEQ))
                 unmatched_from_small = [smallest.sequence[x] for x in range(smallest_index, len(smallest.sequence))]
                 break
             result.append(alignment_result)
         if smallest is left:
             return OrderedSeq((left.position, right.position), result +
-                              [AlignmentNotPossible((None, None), x, None, GenericReportErrorType.NOT_SAME_ELEM_IN_SEQ)
+                              [Misalignment((None, None), x, None, ReportErrorType.NOT_SAME_ELEM_IN_SEQ)
                                for x in unmatched_from_small])
         else:
             return OrderedSeq((left.position, right.position), result +
-                              [AlignmentNotPossible((None, None), None, x, GenericReportErrorType.NOT_SAME_ELEM_IN_SEQ)
+                              [Misalignment((None, None), None, x, ReportErrorType.NOT_SAME_ELEM_IN_SEQ)
                                for x in unmatched_from_small])
 
     def align_set(self, left: Content, right: Content) -> Content:
@@ -203,16 +206,16 @@ class Aligner:
         elems_left = left.bag
         elems_right = right.bag
 
-        common_elems: set[Content] = set()
+        common_elems: list[Content] = []
         for elem_left in elems_left:
             for elem_right in elems_right:
                 if elem_left == elem_right:
-                    common_elems.add(self.align(elem_left, elem_right))
+                    common_elems.append(self.align(elem_left, elem_right))
                     break
         constructing_set += common_elems
-        missing_left = list(filter(lambda x: x in common_elems, elems_right))
+        missing_left = list(filter(lambda x: x not in common_elems, elems_right))
         missing_left_grouped_by_type, type_keys_left = group_by(missing_left, type)
-        missing_right = list(filter(lambda x: x in common_elems, elems_left))
+        missing_right = list(filter(lambda x: x not in common_elems, elems_left))
         missing_right_grouped_by_type, type_keys_right = group_by(missing_right, type)
         for type_key in type_keys_right:
             if type_key not in type_keys_left:
@@ -222,29 +225,29 @@ class Aligner:
             right_elems = missing_right_grouped_by_type.get(elem, [])
             if len(left_elems) == 0:
                 constructing_set += [
-                    AlignmentNotPossible((None, None), None, elem, GenericReportErrorType.MISSING_IN_BAG) for elem in
+                    Misalignment((None, None), None, elem, ReportErrorType.MISSING_IN_BAG) for elem in
                     right_elems]
             elif len(right_elems) == 0:
                 constructing_set += [
-                    AlignmentNotPossible((None, None), elem, None, GenericReportErrorType.MISSING_IN_BAG) for elem in
+                    Misalignment((None, None), elem, None, ReportErrorType.MISSING_IN_BAG) for elem in
                     left_elems]
             elif len(left_elems) == len(right_elems) == 1:
                 subtree = self.align(left_elems[0], right_elems[0])
                 match subtree:
-                    case AlignmentNotPossible(_, _, _):
-                        constructing_set.append(AlignmentNotPossible((None, None), left_elems[0], None,
-                                                                     GenericReportErrorType.MISSING_IN_BAG))
+                    case Misalignment(_, _, _):
+                        constructing_set.append(Misalignment((None, None), left_elems[0], None,
+                                                             ReportErrorType.MISSING_IN_BAG))
                         constructing_set.append(
-                            AlignmentNotPossible((None, None), None, right_elems[0],
-                                                 GenericReportErrorType.MISSING_IN_BAG))
+                            Misalignment((None, None), None, right_elems[0],
+                                         ReportErrorType.MISSING_IN_BAG))
                     case _:
-                        constructing_set.append(AlignmentError(subtree, GenericReportErrorType.MISSPELLED_ENTRY))
+                        constructing_set.append(AlignmentIssue(subtree, ReportErrorType.MISSPELLED_ENTRY))
             else:
                 constructing_set += [
-                    AlignmentNotPossible((None, None), left_elem, None, GenericReportErrorType.MISSING_IN_BAG)
+                    Misalignment((None, None), left_elem, None, ReportErrorType.MISSING_IN_BAG)
                     for left_elem in left_elems]
                 constructing_set += [
-                    AlignmentNotPossible((None, None), None, right_elem, GenericReportErrorType.MISSING_IN_BAG)
+                    Misalignment((None, None), None, right_elem, ReportErrorType.MISSING_IN_BAG)
                     for right_elem in right_elems]
         return Bag((left.position, right.position), constructing_set)
 
@@ -252,5 +255,5 @@ class Aligner:
         left: String
         right: String
         if left != right:
-            return AlignmentNotPossible((None, None), left, right, GenericReportErrorType.NOT_SAME_STRING)
+            return Misalignment((None, None), left, right, ReportErrorType.NOT_SAME_STRING)
         return String((left.position, right.position), left.value)
