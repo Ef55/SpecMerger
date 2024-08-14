@@ -5,25 +5,18 @@ import bs4
 import requests
 from bs4 import BeautifulSoup, PageElement
 
-from comparer_utils import GenericPosition, Dictionnary, String, OrderedSeq
-from utils import Parser, SubSection, Case, ParserState, Position, ParsedPage, GenericParsedPage
-
+from utils import ParserState, Position
+from non_generic_utils import Parser,SubSection, Case, add_case, ParsedPage
 
 @dataclass(frozen=True)
-class URLPosition(GenericPosition):
+class URLPosition(Position):
     url: str
 
     def html_str(self):
         return f"<a href='{self.url}'>{self.url}</a>"
 
-def add_case(cases: dict[str, Dictionnary],case: tuple[str,String], key: str):
-    lines = OrderedSeq(case[1].position, list(map(lambda x: String(None,x),case[1].value.split("\n"))))
-    if cases.get(key) is not None:
-        cases[key].entries[case[0]] = case[1]
-    else:
-        cases[key] = Dictionnary(None, {case[0]: case[1]})
 
-class GenericECMAParser(Parser):
+class ECMAParser(Parser):
 
     def __init__(self, url, parser_name="ECMA", sections=None):
         self.name = parser_name
@@ -32,7 +25,7 @@ class GenericECMAParser(Parser):
         self.sections = sections
         self.url = url
         self.page = self.__get_page()
-        self.sections_by_number: Dict[str, Dictionnary] = None
+        self.sections_by_number: Dict[str, SubSection] = None
         self.avoid = {None, "emu-note", "\n"}
 
     def __get_page(self):
@@ -40,7 +33,7 @@ class GenericECMAParser(Parser):
         soup = BeautifulSoup(html_spec, 'html.parser')
         return soup
 
-    def __parse_section(self, section_html: BeautifulSoup, sections_by_number: Dict[str, Dictionnary]):
+    def __parse_section(self, section_html: BeautifulSoup, sections_by_number: Dict[str, SubSection]):
         position = URLPosition(self.url + "#" + section_html.get("id"))
         title = section_html.find("h1").find("span", {"class": "secnum"}).text
         first_subsection = section_html.find("emu-clause")
@@ -139,16 +132,14 @@ class GenericECMAParser(Parser):
                     res += child.text
         return res
 
-    def __parse_subsection(self, subsection: List[BeautifulSoup], position: URLPosition) -> Dictionnary:
+    def __parse_subsection(self, subsection: List[BeautifulSoup], position: URLPosition) -> SubSection:
         title = ""
         description = ""
-        cases: dict[str, Dictionnary] = {}
+        cases: dict[str, set[Case]] = {}
         current_case = ""
         current_case_titles = [["", ""]]
         parser_state = ParserState.READING_TITLE
         for children in subsection:
-            if title.startswith("22.2.1.2 "):
-                print("DEBUG")
             match children.name:
                 case "h1":
                     title += self.__strip_sides(children.text)
@@ -171,15 +162,16 @@ class GenericECMAParser(Parser):
                     parser_state = ParserState.READING_CASES
                     current_case += self.__parse_emu_alg(children)
                     for current_case_title in current_case_titles:
-                        add_case(cases, (current_case_title[1], String(position, current_case)), current_case_title[0])
+                        case = Case(current_case_title[0], current_case_title[1], current_case, position)
+                        add_case(cases, case)
                     current_case = ""
                     current_case_titles = [["", ""]]
                 case "emu-grammar":
                     parser_state = ParserState.READING_CASES
                     if current_case != "":
                         for current_case_title in current_case_titles:
-                            add_case(cases, (current_case_title[1], String(position, current_case)),
-                                     current_case_title[0])
+                            case = Case(current_case_title[0], current_case_title[1], current_case, position)
+                            add_case(cases, case)
                         current_case = ""
                     current_case_titles = self.__parse_emu_grammar(children)
                 case "span" | "emu-table" | "emu-import" | "h2":
@@ -188,13 +180,12 @@ class GenericECMAParser(Parser):
                     print(f"ERROR: Unhandled tag in html section : {children.name}, {children.text}")
                     raise ValueError
         if current_case_titles != [["", ""]]:
-            for case_title in current_case_titles:
-                add_case(cases, (case_title[1], String(position, current_case)), case_title[0])
-        return Dictionnary(position,{"title":String(None, title),
-                                     "description":String(None, description),
-                                     "cases":Dictionnary(None, cases)})
+            for current_case_title in current_case_titles:
+                case = Case(current_case_title[0], current_case_title[1], current_case, position)
+                add_case(cases, case)
+        return SubSection(title, description, cases, position)
 
-    def get_parsed_page(self) -> GenericParsedPage:
+    def get_parsed_page(self) -> ParsedPage:
         if self.sections_by_number is None:
             self.__preprocess(self.sections)
-        return GenericParsedPage(self.name, Dictionnary(None,self.sections_by_number))
+        return ParsedPage(self.name, self.sections_by_number)

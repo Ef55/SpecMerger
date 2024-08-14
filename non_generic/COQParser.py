@@ -4,8 +4,8 @@ from alectryon.literate import coq_partition, Comment, StringView
 import re
 import os
 
-from utils import Path, SubSection, Parser, Case, ParserState, Position, add_case, ParsedPage
-
+from utils import Path, ParserState, Position
+from non_generic_utils import SubSection, Parser, Case, add_case, ParsedPage
 
 @dataclass(frozen=True)
 class CoqLine:

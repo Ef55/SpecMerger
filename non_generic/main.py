@@ -23,7 +23,7 @@ def main():
     comparer = Comparer(coq_parsed_page, ecma_parsed_page_v14, sections_to_exclude)
     report = comparer.produce_report()
 
-    Formatter.format(report, "/home/martin/regex_coq/parser/v15")
+    Formatter.format(report, "/v15")
 
 
 if __name__ == "__main__":

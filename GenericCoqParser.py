@@ -1,10 +1,13 @@
+import json
+from enum import Enum
+
 from dataclasses import dataclass
 from typing import List, Dict, Tuple
 from alectryon.literate import coq_partition, Comment, StringView
 import re
 import os
 
-from utils import Path, SubSection, Parser, Case, ParserState, Position, ParsedPage, GenericParsedPage
+from utils import Path, ParserState, Position, GenericParsedPage, GenericParser
 from comparer_utils import GenericPosition, Dictionnary, String, WildCard, OrderedSeq
 
 
@@ -13,17 +16,53 @@ class CoqLine:
     file_name: str
     line_number: int
     is_end_comment: bool = False
+    is_end_file: bool = False
 
 
 def get_file_name_without_path(path) -> str:
     return path.split("/")[-1]
 
-def add_case(cases: dict[str, Dictionnary],case: tuple[str,String], key: str):
-    lines = OrderedSeq(case[1].position, list(map(lambda x: String(None,x),case[1].value.split("\n"))))
-    if cases.get(key) is not None:
-        cases[key].entries[case[0]] = case[1]
+
+class Algo_Enum_Type(Enum):
+    NUMBER = 0
+    LETTER = 1
+    ROMAN = 2
+
+def add_case(cases: dict[str, Dictionnary], left_key: str, right_key: str, value: String | WildCard) -> None:
+    if isinstance(value,String) and False:
+        depth = [""]
+        lines = []
+        dict = {}
+        current_enum = Algo_Enum_Type.NUMBER
+        for line in value.value.splitlines(keepends=False):
+            start_index = line.find(".")
+            line_index = line[:start_index]
+            match current_enum:
+                case Algo_Enum_Type.NUMBER:
+                    if line_index.isdigit():
+                        pass
+            if line_index.isdigit():
+                match current_enum:
+                    case Algo_Enum_Type.NUMBER:
+                        depth[-1] = line_index
+                    case Algo_Enum_Type.LETTER:
+                        depth = depth[:-2] + [line_index]
+                    case Algo_Enum_Type.ROMAN:
+                        maxed = max(int(x) for x in dict.keys() if x.isdigit())
+                        if int(line_index) < maxed:
+                            depth.append(line_index)
+                        else:
+                            depth = depth[:-3] + [line_index]
+            elif line_index:
+                lines.append(line[start_index:])
+                dict["".join(depth)] = line[start_index:]
+
+    #lines = OrderedSeq(case[1].position, list(map(lambda x: String(None,x),case[1].value.split("\n"))))
+    if cases.get(left_key) is not None:
+        cases[left_key].entries[right_key] = value
     else:
-        cases[key] = Dictionnary(None, {case[0]: case[1]})
+        cases[left_key] = Dictionnary(None, {right_key: value})
+
 
 @dataclass(frozen=True)
 class GenericCoqPosition(GenericPosition):
@@ -39,7 +78,7 @@ class GenericCoqPosition(GenericPosition):
         return hash(self.html_str())
 
 
-class GenericCOQParser(Parser):
+class GenericCOQParser(GenericParser):
     def __init__(self, files: List[Path], to_exclude: List[Path], parser_name: str = "COQ",
                  title_regex: str = r"(22\.2(?:\.[0-9]{0,2}){1,3})",
                  spec_regex: str = r"^\(\*(\* )?>?>(.|\n)*?<<\*\)$",
@@ -93,7 +132,7 @@ class GenericCOQParser(Parser):
                 self.__add_file(file.uri, files_dic, all_filenames)
         return files_dic, all_filenames
 
-    def __get_comment_lines(self) -> List[tuple[str, CoqLine]]:
+    def __get_comment_lines(self) -> list[tuple[str, CoqLine]]:
         comments = []
         for filename in self.all_filenames:
             file = self.coq_code[filename]
@@ -105,9 +144,11 @@ class GenericCOQParser(Parser):
                         line = self.__parse_comment(line)
                         if line != "":
                             comments.append((line, CoqLine(filename, start_line_num + i)))
-                # avoid -1 at start, would have made no sense
-                if len(comments) > 0:
-                    comments.append(("", CoqLine(filename, -1, True)))
+                    # avoid -1 at start, would have made no sense
+                    if len(comments) > 0:
+                        comments.append(("", CoqLine(filename, -1, True)))
+            if len(comments) > 0:
+                comments.append(("", CoqLine(filename, -1, False, True)))
         return comments
 
     # Completely arbitrary in our case
@@ -142,7 +183,6 @@ class GenericCOQParser(Parser):
                         new_cases[case] = section1["cases"][case][key]
                     else:
                         new_cases[case] = section2["cases"][case].entries[key]
-                new_cases[case] = section1["cases"][case].entries.union(section2["cases"][case])
             elif section1["cases"][case] is not None:
                 new_cases[case] = section1["cases"][case]
             else:
@@ -157,6 +197,7 @@ class GenericCOQParser(Parser):
 
     def __get_comment_titles(self) -> Dict[str, Dictionnary]:
         title_indices = {}
+        wildcard_sections = set()
         current_block = ""
         last_block_end = 0
         section_to_be_thrown_away = False
@@ -166,16 +207,21 @@ class GenericCOQParser(Parser):
                     if title_indices.get(current_block) is not None:
                         # This means the section was split
                         title_indices[current_block] = self.__merge_comments(
-                            self.__parse_subsection((last_block_end, comment_index)), title_indices.get(current_block))
+                            self.__parse_subsection((last_block_end, comment_index), wildcard_sections),
+                            title_indices.get(current_block))
                     else:
-                        title_indices[current_block] = self.__parse_subsection((last_block_end, comment_index))
+                        title_indices[current_block] = self.__parse_subsection((last_block_end, comment_index),
+                                                                               wildcard_sections)
                     last_block_end = comment_index
                 elif current_block != "" and section_to_be_thrown_away:
                     last_block_end = comment_index
                 current_block = res2.group(1)
                 section_to_be_thrown_away = self.title_regex.search(str(comment)) is None
         if not section_to_be_thrown_away:
-            title_indices[current_block] = self.__parse_subsection((last_block_end, len(self.comments)))
+            title_indices[current_block] = self.__parse_subsection((last_block_end, len(self.comments)),
+                                                                   wildcard_sections)
+        for section in wildcard_sections:
+            title_indices[section] = WildCard(None)
         return title_indices
 
     def __parse_title(self, title: str) -> str:
@@ -190,31 +236,46 @@ class GenericCOQParser(Parser):
         return (comment.replace("\n", "").replace("(*>>", "").replace("<<*)", "")
                 .replace("(** >>", "").lstrip().rstrip())
 
-    # Pour les commentaires de 22.2.2.1, on peut soit:
-    # - mettre un "-" ou "*" au début pour montrer qu'il s'agit d'un point
-    # - mettre un commentaire avant qui indique qu'il s'agit d'un enchaînement de points
-    def __parse_subsection(self, comment_indices) -> Dictionnary:
+    def __parse_subsection(self, comment_indices, wildcard_indices: set) -> Dictionnary:
         comment_lines = self.comments[comment_indices[0]:comment_indices[1]]
 
         title = ""
         description = ""
         parser_state = ParserState.READING_TITLE
+        saved_state = ParserState.BEFORE_START
+        wildcard_state = ""
         in_case_title = False
         cases: dict[str, Dictionnary] = {}
         current_case = ""
         current_case_titles = []
+        skip_until_end_file = False
         filenames = {}
         case_line_indices = [-1, -1]
+        wildcard_comment = ""
         for parsed_comment, coq_line in comment_lines:
             # We are at the end of a comment
-            if coq_line.is_end_comment:
+            if coq_line.is_end_comment or coq_line.is_end_file:
                 match parser_state:
+                    case ParserState.BEFORE_START:
+                        parser_state = ParserState.READING_TITLE
                     case ParserState.READING_TITLE:
-                        parser_state = ParserState.READING_DESCRIPTION
+                        if coq_line.is_end_comment:
+                            parser_state = ParserState.READING_DESCRIPTION
                     case ParserState.READING_DESCRIPTION:
                         pass
                     case ParserState.READING_CASES:
                         pass
+                    case ParserState.READING_WILDCARD:
+                        if wildcard_comment != "":
+                            if wildcard_state == "Sections":
+                                sections = json.loads(wildcard_comment)
+                                wildcard_indices.update(sections)
+                            wildcard_comment = ""
+                        parser_state = saved_state
+                if coq_line.is_end_file:
+                    skip_until_end_file = False
+                continue
+            if skip_until_end_file:
                 continue
             # Get file name
             filename = coq_line.file_name
@@ -227,13 +288,30 @@ class GenericCOQParser(Parser):
                 added_index = coq_line.line_number
                 new_indices = (min(before_indices[0], added_index), max(before_indices[1], added_index))
                 filenames[filename] = new_indices
-
+            if parsed_comment.startswith("WILDCARD"):
+                saved_state = parser_state
+                parser_state = ParserState.READING_WILDCARD
+                wildcard_state = parsed_comment.split(" ", 1)[1]
+                if wildcard_state == "PARSING_FILE_END":
+                    skip_until_end_file = True
+                elif wildcard_state != "Sections":
+                    case_wildcarded = json.loads(wildcard_state)
+                    if " ::" in case_wildcarded:
+                        parts = case_wildcarded.split(" ::")
+                        add_case(cases, parts[0], parts[1], WildCard(None))
+                    else:
+                        cases[case_wildcarded] = WildCard(None)
+                continue
+            if parser_state == ParserState.READING_WILDCARD:
+                if wildcard_state == "Sections":
+                    wildcard_comment += parsed_comment + "\n"
+                continue
             if self.case_regex.match(parsed_comment):
                 parser_state = ParserState.READING_CASES
                 if current_case != "":
                     case_pos = GenericCoqPosition({coq_line.file_name: tuple(case_line_indices)})
                     for case_title in current_case_titles:
-                        add_case(cases, (case_title[1], String(case_pos,current_case)), case_title[0])
+                        add_case(cases, case_title[0], case_title[1], String(case_pos, current_case))
                     current_case_titles = []
                 case_line_indices[0] = coq_line.line_number
                 case_line_indices[1] = coq_line.line_number
@@ -281,12 +359,10 @@ class GenericCOQParser(Parser):
         if current_case != "":
             case_pos = GenericCoqPosition({comment_lines[-1][1].file_name: tuple(case_line_indices)})
             for case_title in current_case_titles:
-                add_case(cases, (case_title[1], String(case_pos, current_case)), case_title[0])
-        cases_dict = Dictionnary(None,cases)
-        if title.startswith("22.2.1 "):
-            return WildCard(GenericCoqPosition(filenames))
-        return Dictionnary(GenericCoqPosition(filenames), {"title":String(None,title),
-                                                           "description": String(None,description),
+                add_case(cases, case_title[0],case_title[1], String(case_pos, current_case))
+        cases_dict = Dictionnary(None, cases)
+        return Dictionnary(GenericCoqPosition(filenames), {"title": String(None, title),
+                                                           "description": String(None, description),
                                                            "cases": cases_dict})
 
     def get_parsed_page(self) -> GenericParsedPage:
@@ -294,4 +370,4 @@ class GenericCOQParser(Parser):
             self.coq_code, self.all_filenames = self.__get_coq_code()
             self.comments = self.__get_comment_lines()
             self.sections_by_number = self.__get_comment_titles()
-        return GenericParsedPage(self.name, Dictionnary(None,self.sections_by_number))
+        return GenericParsedPage(self.name, Dictionnary(None, self.sections_by_number))

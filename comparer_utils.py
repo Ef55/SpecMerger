@@ -45,24 +45,29 @@ class Content(ABC):
 @dataclass(frozen=True)
 class String(Content):
     value: str
-    chars_useless : str = " \xa0"
+    chars_useless: str = " \xa0"
+
     def real_string(self):
         s = self.value
         for c in self.chars_useless:
             s = s.replace(c, "")
         return s
+
     def __eq__(self, other):
         return isinstance(other, String) and self.real_string() == other.real_string()
 
     def __hash__(self):
-        return hash(self.value.replace(" ",""))
+        return hash(self.real_string())
+
     def __len__(self):
         return len(self.value)
+
     def __add__(self, other):
         if isinstance(other, String):
-            return String(self.position,self.value + other.value)
+            return String(self.position, self.value + other.value)
         if isinstance(other, str):
-            return String(self.position,self.value + other)
+            return String(self.position, self.value + other)
+
 
 @dataclass(frozen=True)
 class OrderedSeq(Generic[T], Content):
@@ -81,10 +86,11 @@ class OrderedSeq(Generic[T], Content):
 
 @dataclass(frozen=True)
 class Bag(Generic[T], Content):
-    bag: set[T]
+    # represents a set but stored as list to avoid non-determinism
+    bag: list[T]
 
     def __eq__(self, other):
-        return isinstance(other, Bag) and self.bag == other.bag
+        return isinstance(other, Bag) and set(self.bag) == set(other.bag)
 
     def __hash__(self):
         return hash(self.bag)
@@ -132,7 +138,7 @@ class WildCard(Generic[T], Content):
         return hash(WildCard)
 
 
-# These classes are used for the alignment and comparison, please do not
+# These classes are used for the alignment and comparison, please do not use them in the parser
 @dataclass(frozen=True)
 class AlignmentError(Content):
     value: Content

@@ -1,7 +1,7 @@
 from typing import List
 from packaging.version import Version
 
-from Report import Report
+from non_generic.Report import Report
 from utils import Case, SubSection, ParsedPage
 
 
