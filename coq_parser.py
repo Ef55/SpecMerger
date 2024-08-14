@@ -8,7 +8,7 @@ import re
 import os
 
 from utils import Path, ParserState, ParsedPage, Parser
-from aligner_utils import Position
+from aligner_utils import Position, Content
 from content_classes.dictionary import Dictionary
 from content_classes.string import String
 from content_classes.wildcard import WildCard
@@ -27,42 +27,10 @@ def get_file_name_without_path(path) -> str:
     return path.split("/")[-1]
 
 
-class Algo_Enum_Type(Enum):
-    NUMBER = 0
-    LETTER = 1
-    ROMAN = 2
-
-def add_case(cases: dict[str, Dictionary], left_key: str, right_key: str, value: String | WildCard) -> None:
-    if isinstance(value,String) and False:
-        depth = [""]
-        lines = []
-        dict = {}
-        current_enum = Algo_Enum_Type.NUMBER
-        for line in value.value.splitlines(keepends=False):
-            start_index = line.find(".")
-            line_index = line[:start_index]
-            match current_enum:
-                case Algo_Enum_Type.NUMBER:
-                    if line_index.isdigit():
-                        pass
-            if line_index.isdigit():
-                match current_enum:
-                    case Algo_Enum_Type.NUMBER:
-                        depth[-1] = line_index
-                    case Algo_Enum_Type.LETTER:
-                        depth = depth[:-2] + [line_index]
-                    case Algo_Enum_Type.ROMAN:
-                        maxed = max(int(x) for x in dict.keys() if x.isdigit())
-                        if int(line_index) < maxed:
-                            depth.append(line_index)
-                        else:
-                            depth = depth[:-3] + [line_index]
-            elif line_index:
-                lines.append(line[start_index:])
-                dict["".join(depth)] = line[start_index:]
-
-    #lines = OrderedSeq(case[1].position, list(map(lambda x: String(None,x),case[1].value.split("\n"))))
+def add_case(cases: dict[str, Dictionary | WildCard], left_key: str, right_key: str, value: String | WildCard) -> None:
     if cases.get(left_key) is not None:
+        if cases.get(left_key) == WildCard(None):
+            return
         cases[left_key].entries[right_key] = value
     else:
         cases[left_key] = Dictionary(None, {right_key: value})
@@ -125,8 +93,8 @@ class COQParser(Parser):
         all_filenames.append(filename)
 
     def __get_coq_code(self) -> Tuple[Dict[str, str], List[str]]:
-        files_dic = {}
-        all_filenames = []
+        files_dic: dict[str, str] = {}
+        all_filenames: list[str] = []
         for file in self.files:
             if file.is_dir:
                 for root, dirs, files in os.walk(file.uri, topdown=False):
@@ -157,7 +125,7 @@ class COQParser(Parser):
 
     # Completely arbitrary in our case
     def __merge_comments(self, section1: Dictionary, section2: Dictionary) -> Dictionary:
-        print("[WARNING] Merge called for ", section1, section2)
+        #print("[WARNING] Merge called for ", section1, section2)
         title = section1["title"] if len(section1["title"]) > len(section2["title"]) else section2["title"]
         description_first = section1["description"] if len(section1["description"]) > len(
             section2["description"]) else section2["description"]
@@ -182,7 +150,6 @@ class COQParser(Parser):
             if section1["cases"][case] is not None and section2["cases"][case] is not None:
                 section1["cases"][case]: Dictionary[String]
                 for key in section1["cases"][case].entries.keys() | section2["cases"][case].entries.keys():
-                    #TODO Better handling of common keys
                     if section1["cases"][case][key] is not None:
                         new_cases[case] = section1["cases"][case][key]
                     else:
@@ -193,13 +160,15 @@ class COQParser(Parser):
                 new_cases[case] = section2["cases"][case]
         return Dictionary(CoqPosition(new_files), {"title": title, "description": description_first + "\n" +
                                                                                   description_second,
-                                                           "cases": Dictionary(None, new_cases)})
+                                                   "cases": Dictionary(None, new_cases)})
 
-    """
-    Gets the indices of the comments that contain the titles of the sections (comments that match the title_regex)
-    """
 
     def __get_comment_titles(self) -> Dict[str, Dictionary]:
+        """
+           Gets the indices of the comments that contain the titles of the sections (comments that match the title_regex)
+           :return: A dictionary with the title of the section as key and the indices of the comments that contain the
+           section as value
+        """
         title_indices = {}
         wildcard_sections = set()
         current_block = ""
@@ -249,7 +218,7 @@ class COQParser(Parser):
         saved_state = ParserState.BEFORE_START
         wildcard_state = ""
         in_case_title = False
-        cases: dict[str, Dictionary] = {}
+        cases: dict[str, Dictionary| WildCard] = {}
         current_case = ""
         current_case_titles = []
         skip_until_end_file = False
@@ -363,11 +332,11 @@ class COQParser(Parser):
         if current_case != "":
             case_pos = CoqPosition({comment_lines[-1][1].file_name: tuple(case_line_indices)})
             for case_title in current_case_titles:
-                add_case(cases, case_title[0],case_title[1], String(case_pos, current_case))
+                add_case(cases, case_title[0], case_title[1], String(case_pos, current_case))
         cases_dict = Dictionary(None, cases)
         return Dictionary(CoqPosition(filenames), {"title": String(None, title),
-                                                           "description": String(None, description),
-                                                           "cases": cases_dict})
+                                                   "description": String(None, description),
+                                                   "cases": cases_dict})
 
     def get_parsed_page(self) -> ParsedPage:
         if self.sections_by_number is None:

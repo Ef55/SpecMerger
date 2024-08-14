@@ -8,7 +8,7 @@ from content_classes.ordered_seq import OrderedSeq
 from content_classes.string import String
 from special_comparator import SpecialComparator
 from typing import Optional, Callable, TypeVar
-import nltk
+from nltk import edit_distance
 
 T = TypeVar('T', covariant=True)
 U = TypeVar('U', covariant=True)
@@ -56,7 +56,7 @@ class Aligner:
         if key == "":
             return None
         length = len(key)
-        distances = map(lambda x: (x, nltk.edit_distance(x, key)), keys)
+        distances = map(lambda x: (x, edit_distance(x, key)), keys)
         close_distances = list(filter(lambda x: x[1] / length < allowed_errors, distances))
         return min(close_distances, key=lambda x: x[1], default=[None])[0]
 

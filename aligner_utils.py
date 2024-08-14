@@ -53,9 +53,9 @@ class Content(ABC):
         pass
 
     def render_positions_html(self) -> str:
-        if not self.position:
+        if self.position is None:
             return ""
         if isinstance(self.position, Position):
             return ", <div> POS: " + self.position.html_str() + "</div>"
         return ", <div> POS: " + ", ".join(
-            self.position[i].html_str() for i in range(2) if self.position[i]) + "</div>"
+            self.position[i].html_str() for i in range(2) if self.position[i] is not None) + "</div>"

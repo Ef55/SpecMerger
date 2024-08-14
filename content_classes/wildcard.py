@@ -19,7 +19,7 @@ class WildCard(Generic[T], Content):
         return ErrorWarningCount(0, 1)
 
     def __eq__(self, other):
-        return other is WildCard
+        return isinstance(other, WildCard)
 
     def __hash__(self):
         return hash(WildCard)

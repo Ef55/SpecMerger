@@ -10,7 +10,6 @@ class SpecialComparator:
             case (WildCard(), _) | (_, WildCard()):
                 return Misalignment((elem1.position, elem2.position), elem1, elem2, ReportErrorType.MATCHED_WILDCARDS)
             case (t1, t2) if type(t1) is not type(t2):
-                print(type(t1),type(t2))
                 return Misalignment((elem1.position, elem2.position), elem1, elem2, ReportErrorType.MISMATCHED_TYPES)
             case _:
                 print(
