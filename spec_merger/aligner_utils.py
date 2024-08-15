@@ -4,7 +4,7 @@ from enum import Enum
 from dataclasses import dataclass
 from typing import Optional, Union
 
-from error_warning_count import ErrorWarningCount
+from .error_warning_count import ErrorWarningCount
 
 
 @dataclass(frozen=True)

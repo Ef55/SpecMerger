@@ -4,10 +4,10 @@ from typing import Dict, List
 import bs4
 import requests
 from bs4 import BeautifulSoup, PageElement
-from content_classes.dictionary import Dictionary
-from content_classes.string import String
-from aligner_utils import Position
-from utils import ParserState, ParsedPage, Parser
+from .content_classes.dictionary import Dictionary
+from .content_classes.string import String
+from .aligner_utils import Position
+from .utils import ParserState, ParsedPage, Parser
 
 
 @dataclass(frozen=True)
