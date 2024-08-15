@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .toggle {
+            cursor: pointer;
+            user-select: none;
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .toggle:hover {
+            background-color: #e0e6e8;
+        }
+        .toggle::before {
+            content: '▶';
+            display: inline-block;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        .toggle.open::before {
+            transform: rotate(90deg);
+        }
+        .content {
+            margin-left: 20px;
+            display: none;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .content.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .error-count {
+            color: #e74c3c;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .no-error {
+            color: #27ae60;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+
+        .alignment-error{
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .alignment-warning{
+            color: #f39c12;
+            font-weight: bold;
+            font-size: 20px;
+
+        }
+        .text-displayer{
+
+                font-weight: bold;
+
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Comparison Report</h1>
+    <div class="toggle">Dictionary<span class='error-count'>(15 errors, 1 warnings)</span> , <div> POS: 267ONE, 364TWO</div></div><div class="content"><ul><li><h3>22.123:</h3> <div class="toggle">Dictionary<span class='error-count'>(5 errors, 0 warnings)</span> , <div> POS: 829ONE, 471TWO</div></div><div class="content"><ul><li><h3>computer:</h3> <div class="toggle">OrderedSeq <span class='error-count'>(3 errors, 0 warnings)</span> , <div> POS: 390ONE, 11TWO</div></div><div class="content"><ol><li><div>"1. CPU", <div> POS: 485ONE, 275TWO</div></div></li><li><div><div class=alignment-error > ERROR Not Same Elem In Seq</div><div class="text-displayer">None</div><div> VS </div><div class="text-displayer"><div>"2. RAM", <div> POS: 673TWO</div></div></div></div></li><li><div>"3. GPU", <div> POS: 541ONE, 682TWO</div></div></li><li><div><div class=alignment-error > ERROR Not Same Elem In Seq</div><div class="text-displayer">None</div><div> VS </div><div class="text-displayer"><div>"4. HDD", <div> POS: 358TWO</div></div></div></div></li><li><div><div class=alignment-error > ERROR Not Same Elem In Seq</div><div class="text-displayer"><div>"4. SSD", <div> POS: 146ONE</div></div></div><div> VS </div><div class="text-displayer">None</div></div></li></ol></div></li><li><h3>description:</h3> <div><div class=alignment-error > ERROR Not Same String</div><div class="text-displayer"><div>"Radio télévision FM", <div> POS: 383ONE</div></div></div><div> VS </div><div class="text-displayer"><div>"Read the f..ing manual!", <div> POS: 494TWO</div></div></div></div></li><li><h3>title:</h3> <div><div class=alignment-error > ERROR Not Same String</div><div class="text-displayer"><div>"22.123 RTFM (priorities should work)", <div> POS: 280ONE</div></div></div><div> VS </div><div class="text-displayer"><div>"22.123 RTFM (different fields)", <div> POS: 658TWO</div></div></div></div></li></ul></div></li><li><h3>22.1937006962:</h3> <div class="toggle">Dictionary<span class='error-count'>(0 errors, 1 warnings)</span> , <div> POS: 571ONE, 1TWO</div></div><div class="content"><ul><li><h3>description:</h3> <div><div class=alignment-warning > WARNING Matched Wildcards</div><div class="text-displayer"><div class="wildcard">Wildcard, <div> POS: 707ONE</div></div></div><div> VS </div><div class="text-displayer"><div>"completely different one", <div> POS: 885TWO</div></div></div></div></li><li><h3>title:</h3> <div>"22.1937006962 Stars", <div> POS: 615ONE, 233TWO</div></div></li></ul></div></li><li><h3>22.2:</h3> <div class="toggle">Dictionary<span class='error-count'>(1 errors, 0 warnings)</span> , <div> POS: 697ONE, 414TWO</div></div><div class="content"><ul><li><h3>cases:</h3> <div class="toggle">Dictionary<span class='error-count'>(1 errors, 0 warnings)</span> , <div> POS: 204ONE, 76TWO</div></div><div class="content"><ul><li><h3>Atoms :: Disjunction:</h3> <div><div class=alignment-error > ERROR Misspelled Entry</div><div><div class="toggle">Ordered Dictionary<span class='no-error'>(Fine)</span>, <div> POS: 376ONE, 166TWO</div></div><div class="content"><ul><li><h3>1:</h3> <div>"1. Do a shenanigan", <div> POS: 677ONE, 639TWO</div></div></li><li><h3>2:</h3> <div>"2. This is weird ?", <div> POS: 148ONE, 450TWO</div></div></li></ul></div></div></div></li><li><h3>Disjunction :: Alternative:</h3> <div class="toggle">OrderedSeq <span class='no-error'>(Fine)</span>, <div> POS: </div></div><div class="content"><ol><li><div>"1. this is an alternative", <div> POS: 347ONE, 927TWO</div></div></li><li><div>"2. continue", <div> POS: 215ONE, 60TWO</div></div></li><li><div>"3. end.", <div> POS: 590ONE, 838TWO</div></div></li></ol></div></li></ul></div></li><li><h3>description:</h3> <div>"This is the regex description", <div> POS: 525ONE, 703TWO</div></div></li><li><h3>title:</h3> <div>"22.2 Regex (typo in one of the keys)", <div> POS: 838ONE, 345TWO</div></div></li></ul></div></li><li><h3>22.2.1:</h3> <div class="toggle">Dictionary<span class='error-count'>(1 errors, 0 warnings)</span> , <div> POS: 940ONE, 62TWO</div></div><div class="content"><ul><li><h3>description:</h3> <div><div class=alignment-error > ERROR Not Same String</div><div class="text-displayer"><div>"From greatest falls come greatest bruises.", <div> POS: 817ONE</div></div></div><div> VS </div><div class="text-displayer"><div>"From greatest falls come greatest rises.", <div> POS: 862TWO</div></div></div></div></li><li><h3>title:</h3> <div>"22.2.1 Notation (description different)", <div> POS: 89ONE, 19TWO</div></div></li></ul></div></li><li><h3>22.2.5:</h3> <div class="toggle">Dictionary<span class='error-count'>(5 errors, 0 warnings)</span> , <div> POS: 175ONE, 519TWO</div></div><div class="content"><ul><li><h3>algorithm:</h3> <div class="toggle">Ordered Dictionary<span class='error-count'>(4 errors, 0 warnings)</span> , <div> POS: 433ONE, 969TWO</div></div><div class="content"><ul><li><h3>1:</h3> <div><div class=alignment-error > ERROR Not Same String</div><div class="text-displayer"><div>"1. Do x.", <div> POS: 839ONE</div></div></div><div> VS </div><div class="text-displayer"><div>"1. Do z.", <div> POS: 936TWO</div></div></div></div></li><li><h3>2:</h3> <div><div class=alignment-error > ERROR Missing Entries</div><div class="text-displayer"><div>"2. Do y.", <div> POS: 677ONE</div></div></div><div> VS </div><div class="text-displayer">None</div></div></li><li><h3>3:</h3> <div><div class=alignment-error > ERROR Reordered Entries</div><div><div>"3. Do a.", <div> POS: 521ONE, 228TWO</div></div></div></div></li><li><h3>4:</h3> <div><div class=alignment-error > ERROR Missing Entries</div><div class="text-displayer">None</div><div> VS </div><div class="text-displayer"><div>"Try to overcome the burden of existence", <div> POS: 93TWO</div></div></div></div></li></ul></div></li><li><h3>description:</h3> <div>"Ahhh... statistics", <div> POS: 454ONE, 115TWO</div></div></li><li><h3>subpart:</h3> <div class="toggle">Dictionary<span class='error-count'>(1 errors, 0 warnings)</span> , <div> POS: 713ONE, 906TWO</div></div><div class="content"><ul><li><h3>center:</h3> <div>"present", <div> POS: 676ONE, 433TWO</div></div></li><li><h3>left:</h3> <div>"present", <div> POS: 994ONE, 138TWO</div></div></li><li><h3>right:</h3> <div><div class=alignment-error > ERROR Mismatched Types</div><div class="text-displayer"><div class="toggle">OrderedSeq , <div> POS: 167ONE</div></div><div class="content"><ol><li><div>"no", <div> POS: 552ONE</div></div></li><li><div>"it", <div> POS: 320ONE</div></div></li><li><div>"is", <div> POS: 903ONE</div></div></li><li><div>"not", <div> POS: 636ONE</div></div></li><li><div>"there", <div> POS: 571ONE</div></div></li></ol></div></div><div> VS </div><div class="text-displayer"><div>"present", <div> POS: 999TWO</div></div></div></div></li></ul></div></li><li><h3>title:</h3> <div>"22.2.5 Static Semantics (problem with priorities and focus)", <div> POS: 52ONE, 568TWO</div></div></li></ul></div></li><li><h3>22.2.7.3:</h3> <div class="toggle">Dictionary<span class='error-count'>(3 errors, 0 warnings)</span> , <div> POS: 806ONE, 679TWO</div></div><div class="content"><ul><li><h3>cases:</h3> <div class="toggle">Dictionary<span class='error-count'>(3 errors, 0 warnings)</span> , <div> POS: 84ONE, 990TWO</div></div><div class="content"><ul><li><h3>Atom :: Bomb:</h3> <div class="toggle">OrderedSeq <span class='error-count'>(1 errors, 0 warnings)</span> , <div> POS: 684ONE, 610TWO</div></div><div class="content"><ol><li><div><div class=alignment-error > ERROR Not Same Elem In Seq</div><div class="text-displayer">None</div><div> VS </div><div class="text-displayer"><div>"1. compute 2*12", <div> POS: 835TWO</div></div></div></div></li><li><div>"2. Now everything is ok.", <div> POS: 85ONE, 410TWO</div></div></li><li><div>"3. return.", <div> POS: 622ONE, 428TWO</div></div></li></ol></div></li><li><h3>DJ :: Set:</h3> <div class="toggle">Bag <span class='error-count'>(2 errors, 0 warnings)</span> , <div> POS: 656ONE, 743TWO</div></div><div class="content"><ul><li><div>"10100111001", <div> POS: 480ONE, 488TWO</div></div></li><li><div>"if you give a fishing stick to a man, he will starve (not edible)", <div> POS: 623ONE, 393TWO</div></div></li><li><div><div class=alignment-error > ERROR Missing In Bag</div><div class="text-displayer">None</div><div> VS </div><div class="text-displayer"><div>"if y then b", <div> POS: 554ONE</div></div></div></div></li><li><div><div class=alignment-error > ERROR Missing In Bag</div><div class="text-displayer">None</div><div> VS </div><div class="text-displayer"><div>"if u then v", <div> POS: 31ONE</div></div></div></div></li></ul></div></li></ul></div></li><li><h3>title:</h3> <div>"22.2.7.3 Semantics (steps missing in list + set)", <div> POS: 196ONE, 999TWO</div></div></li></ul></div></li></ul></div>
+    <script>
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('toggle')) {
+                e.target.classList.toggle('open');
+                const content = e.target.nextElementSibling;
+                content.classList.toggle('show');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,5 +1,4 @@
 import json
-from enum import Enum
 
 from dataclasses import dataclass
 from typing import List, Dict, Tuple
@@ -12,7 +11,6 @@ from aligner_utils import Position, Content
 from content_classes.dictionary import Dictionary
 from content_classes.string import String
 from content_classes.wildcard import WildCard
-from content_classes.ordered_seq import OrderedSeq
 
 
 @dataclass(frozen=True)
@@ -207,7 +205,7 @@ class COQParser(Parser):
 
     def __parse_comment(self, comment: str) -> str:
         return (comment.replace("\n", "").replace("(*>>", "").replace("<<*)", "")
-                .replace("(** >>", "").lstrip().rstrip())
+                .replace("(** >>", "").replace("[OMITTED]","").lstrip().rstrip())
 
     def __parse_subsection(self, comment_indices, wildcard_indices: set) -> Dictionary:
         comment_lines = self.comments[comment_indices[0]:comment_indices[1]]

@@ -1,5 +1,4 @@
 import os.path
-from typing import Callable
 
 from aligner_utils import Content
 from error_warning_count import ErrorWarningCount

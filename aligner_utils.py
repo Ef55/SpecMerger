@@ -9,8 +9,14 @@ from error_warning_count import ErrorWarningCount
 
 @dataclass(frozen=True)
 class Position(ABC):
+    """
+    Simple class that represents the position in a document.
+    """
     @abstractmethod
     def html_str(self) -> str:
+        """
+        Returns the HTML representation of the position.
+        """
         pass
 
 
@@ -38,18 +44,32 @@ class ReportErrorType(Enum):
 
 @dataclass(frozen=True)
 class Content(ABC):
+    """
+    Abstract class representing the node of a tree in a parsed page.
+    """
     position: Union[Optional[Position], tuple[Optional[Position], Optional[Position]]]
 
     @abstractmethod
     def to_text(self, indenting: int) -> str:
+        """
+        Returns a very minimal text representation of the node. Doesn't go deeper if there are no errors.
+        :param indenting: The number of double spaces to indent the text representation of the node.
+        """
         pass
 
     @abstractmethod
     def to_html(self, is_in_error: bool) -> str:
+        """
+        Returns the HTML representation of the node.
+        :param is_in_error: Whether one of the node parents was one of the two trees of a misalignment.
+        """
         pass
 
     @abstractmethod
     def count_errors(self) -> ErrorWarningCount:
+        """
+        Counts the number of errors and warnings in the node and its children.
+        """
         pass
 
     def render_positions_html(self) -> str:

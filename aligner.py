@@ -26,26 +26,30 @@ def group_by(to_be_grouped: list[T] | set[T], key_function: Callable[[T], U]) ->
     return result, keys
 
 
-class ComparisonNotFoundException(Exception):
-    pass
-
-
 class Aligner:
     def __init__(self, alignment_functions: dict[tuple[type, type], Callable[[Content, Content], Content]] = None):
-        self.report_error_dict = alignment_functions
+        self.__report_error_dict = alignment_functions
         if alignment_functions is None:
-            self.report_error_dict = {}
-        self.populate_report_error_dict()
+            self.__report_error_dict = {}
+        self.__populate_report_error_dict()
 
-    def populate_report_error_dict(self):
-        self.report_error_dict[(Dictionary, Dictionary)] = self.align_dict
-        self.report_error_dict[OrderedSeq, OrderedSeq] = self.align_sequence
-        self.report_error_dict[(OrderedDictionnary, OrderedDictionnary)] = self.align_ordered_dict
-        self.report_error_dict[(Bag, Bag)] = self.align_set
-        self.report_error_dict[(String, String)] = self.align_string
+    def __populate_report_error_dict(self):
+        self.__report_error_dict[(Dictionary, Dictionary)] = self.__align_dict
+        self.__report_error_dict[OrderedSeq, OrderedSeq] = self.__align_sequence
+        self.__report_error_dict[(OrderedDictionnary, OrderedDictionnary)] = self.__align_ordered_dict
+        self.__report_error_dict[(Bag, Bag)] = self.__align_set
+        self.__report_error_dict[(String, String)] = self.__align_string
 
     def align(self, left: Content, right: Content) -> Content:
-        comparison_function = self.report_error_dict.get((type(left), type(right)))
+        """
+        This method is used to align two Content trees by comparing them recursively. This method then returns a tree
+        of Content with two more Content types: Misalignment and AlignmentIssue.
+        Misalignment is used to represent a point where the two trees could not be unified, whereas AlignmentIssue
+        warns about some difference but can still continue to compare deeper.
+        """
+        comparison_function = self.__report_error_dict.get((type(left), type(right)))
+        if comparison_function is None:
+            comparison_function = self.__report_error_dict.get((type(left), type(right)))
         if comparison_function is None:
             return SpecialComparator.compare_special(left, right, self)
         return comparison_function(left, right)
@@ -60,7 +64,7 @@ class Aligner:
         close_distances = list(filter(lambda x: x[1] / length < allowed_errors, distances))
         return min(close_distances, key=lambda x: x[1], default=[None])[0]
 
-    def align_ordered_dict(self, left: Content, right: Content) -> Content:
+    def __align_ordered_dict(self, left: Content, right: Content) -> Content:
         assert isinstance(left, OrderedDictionnary) and isinstance(right, OrderedDictionnary)
         left: OrderedDictionnary
         right: OrderedDictionnary
@@ -93,7 +97,7 @@ class Aligner:
                     ordered_keys.append(key_right)
         return OrderedDictionnary((left.position, right.position), current_dic, ordered_keys)
 
-    def align_dict(self, left: Content, right: Content) -> Content:
+    def __align_dict(self, left: Content, right: Content) -> Content:
         assert isinstance(left, Dictionary) and isinstance(right, Dictionary)
         current_dic = {}
         left: Dictionary
@@ -130,7 +134,7 @@ class Aligner:
                                                                   ReportErrorType.MISSPELLED_ENTRY)
 
             elif key in remaining_right:
-                keys = filter(lambda x: x not in used and x not in remaining_right,remaining_left)
+                keys = filter(lambda x: x not in used and x not in remaining_right, remaining_left)
                 match Aligner.find_closest_key(keys, key):
                     case None:
                         current_dic[key] = Misalignment((None, None), None, right.entries[key],
@@ -147,7 +151,7 @@ class Aligner:
                                                                   ReportErrorType.MISSPELLED_ENTRY)
         return Dictionary((left.position, right.position), current_dic)
 
-    def align_sequence(self, left: Content, right: Content) -> Content:
+    def __align_sequence(self, left: Content, right: Content) -> Content:
         left: OrderedSeq
         right: OrderedSeq
         if len(left.sequence) == len(right.sequence):
@@ -198,7 +202,7 @@ class Aligner:
                               [Misalignment((None, None), None, x, ReportErrorType.NOT_SAME_ELEM_IN_SEQ)
                                for x in unmatched_from_small])
 
-    def align_set(self, left: Content, right: Content) -> Content:
+    def __align_set(self, left: Content, right: Content) -> Content:
         left: Bag
         right: Bag
         # List is used to keep order but elements are still treated as if it were a set
@@ -251,7 +255,7 @@ class Aligner:
                     for right_elem in right_elems]
         return Bag((left.position, right.position), constructing_set)
 
-    def align_string(self, left: Content, right: Content) -> Content:
+    def __align_string(self, left: Content, right: Content) -> Content:
         left: String
         right: String
         if left != right:

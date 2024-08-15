@@ -1,18 +1,16 @@
 import os
-import random
 import sys
 import webbrowser
 
 from aligner import Aligner
 from coq_parser import COQParser
 from html_renderer import HTMLRenderer
-from json_example.json_parser import JSONParser
 from ecma_parser import ECMAParser
 from utils import Path
 
 
 def main(open_in_browser:bool):
-    paths = [Path("../warblre/mechanization/spec/", True)]
+    paths = [Path("../Warblre/mechanization/spec/", True)]
     files_to_exclude = [Path("../warblre/mechanization/spec/Node.v", False)]
     url = "https://262.ecma-international.org/14.0/"
 

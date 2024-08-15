@@ -10,6 +10,11 @@ class ErrorWarningCount:
         self.warning_count: int = warning_count
 
     def to_html(self, is_in_error: bool) -> str:
+        """
+        Returns the HTML representation of the error count
+        :param is_in_error: Whether the error count is in an subtree that had an error at its root
+        :return: The HTML representation of the error count
+        """
         if is_in_error:
             return ""
         if self == ErrorWarningCount(0, 0):
