@@ -1,6 +1,6 @@
 from aligner_utils import Content, ReportErrorType
-from spec_merger.content_classes.misalignment import Misalignment
-from spec_merger.content_classes.wildcard import WildCard
+from content_classes.misalignment import Misalignment
+from content_classes.wildcard import WildCard
 
 
 class SpecialComparator:
