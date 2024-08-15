@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from aligner_utils import Content, ReportErrorType
-from error_warning_count import ErrorWarningCount
+from spec_merger.aligner_utils import Content, ReportErrorType
+from spec_merger.error_warning_count import ErrorWarningCount
 
 
 @dataclass(frozen=True)

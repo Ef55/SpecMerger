@@ -2,14 +2,14 @@ import json
 import random
 from dataclasses import dataclass
 
-from aligner_utils import Content, Position
-from content_classes.bag import Bag
-from content_classes.dictionary import Dictionary
-from content_classes.ordered_dictionary import OrderedDictionnary
-from content_classes.ordered_seq import OrderedSeq
-from content_classes.string import String
-from content_classes.wildcard import WildCard
-from utils import Parser, ParsedPage
+from spec_merger.aligner_utils import Content, Position
+from spec_merger.content_classes.bag import Bag
+from spec_merger.content_classes.dictionary import Dictionary
+from spec_merger.content_classes.ordered_dictionary import OrderedDictionnary
+from spec_merger.content_classes.ordered_seq import OrderedSeq
+from spec_merger.content_classes.string import String
+from spec_merger.content_classes.wildcard import WildCard
+from spec_merger.utils import Parser, ParsedPage
 
 
 @dataclass(frozen=True)

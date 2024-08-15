@@ -7,10 +7,10 @@ import re
 import os
 
 from utils import Path, ParserState, ParsedPage, Parser
-from aligner_utils import Position, Content
-from content_classes.dictionary import Dictionary
-from content_classes.string import String
-from content_classes.wildcard import WildCard
+from aligner_utils import Position
+from spec_merger.content_classes.dictionary import Dictionary
+from spec_merger.content_classes.string import String
+from spec_merger.content_classes.wildcard import WildCard
 
 
 @dataclass(frozen=True)

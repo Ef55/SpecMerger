@@ -2,8 +2,8 @@ import os
 import webbrowser
 
 from json_parser import JSONParser
-from aligner import Aligner
-from html_renderer import HTMLRenderer
+from spec_merger.aligner import Aligner
+from spec_merger.html_renderer import HTMLRenderer
 
 
 def compare_jsons_and_see_html_report():

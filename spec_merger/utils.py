@@ -1,7 +1,7 @@
 import enum
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
-from content_classes.dictionary import Dictionary
+from spec_merger.content_classes.dictionary import Dictionary
 
 @dataclass(frozen=True)
 class Path:

@@ -1,11 +1,11 @@
 from aligner_utils import Content, ReportErrorType
-from content_classes.alignment_issue import AlignmentIssue
-from content_classes.bag import Bag
-from content_classes.dictionary import Dictionary
-from content_classes.misalignment import Misalignment
-from content_classes.ordered_dictionary import OrderedDictionnary
-from content_classes.ordered_seq import OrderedSeq
-from content_classes.string import String
+from spec_merger.content_classes.alignment_issue import AlignmentIssue
+from spec_merger.content_classes.bag import Bag
+from spec_merger.content_classes.dictionary import Dictionary
+from spec_merger.content_classes.misalignment import Misalignment
+from spec_merger.content_classes.ordered_dictionary import OrderedDictionnary
+from spec_merger.content_classes.ordered_seq import OrderedSeq
+from spec_merger.content_classes.string import String
 from special_comparator import SpecialComparator
 from typing import Optional, Callable, TypeVar
 from nltk import edit_distance

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import TypeVar, Generic
 
-from aligner_utils import Content
-from error_warning_count import ErrorWarningCount
+from spec_merger.aligner_utils import Content
+from spec_merger.error_warning_count import ErrorWarningCount
 
 T = TypeVar('T', bound='Content', covariant=True)
 

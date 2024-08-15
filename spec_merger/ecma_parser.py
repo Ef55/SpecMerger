@@ -4,9 +4,8 @@ from typing import Dict, List
 import bs4
 import requests
 from bs4 import BeautifulSoup, PageElement
-from content_classes.dictionary import Dictionary
-from content_classes.string import String
-from content_classes.ordered_seq import OrderedSeq
+from spec_merger.content_classes.dictionary import Dictionary
+from spec_merger.content_classes.string import String
 from aligner_utils import Position
 from utils import ParserState, ParsedPage, Parser
 
