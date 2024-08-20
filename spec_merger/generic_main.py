@@ -2,14 +2,14 @@ import os
 import sys
 import webbrowser
 
-from aligner import Aligner
-from coq_parser import COQParser
-from html_renderer import HTMLRenderer
-from ecma_parser import ECMAParser
-from utils import Path
+from .aligner import Aligner
+from .coq_parser import COQParser
+from .html_renderer import HTMLRenderer
+from .ecma_parser import ECMAParser
+from .utils import Path
 
 
-def main(open_in_browser:bool):
+def main(open_in_browser: bool):
     paths = [Path("../Warblre/mechanization/spec/", True)]
     files_to_exclude = [Path("../warblre/mechanization/spec/Node.v", False)]
     url = "https://262.ecma-international.org/14.0/"
@@ -21,6 +21,9 @@ def main(open_in_browser:bool):
 
     a = Aligner()
     result = a.align(coq_parsed_page.entries, ecma_parsed_page_v14.entries)
+    with open("text_output.txt","w+") as f:
+        f.write(result.to_text(0))
+    exit(0)
     renderer = HTMLRenderer(result)
     errors = renderer.get_errors()
     if errors.error_count == 0:
@@ -34,5 +37,4 @@ def main(open_in_browser:bool):
         webbrowser.open(f"file://{os.path.abspath('generic_result.html')}", 2)
     return 1 if errors.error_count != 0 else 0
 
-if __name__ == "__main__":
-    sys.exit(main(True))
+

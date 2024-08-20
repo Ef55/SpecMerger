@@ -26,7 +26,7 @@ class OrderedSeq(Generic[T], Content):
         return sum([element.count_errors() for element in self.sequence],
                    start=ErrorWarningCount(0, 0))
 
-    def to_text(self, indenting: int) -> str:
+    def to_text(self, indenting: int = 0) -> str:
         if self.count_errors() == ErrorWarningCount(0,0):
             return f"{'  '*indenting}ORDERED SEQ: OK\n"
         return f"{'  '*indenting}ORDERED SEQ: OK\n{''.join(x.to_text(indenting+1) for x in self.sequence)}"

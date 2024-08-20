@@ -6,11 +6,11 @@ from alectryon.literate import coq_partition, Comment, StringView
 import re
 import os
 
-from utils import Path, ParserState, ParsedPage, Parser
-from aligner_utils import Position
-from content_classes.dictionary import Dictionary
-from content_classes.string import String
-from content_classes.wildcard import WildCard
+from .utils import Path, ParserState, ParsedPage, Parser
+from .aligner_utils import Position
+from .content_classes.dictionary import Dictionary
+from .content_classes.string import String
+from .content_classes.wildcard import WildCard
 
 
 @dataclass(frozen=True)

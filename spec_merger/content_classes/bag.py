@@ -13,7 +13,7 @@ class Bag(Generic[T], Content):
     # represents a set but stored as list to avoid non-determinism
     bag: list[T]
 
-    def to_text(self, indenting: int) -> str:
+    def to_text(self, indenting: int = 0) -> str:
         if self.count_errors() == ErrorWarningCount(0,0):
             return f"{'  '*indenting}ORDERED SEQ: OK\n"
         return f"{'  '*indenting}ORDERED SEQ: OK\n{''.join(x.to_text(indenting+1) for x in self.bag)}"

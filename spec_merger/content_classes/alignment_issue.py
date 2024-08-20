@@ -9,7 +9,7 @@ class AlignmentIssue(Content):
     value: Content
     warning: ReportErrorType
 
-    def to_text(self, indenting: int) -> str:
+    def to_text(self, indenting: int = 0) -> str:
         return f"{'  '*indenting}!WARNING! {str(self.warning)}\n{self.value.to_text(indenting)}"
 
     def to_html(self, is_in_error: bool) -> str:

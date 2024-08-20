@@ -1,7 +1,7 @@
 import os.path
 
-from aligner_utils import Content
-from error_warning_count import ErrorWarningCount
+from .aligner_utils import Content
+from .error_warning_count import ErrorWarningCount
 
 
 class HTMLRenderer:

@@ -18,7 +18,7 @@ class String(Content):
     def count_errors(self) -> ErrorWarningCount:
         return ErrorWarningCount(0, 0)
 
-    def to_text(self, indenting) -> str:
+    def to_text(self, indenting: int = 0) -> str:
         return "  "*indenting + "STRING: OK\n"
 
     def to_html(self, is_in_error: bool) -> str:

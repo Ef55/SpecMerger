@@ -12,7 +12,7 @@ T = TypeVar('T', bound='Content', covariant=True)
 class Dictionary(Generic[T], Content):
     entries: dict[str, T]
 
-    def to_text(self, indenting: int) -> str:
+    def to_text(self, indenting: int = 0) -> str:
         if self.count_errors() == ErrorWarningCount(0,0):
             return "  "*indenting+"DICT: OK\n"
         return f"{'  '*indenting}DICT: OK\n{''.join('  '*(indenting+1)+k +self.entries[k].to_text(indenting+1)[2*indenting:] for k in self.entries.keys())}"

@@ -9,7 +9,7 @@ T = TypeVar('T', bound='Content', covariant=True)
 
 @dataclass(frozen=True)
 class WildCard(Generic[T], Content):
-    def to_text(self, indenting: int) -> str:
+    def to_text(self, indenting: int = 0) -> str:
         return "  " * indenting + "WildCard\n"
 
     def to_html(self, is_in_error: bool) -> str:

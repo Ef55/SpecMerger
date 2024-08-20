@@ -14,22 +14,22 @@ from spec_merger.utils import Parser, ParsedPage
 
 @dataclass(frozen=True)
 class JSONPosition(Position):
-    rand_value_so_not_equal: str
+    position: str
 
     def html_str(self) -> str:
-        return str(random.randint(0, 1000)) + self.rand_value_so_not_equal
+        return self.position
 
 
 class JSONParser(Parser):
-    def __init__(self, file_name: str, last_letter: str):
+    def __init__(self, file_name: str, parser_num: str):
         with open(file_name, "r") as file:
             self.content = json.load(file)
         self.parsed_page: ParsedPage = None
         self.name = "JSONParser"
-        self.last_letter = last_letter
+        self.parser_num = parser_num
 
     def new_pos(self):
-        return JSONPosition(self.last_letter)
+        return JSONPosition(self.parser_num)
 
     def parse(self,content) -> Content:
         match content:

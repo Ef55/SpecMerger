@@ -50,7 +50,7 @@ class Content(ABC):
     position: Union[Optional[Position], tuple[Optional[Position], Optional[Position]]]
 
     @abstractmethod
-    def to_text(self, indenting: int) -> str:
+    def to_text(self, indenting: int = 0) -> str:
         """
         Returns a very minimal text representation of the node. Doesn't go deeper if there are no errors.
         :param indenting: The number of double spaces to indent the text representation of the node.
@@ -79,3 +79,4 @@ class Content(ABC):
             return ", <div> POS: " + self.position.html_str() + "</div>"
         return ", <div> POS: " + ", ".join(
             self.position[i].html_str() for i in range(2) if self.position[i] is not None) + "</div>"
+y

@@ -13,7 +13,7 @@ class OrderedDictionnary(Generic[T], Content):
     entries: dict[str, T]
     entries_list: list[str]
 
-    def to_text(self, indenting: int) -> str:
+    def to_text(self, indenting: int = 0) -> str:
         if self.count_errors() == ErrorWarningCount(0,0):
             return f"{'  '*indenting}ORDERED DICT: OK\n"
         return (f"{'  '*indenting}ORDERED DICT: OK\n" +

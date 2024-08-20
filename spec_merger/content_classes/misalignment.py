@@ -11,7 +11,7 @@ class Misalignment(Content):
     right: Optional[Content]
     error: ReportErrorType
 
-    def to_text(self, indenting) -> str:
+    def to_text(self, indenting: int = 0) -> str:
         none_str = "  "*(indenting+1) + "NONE\n"
         left = self.left.to_text(indenting+1) if self.left is not None else none_str
         right = self.right.to_text(indenting+1) if self.right is not None else none_str
