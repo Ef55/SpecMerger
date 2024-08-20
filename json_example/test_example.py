@@ -10,7 +10,7 @@ def compare_jsons_and_see_html_report():
     parsed1 = JSONParser("jsons/test.json", "ONE").get_parsed_page()
     parsed2 = JSONParser("jsons/test2.json", "TWO").get_parsed_page()
     alignment_result = Aligner().align(parsed1.entries, parsed2.entries)
-    rendered = HTMLRenderer(alignment_result).render(path_to_template="../")
+    rendered = HTMLRenderer(alignment_result).render(path_to_template="../spec_merger")
     with open("json_comparison_report.html", "w+") as f:
         f.write(rendered)
     webbrowser.open(f"file://{os.path.abspath('json_comparison_report.html')}", 2)

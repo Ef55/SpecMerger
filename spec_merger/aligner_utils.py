@@ -79,4 +79,3 @@ class Content(ABC):
             return ", <div> POS: " + self.position.html_str() + "</div>"
         return ", <div> POS: " + ", ".join(
             self.position[i].html_str() for i in range(2) if self.position[i] is not None) + "</div>"
-y
