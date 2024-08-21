@@ -20,9 +20,6 @@ packages = ["spec_merger"]
 [project]
 name = "spec-merger"
 version = "0.1.0"
-dependencies = [
-    "nltk>=3.8.1",
-    "alectryon>=1.4.0"
-]
+dependencies = []
 requires-python = ">= 3.10"
 

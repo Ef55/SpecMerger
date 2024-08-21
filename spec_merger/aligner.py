@@ -8,7 +8,7 @@ from .content_classes.ordered_seq import OrderedSeq
 from .content_classes.string import String
 from .special_comparator import SpecialComparator
 from typing import Optional, Callable, TypeVar
-from nltk import edit_distance
+from difflib import get_close_matches
 
 T = TypeVar('T', covariant=True)
 U = TypeVar('U', covariant=True)
@@ -55,14 +55,14 @@ class Aligner:
         return comparison_function(left, right)
 
     @staticmethod
-    def find_closest_key(keys: set[str], key: str, allowed_errors: float = 0.2) -> Optional[str]:
+    def find_closest_key(keys: set[str], key: str, allowed_errors: float = 0.88) -> Optional[str]:
         assert 0 <= allowed_errors < 1
         if key == "":
             return None
-        length = len(key)
-        distances = map(lambda x: (x, edit_distance(x, key)), keys)
-        close_distances = list(filter(lambda x: x[1] / length < allowed_errors, distances))
-        return min(close_distances, key=lambda x: x[1], default=[None])[0]
+        matches = get_close_matches(key,keys,cutoff=allowed_errors,n=1)
+        if matches:
+            return matches[0]
+        return None
 
     def __align_ordered_dict(self, left: Content, right: Content) -> Content:
         assert isinstance(left, OrderedDictionnary) and isinstance(right, OrderedDictionnary)
