@@ -17,14 +17,13 @@
   {
     "title": "22.2.7.3 Semantics (steps missing in list + set)",
     "cases": {
-      "Atom :: Bomb": [true, "2. Now everything is ok.","3. return."],
-      "DJ :: Set": [false,"if y then b","if u then v","10100111001",
-        "if you give a fishing stick to a man, he will starve (not edible)"]
+      "Atom :: UnicodeProperty": [true, "2. Now everything is ok.","3. return."],
+      "ClassAtom :: -": [false,"if y then b","if u then v","10100111001","This is an element."]
     }
   },
-  "22.2.5":
+  "22.2.8":
   {
-    "title": "22.2.5 Static Semantics (problem with priorities and focus)",
+    "title": "22.2.8 Static Semantics",
     "description": "Ahhh... statistics",
     "algorithm" : {"1": "1. Do x.","2":"2. Do y.","3":"3. Do a.",
       "order": ["1","2","3"]},
@@ -34,15 +33,9 @@
       "right": [true,"no","it","is","not","there"]
     }
   },
-  "22.123":
+  "22.3":
   {
-    "title": "22.123 RTFM (priorities should work)",
-    "description": "Radio télévision FM",
-    "computer": [true,"1. CPU","3. GPU", "4. SSD"]
-  },
-  "22.1937006962":
-  {
-    "title": "22.1937006962 Stars",
+    "title": "22.3 Stars",
     "description": "22.1937006962",
     "wildcards": ["description"]
   }
