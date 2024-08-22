@@ -28,10 +28,11 @@ def group_by(to_be_grouped: list[T] | set[T], key_function: Callable[[T], U]) ->
 
 class Aligner:
     def __init__(self, alignment_functions: dict[tuple[type, type], Callable[[Content, Content], Content]] = None):
-        self.__report_error_dict = alignment_functions
-        if alignment_functions is None:
-            self.__report_error_dict = {}
+        self.__report_error_dict = {}
         self.__populate_report_error_dict()
+        if alignment_functions is not None:
+            for key in alignment_functions.keys():
+                self.__report_error_dict[key] = alignment_functions[key]
 
     def __populate_report_error_dict(self):
         self.__report_error_dict[(Dictionary, Dictionary)] = self.__align_dict
