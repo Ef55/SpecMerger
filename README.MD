@@ -2,6 +2,8 @@
 
 This tool was developped in the Systems and Formalism Lab at EPFL.
 
+For a full understanding of the project, please read this [blogspot](https://systemf.epfl.ch/blog/SpecMerger) that explains it in great details.
+
 This tool can be used to compare two trees that were constructed with special Nodes provided in the project.
 
 This can be very useful to compare two structured documents that should have the same content, like for example
