@@ -4,7 +4,7 @@ This minimal example servers to illustrate how the tool can be used
 
 ## How to run it
 
-Just run `python3 test_example.py
+Just run `python3 test_example.py`
 
 ## What is it doing
 
