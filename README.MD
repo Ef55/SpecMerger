@@ -57,5 +57,7 @@ If you wish to have a type that has very special behaviour, like the WildCard, y
 Note however that this function will only be called if the pair of types was not found in the function_map.
 
 ## Example
-You can have a look at the test-example folder, it contains a very minimal example for a JSONParser.
+You can have a look at the test-example folder, it contains a very minimal example for a specification vs implementation
+check and try to spot the implementation mistakes ;)
+
 If you want to have a look at a bigger project where it was used, have a look at [Warblre](https://github.com/epfl-systemf/Warblre).
