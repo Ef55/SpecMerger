@@ -1,5 +1,6 @@
 import json
-import random
+from typing import Optional
+
 from dataclasses import dataclass
 
 from spec_merger.aligner_utils import Content, Position
@@ -24,7 +25,7 @@ class JSONParser(Parser):
     def __init__(self, file_name: str, parser_num: str):
         with open(file_name, "r") as file:
             self.content = json.load(file)
-        self.parsed_page: ParsedPage = None
+        self.parsed_page: Optional[ParsedPage] = None
         self.name = "JSONParser"
         self.parser_num = parser_num
 

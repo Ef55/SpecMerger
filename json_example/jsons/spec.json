@@ -1,0 +1,40 @@
+{
+  "0.1 Introduction":
+  {
+    "description": "This is the introduction of the specification",
+    "bulletpoints": [false, "This specification is purely invented",
+      "This specification may not be used in any way outside of this project",
+      "This specification is useless so why use it anyways?"]
+  },
+  "1.0 Notation":
+  {
+    "description": "The notations in this specification will have the following format :",
+    "bulletpoints": [false, "string denotes a text value",
+      "number denotes an integer value",
+      "double denotes a floating-point value"
+    ]
+  },
+  "1.1 int_mul":
+  {
+    "description": "This function is used to multiply two integers.",
+    "inputs": {"x": "number","y":"number"},
+    "algorithm": {"1.":  "Let z = x + y","2.": "Let res = (z^2 - x^2 - y^2)/2","3.":"If res = 0","3a.": "Let res = 1", "4.":  "Return res.",
+      "order": ["1.","2.","3.","3a.","4."]}
+  },
+  "1.2 string_concat":
+  {
+    "description": "This function is used to concatenate two strings.",
+    "inputs": {"s1": "string","s2": "string"},
+    "algorithm" : {"1.": "Let s3 be the copy of s1.","2.":"For each character c in s2","2a.":"Let s3 = s3 + c","3.": "Return s3.",
+      "order": ["1.","2.","2a.","3."]}
+  },
+  "2.0 complex_useless_math":
+  {
+    "description": "I love this function",
+    "inputs": {"x": "number","y": "number", "s": "string","w": "number", "ctr": "number"},
+    "algorithm": {"1.":"Let l be the length of s","2.": "Let z = int_mul(x,y)^2","3.": "while z >= l:","3a.": "Let z = z - l",
+      "4.": "Return int_mul(z,ctr) + w",
+    "order": ["1.","2.","3.","3a.","4."]}
+
+  }
+}

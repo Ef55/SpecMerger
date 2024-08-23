@@ -8,7 +8,8 @@ Just run `python3 test_example.py`
 
 ## What is it doing
 
-This example is comparing the two json documents in the [jsons](https://github.com/epfl-systemf/SpecMerger/tree/main/json_example/jsons) folder and creating either a minimal 
-text report or a full HTML report.
+This example is comparing a pseudo spec document in JSON with its implementation in python.
+Both files are available in the [jsons](https://github.com/epfl-systemf/SpecMerger/tree/main/json_example/jsons) folder 
+The script then allows you to either create a minimal text report or a full HTML report that you can view in your browser.
 
-You can inpire yourself from the code to try to write a new small parser and have fun with the tool !
+You can inspire yourself from the code to try to write a new small parser and have fun with the tool !
