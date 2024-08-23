@@ -8,8 +8,8 @@ from spec_merger.html_renderer import HTMLRenderer
 
 
 def compare_jsons_and_see_html_report():
-    parsed1 = JSONParser("jsons/spec.json", "Specification").get_parsed_page()
-    parsed2 = PythonParser("jsons/implem.py").get_parsed_page()
+    parsed1 = JSONParser("documents/spec.json", "Specification").get_parsed_page()
+    parsed2 = PythonParser("documents/implem.py").get_parsed_page()
     alignment_result = Aligner().align(parsed1.entries, parsed2.entries)
     rendered = HTMLRenderer(alignment_result).render(path_to_template="../spec_merger")
     with open("json_comparison_report.html", "w+") as f:
@@ -18,8 +18,8 @@ def compare_jsons_and_see_html_report():
 
 
 def compare_jsons_and_see_minimal_text_report():
-    parsed1 = JSONParser("jsons/spec.json", "ONE").get_parsed_page()
-    parsed2 = PythonParser("jsons/implem.py").get_parsed_page()
+    parsed1 = JSONParser("documents/spec.json", "ONE").get_parsed_page()
+    parsed2 = PythonParser("documents/implem.py").get_parsed_page()
     alignment_result = Aligner().align(parsed1.entries, parsed2.entries)
     print(alignment_result.to_text(0))
 
